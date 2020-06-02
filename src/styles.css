@@ -1,0 +1,65 @@
+/* You can add global styles to this file, and also import other style files */
+
+*{
+    font-family: 'Montserrat', sans-serif;
+}
+
+html { height: 100%; margin: 0;}
+body, .fondoBg{
+    background-color: #eceff1 ;
+}
+.minh-100{
+    height: 100vh;
+}
+.tamañoMenu{
+    font-size: 40px;
+}
+.pageError{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('assets/error404.png');
+}
+.fondo{
+
+    background-repeat: no-repeat;
+    background-size: cover!important;
+    background-position: center!important;
+    background-image: url('assets/josue.jpg') ;
+}
+.transparent{
+    opacity: .6;
+    animation-name: opacidad;
+    animation-duration: 3s;
+}
+@keyframes opacidad{
+    0%{
+        transition: all ease-in-out;
+        opacity: 0;
+    }
+    15%{opacity: .15;}
+    25%{
+        opacity: .25;
+    }
+    50%{
+        opacity: .5;
+    }
+    75%{
+        opacity: .55;
+    }
+    100%{
+        opacity: .6;
+    }
+}
+.vh-75{
+    height: 75vh;
+}
+.vh-88{
+    height: 87.5vh;
+    overflow-y: auto;
+}
+
+.spinner mat-spinner,.spinner mat-spinner svg{
+    width: 30px!important;
+    height: 30px!important;
+}

@@ -1,0 +1,52 @@
+
+  <h2 mat-dialog-title class="text-center" *ngIf="user">Modificar Usuario</h2>
+  <mat-dialog-content class="mat-typography" *ngIf="user">
+
+    <form  [formGroup]="updateUser"  novalidate>
+      
+          
+        <div class="row">
+
+          <mat-form-field appearance="fill" class="col-12" >
+            <mat-label>Nombres</mat-label>
+            <input matInput  [(ngModel)]="user.nombres" required formControlName="nombres"  >
+          </mat-form-field>
+          
+          <mat-form-field appearance="fill" class="col-12" >
+            <mat-label>Apellidos</mat-label>
+            <input matInput [(ngModel)]="user.apellidos" required formControlName="apellidos" >
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" class="col-12" >
+            <mat-label>Rol de usuario</mat-label>
+            <mat-select required formControlName="rol" [(ngModel)]="user.rol">
+              <mat-option value="ADMIN">Administrador</mat-option>
+              <mat-option value="MASTER">Master</mat-option>
+              <mat-option value="SOLICITANTE">Solicitante</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="col-12" >
+            <mat-label>Status del Usuario</mat-label>
+            <mat-select required formControlName="status" [(ngModel)]="user.status" >
+              <mat-option value="ACTIVO">ACTIVO</mat-option>
+              <mat-option value="INACTIVO">INACTIVO</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="alert alert-danger col-12" *ngIf="statusPut">
+            Ha ocurrido un error, intente mas tarde
+          </div>
+           
+          
+
+        </div>
+      
+    </form>
+
+
+  </mat-dialog-content>
+  <mat-dialog-actions [attr.align]="'end'" *ngIf="user">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-button (click)="updateUserData(updateUser)" [disabled]="!updateUser.valid">Actualizar Información</button>
+  </mat-dialog-actions>

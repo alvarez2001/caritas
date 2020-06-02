@@ -1,0 +1,66 @@
+<h2 mat-dialog-title>Agregar  Banco</h2>
+<mat-dialog-content>
+
+    <form [formGroup]="formBanco" novalidate>
+        <mat-form-field class="col-12">
+            <mat-label>Titular</mat-label>
+            <input autocomplete="off" matInput type="text" formControlName="titular" [(ngModel)]="banco.titular"> 
+            <mat-error *ngIf="formBanco.get('titular')">
+                <span *ngIf="formBanco.get('titular').hasError('required')">
+                    Campo obligatorio
+                </span>
+                <span *ngIf="formBanco.get('titular').hasError('pattern')">
+                    solo se aceptan caracteres alfabeticos
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-12">
+            <mat-label>Cedula/Rif</mat-label>
+            <input autocomplete="off" matInput type="text" placeholder="ej: V0000000 / J000000" formControlName="cedula" maxlength="20" [(ngModel)]="banco.rif">
+            <mat-error *ngIf="formBanco.get('cedula')">
+                <span *ngIf="formBanco.get('cedula').hasError('required')">
+                    Campo obligatorio
+                </span>
+                <span *ngIf="formBanco.get('cedula').hasError('pattern')">
+                    solo se aceptan caracteres numericos
+                </span>
+            </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field class="col-12">
+            <mat-label>Banco</mat-label>
+            <input autocomplete="off" matInput type="text" formControlName="banco" [(ngModel)]="banco.banco">
+            <mat-error *ngIf="formBanco.get('banco')">
+                <span *ngIf="formBanco.get('banco').hasError('required')">
+                    Campo obligatorio
+                </span>
+                <span *ngIf="formBanco.get('banco').hasError('pattern')">
+                    solo se aceptan caracteres alfabeticos
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-12">
+            <mat-label>Numero de cuenta</mat-label>
+            <input autocomplete="off" matInput type="text" maxlength="20" formControlName="cuenta" [(ngModel)]="banco.numero">
+            <mat-error *ngIf="formBanco.get('cuenta')">
+                <span *ngIf="formBanco.get('cuenta').hasError('required')">
+                    Campo obligatorio
+                </span>
+                <span *ngIf="formBanco.get('cuenta').hasError('pattern')">
+                    solo se aceptan caracteres numericos
+                </span>
+                <span *ngIf="formBanco.get('cuenta').hasError('minlength')">
+                    el minimo de caracteres es de "20" 
+                </span>
+            </mat-error>
+        </mat-form-field>
+    </form>
+
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [disabled]="formBanco.invalid" (click)="formularioRegistro(formBanco)">Guardar</button>
+</mat-dialog-actions>

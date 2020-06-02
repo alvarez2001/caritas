@@ -1,0 +1,19 @@
+
+<h2 mat-dialog-title class="text-center">Registrar Concepto</h2>
+<mat-dialog-content>
+
+    <form [formGroup]="ConceptoForm" novalidate>
+        <mat-form-field class="col-12">
+
+            <mat-label>Concepto</mat-label>
+            <input matInput formControlName="concepto" [(ngModel)]="concepto.descripcion" autocomplete="off" type="text" maxlength="200" required>
+            
+        </mat-form-field>
+    </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button (click)="guardar(ConceptoForm)" [disabled]="ConceptoForm.invalid">Guardar Concepto</button>
+</mat-dialog-actions>

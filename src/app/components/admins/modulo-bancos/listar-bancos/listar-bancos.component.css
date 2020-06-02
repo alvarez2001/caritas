@@ -1,0 +1,19 @@
+td,th{
+    text-align: center!important; 
+    min-width: 150px!important;
+    }
+    
+    table{
+        overflow-x: auto;
+        min-width: 850px!important;
+    }
+    mat-paginator{
+        min-width: 850px!important;
+        overflow-x: auto;
+    }
+
+    .tamanoIcon{
+        height: auto;
+        width: auto;
+        font-size: 35px;
+    }

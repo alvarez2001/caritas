@@ -1,0 +1,66 @@
+
+
+<mat-accordion>
+    <div class="d-block">
+      <button mat-icon-button  (click)="drawer.close()" class="float-right clearfix"><mat-icon>close</mat-icon></button>
+    </div>
+    <div class="d-block">
+      <img src="./assets/logoTransparencia.png" alt="Logo Caritas" class="mw-100">
+    </div>
+
+    <a mat-raised-button class="w-100 " [routerLink]="['inicio']" (click)="drawer.close()" ><mat-icon class="float-left mt-2 ml-2 clearfix">home</mat-icon>Inicio</a>
+    
+    <mat-expansion-panel  class="">
+
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            <mat-icon class="mr-3">account_circle</mat-icon>
+          Modulo Usuarios
+        </mat-panel-title>
+
+      </mat-expansion-panel-header>
+
+      <a mat-raised-button class="w-100  " [routerLink]="['usuarios']" (click)="drawer.close()">Registar</a>
+      <a mat-raised-button class="w-100  mt-2" [routerLink]="['listar-usuarios']" (click)="drawer.close()">Listar usuarios</a>
+      
+      
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel >
+
+        <mat-expansion-panel-header>
+
+            <mat-panel-title>
+                <mat-icon class="mr-3">description</mat-icon>
+              Modulo Proyectos
+            </mat-panel-title>
+    
+          </mat-expansion-panel-header>
+          <a mat-raised-button class="w-100 " [routerLink]="['crear-proyecto']" (click)="drawer.close()">Registar</a>
+          <a mat-raised-button class="w-100 mt-2 " (click)="drawer.close()" [routerLink]="['listar-proyectos']">Listar Proyectos</a>
+    
+  
+      </mat-expansion-panel>
+
+      <mat-expansion-panel >
+
+        <mat-expansion-panel-header>
+
+            <mat-panel-title>
+                <mat-icon class="mr-3">description</mat-icon>
+              Modulo Concepto
+            </mat-panel-title>
+    
+          </mat-expansion-panel-header>
+          <a mat-raised-button class="w-100 mt-2 " (click)="drawer.close()" [routerLink]="['listar-concepto']">Listar Concepto</a>
+          <a mat-raised-button class="w-100 mt-2 " (click)="drawer.close()" [routerLink]="['listar-bancos']">Listar Bancos</a>
+    
+  
+      </mat-expansion-panel>
+
+      <a mat-raised-button class="w-100 " [routerLink]="['/logout/1']" ><mat-icon class="float-left mt-2 ml-2 clearfix">exit_to_app</mat-icon> Cerrar Sesión</a>
+
+  </mat-accordion>
+  
+  

@@ -1,0 +1,56 @@
+<h2 mat-dialog-title [ngClass]="'text-center'" >Actualización del proyecto</h2>
+<form novalidate [formGroup]="putProject"  *ngIf="projectInfo">
+    <mat-dialog-content *ngIf="projectInfo" [ngClass]="'mt-2 mat-typography'">
+
+        
+
+            <mat-form-field [ngClass]="'col-12'">
+                <mat-label>Nombre del proyecto</mat-label>
+                <input required matInput autocomplete="off" [(ngModel)]="proyecto.nombre" formControlName="nombre">
+            </mat-form-field>   
+
+            <mat-form-field [ngClass]="'col-12'">
+                <mat-label>Codigo del proyecto</mat-label>
+                <input required matInput autocomplete="off" [(ngModel)]="proyecto.codigo" formControlName="codigo">
+            </mat-form-field> 
+
+            <mat-form-field [ngClass]="'col-12'">
+                <mat-label>Administrador del proyecto</mat-label>
+                <mat-select required formControlName="admin_id" [(ngModel)]="proyecto.admin_id"  [(value)]="proyecto.admin_id">
+                    <mat-option *ngFor="let admin of admins" [value]="admin.id">
+                        {{admin.nombres | titlecase}} {{admin.apellidos | titlecase}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field [ngClass]="'col-12'">
+                <mat-label>Usuario del proyecto</mat-label>
+                <mat-select required formControlName="usuario_id" [(ngModel)]="proyecto.usuario_id"  [(value)]="proyecto.usuario_id">
+                    <mat-option *ngFor="let solicitante of solicitantes" [value]="solicitante.id">
+                        {{solicitante.nombres | titlecase}} {{solicitante.apellidos | titlecase}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field [ngClass]="'col-12'">
+                <mat-label>Status del proyecto</mat-label>
+                <mat-select required formControlName="status" [(ngModel)]="proyecto.status"  [(value)]="proyecto.status">
+                    <mat-option  value="ACTIVO">ACTIVO</mat-option>
+                    <mat-option  value="INACTIVO">INACTIVO</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <div [ngClass]="'alert alert-danger col-12'" *ngIf="statusPut">
+                Ha ocurrido un error, intente mas tarde
+              </div>
+
+
+            
+
+
+    </mat-dialog-content>
+    <mat-dialog-actions  *ngIf="projectInfo">
+        <button mat-button mat-dialog-close [ngClass]="'float-left'">Cerrar</button>
+        <button mat-button [ngClass]="'float-rigth'" [type]="'submit'" #buttonSave  [disabled]="!putProject.valid" (click)="actualizar(putProject, buttonSave._elementRef)">Actualizar Proyecto</button>
+    </mat-dialog-actions>
+</form>

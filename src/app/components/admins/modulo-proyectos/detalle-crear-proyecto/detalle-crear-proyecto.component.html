@@ -1,0 +1,54 @@
+<h2 mat-dialog-title [ngClass]="'text-center'">Informacion del proyecto</h2>
+
+<mat-dialog-content [ngClass]="'mat-typography'">
+
+    <div *ngIf="infoProyecto.nombre">
+        <p [ngClass]="'mb-0'">Nombre del Proyecto:</p>
+        <h3 [ngClass]="'font-weight-bold'">{{infoProyecto.nombre}}</h3>
+    </div>
+
+    <div *ngIf="infoProyecto.codigo">
+        <p [ngClass]="'mb-0'">Codigo del Proyecto:</p>
+        <h3 [ngClass]="'font-weight-bold'">{{infoProyecto.codigo}}</h3>
+    </div>
+
+    <div *ngIf="infoProyecto.aprobado">
+        <p [ngClass]="'mb-0'">Aprobado del Proyecto:</p>
+        <h3 [ngClass]="'font-weight-bold'">{{infoProyecto.aprobado | currency:'€ ':true:'1.2'}}</h3>
+    </div>
+
+    <div *ngIf="infoProyecto.comision">
+        <p [ngClass]="'mb-0'">Comisión del Proyecto:</p>
+        <h3 [ngClass]="'font-weight-bold'">{{infoProyecto.comision | currency:'€ ':true:'1.2'}}</h3>
+    </div>
+
+    <div *ngIf="infoProyecto.disponible">
+        <p [ngClass]="'mb-0'">Disponible del Proyecto:</p>
+        <h3 [ngClass]="'font-weight-bold'">{{infoProyecto.disponible | currency:'€ ':true:'1.2'}}</h3>
+    </div>
+
+    <div *ngIf="infoProyecto.usuario_id">
+        <p [ngClass]="'mb-0'">Usuario del proyecto:</p>
+        <div *ngFor="let solicitante of solicitantes">
+            <h3 [ngClass]="'font-weight-bold'" *ngIf="infoProyecto.usuario_id === solicitante.id">
+                {{solicitante.nombres | titlecase}} {{solicitante.apellidos | titlecase}}
+            </h3>
+        </div>
+    </div>
+
+    <div *ngIf="infoProyecto.admin_id">
+        <p [ngClass]="'mb-0'">Administrador del Proyecto:</p>
+        <div *ngFor="let admin of admins">
+            <h3 [ngClass]="'font-weight-bold'" *ngIf="infoProyecto.admin_id === admin.id">
+                {{admin.nombres | titlecase}} {{admin.apellidos | titlecase}}
+            </h3>
+        </div>
+    </div>
+
+
+
+</mat-dialog-content>
+<mat-dialog-actions  [ngClass]="'mx-auto'">
+  <button mat-button mat-dialog-close>No guardar</button>
+  <button mat-button (click)="crearProyecto(infoProyecto, buttonSave._elementRef)" #buttonSave>Guardar</button>
+</mat-dialog-actions>

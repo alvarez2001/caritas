@@ -1,0 +1,50 @@
+<h2 mat-dialog-title class="text-center">Detalle del Usuario</h2>
+
+<mat-dialog-content class="mat-typography">
+
+
+    <div *ngIf="data.nombres">
+        <p class="mb-0">Nombres:</p>
+        <h3 class="font-weight-bold ">{{data.nombres | titlecase}}</h3>
+    </div>
+
+    <div *ngIf="data.apellidos">
+        <p class="mb-0">Apellidos:</p>
+        <h3 class="font-weight-bold ">{{data.apellidos | titlecase}}</h3>
+    </div>
+
+    <div *ngIf="data.email">
+        <p class="mb-0">Email:</p>
+        <h3 class="font-weight-bold ">{{data.email}}</h3>
+    </div>
+
+    <div *ngIf="data.rol">
+        <p class="mb-0">Rol:</p>
+        <h3 class="font-weight-bold ">{{data.rol | titlecase}}</h3>
+    </div>
+
+    <div *ngIf="data.status">
+        <p class="mb-0">Status usuario:</p>
+        <h3 class="font-weight-bold ">{{data.status | titlecase}}</h3>
+    </div>
+
+    <div *ngIf="data.created_at">
+        <p class="mb-0">Fecha de creación:</p>
+        <h3 class="font-weight-bold ">{{data.created_at | date:'medium'}}</h3>
+    </div>
+    <div *ngIf="data.updated_at">
+        <p class="mb-0">Fecha de ultima actualización:</p>
+        <h3 class="font-weight-bold ">{{data.updated_at |date:'medium'}}</h3>
+    </div>
+
+    <div *ngIf="data.sello">
+        <p class="mb-0">Sello:</p>
+        <h3 class="font-weight-bold ">{{data.sello}}</h3>
+    </div>
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions [attr.align]="'end'">
+    <button mat-button mat-dialog-close>Salir</button>
+  </mat-dialog-actions>

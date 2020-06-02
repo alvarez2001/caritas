@@ -1,0 +1,31 @@
+<h2 class="text-center" mat-dialog-title>Detalle Banco</h2>
+
+<mat-dialog-content>
+    <div class="separador">
+        <h4>Titular</h4>
+        <p>{{data.titular}}</p>
+    </div>
+    <div class="separador">
+        <h4>Banco</h4>
+        <p>{{data.banco}}</p>
+    </div>
+    <div class="separador">
+        <h4>Numero de cuenta</h4>
+        <p>{{data.numero}}</p>
+    </div>
+    <div class="separador">
+        <h4>Rif / Cedula</h4>
+        <p>{{data.rif}}</p>
+    </div>
+    <div class="separador">
+        <h4>Creado</h4>
+        <p>{{data.created_at}}</p>
+    </div>
+    <div class="separador">
+        <h4>Actualizado</h4>
+        <p>{{data.updated_at}}</p>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cerrar</button>
+  </mat-dialog-actions>

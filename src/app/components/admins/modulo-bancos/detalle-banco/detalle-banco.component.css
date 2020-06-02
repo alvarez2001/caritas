@@ -1,0 +1,7 @@
+.separador{
+    -webkit-box-shadow: 0px 2px 0px 0px rgba(0,0,0,0.28);
+-moz-box-shadow: 0px 2px 0px 0px rgba(0,0,0,0.28);
+box-shadow: 0px 2px 0px 0px rgba(0,0,0,0.28);
+padding-left: 7px;
+padding-right: 7px;
+}

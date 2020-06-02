@@ -1,0 +1,40 @@
+
+
+<mat-card class="col-12 mx-auto col-md-10">
+    <mat-card-title class="text-center">
+        Listado de Conceptos
+        
+    </mat-card-title>
+    <mat-card-content class="mb-3">
+        <div class="container" >
+            <span  matTooltip="Agregar Concepto" class="float-right mt-0" (click)="openDialog()">
+                <mat-icon class="tamañoIcon">add_circle_outline</mat-icon>
+            </span>
+            <div class="table-responsive">
+                <table  class="mat-elevation-z7 col-12 mx-auto  table table-light  table-hover table-striped text-center" >
+                    <thead class="thead-dark">
+                        <tr>
+                          <th scope="col">Nº</th>
+                          <th scope="col">Concepto</th>
+                          <th scope="col">Accion</th>
+                        </tr>
+                      </thead>
+                      <tbody >
+            
+                        <tr class="text-center" *ngFor="let element of conceptos; let index = index">
+                            <td >{{index + 1}}</td>
+                            <td>{{element.descripcion}}</td>
+                            <td>
+                            <button mat-icon-button matTooltip="Eliminar Concepto"  (click)="eliminarConcepto(element.id)">
+                                <mat-icon>delete_forever</mat-icon>
+                            </button>
+                            </td>   
+                        </tr>
+            
+                      </tbody>
+                
+                </table>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

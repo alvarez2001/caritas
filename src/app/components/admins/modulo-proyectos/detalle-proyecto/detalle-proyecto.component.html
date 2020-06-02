@@ -1,0 +1,56 @@
+<h2 mat-dialog-title class="text-center" >Informacion del proyecto</h2>
+
+<mat-dialog-content *ngIf="projectInfo" class="mt-2 mat-typography">
+    <div class="form-group">
+        <label class="mb-0">Codigo del Proyecto:</label>
+        <p class="font-weight-bold">{{projectInfo.codigo}}</p>
+    </div>
+
+    <div class="form-group">
+        <label class="mb-0">Nombre del Proyecto:</label>
+        <p class="font-weight-bold">{{projectInfo.nombre | titlecase }}</p>
+    </div>
+
+    <div class="form-group">
+        <label class="mb-0">Status del Proyecto:</label>
+        <p class="font-weight-bold">{{projectInfo.status | titlecase }}</p>
+    </div>
+
+    <div class="form-group">
+        <label class="mb-0">Monto aprobado del Proyecto:</label>
+        <p class="font-weight-bold">{{projectInfo.aprobado | currency:'€ ':true:'1.2'}}</p>
+    </div>
+
+    <div class="form-group">
+        <label class="mb-0">Comisión del Proyecto:</label>
+        <p class="font-weight-bold">{{projectInfo.comision | currency:'€ ':true:'1.2'}}</p>
+    </div>
+
+    <div class="form-group">
+        <label class="mb-0">Monto disponible del Proyecto:</label>
+        <p class="font-weight-bold">{{projectInfo.disponible | currency:'€ ':true:'1.2'}}</p>
+    </div>
+
+    <div class="form-group">
+        <label class="mb-0">Administrador del Proyecto:</label>
+        <p class="font-weight-bold">{{projectInfo.admin.nombres | titlecase  }} {{ projectInfo.admin.apellidos | titlecase }}</p>
+    </div>
+
+    <div class="form-group">
+        <label class="mb-0">Solicitante del Proyecto:</label>
+        <p class="font-weight-bold">{{projectInfo.usuario.nombres | titlecase  }} {{ projectInfo.usuario.apellidos | titlecase }}</p>
+    </div>
+
+    <div class="form-group">
+        <label class="mb-0">Creación del Proyecto:</label>
+        <p class="font-weight-bold">{{projectInfo.created_at | date: 'medium' }}</p>
+    </div>
+
+    <div class="form-group">
+        <label class="mb-0">Ultima actualización del Proyecto:</label>
+        <p class="font-weight-bold">{{projectInfo.updated_at | date: 'medium' }}</p>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions >
+    <button mat-button mat-dialog-close [ngClass]="'float-left'">Cerrar</button>
+  </mat-dialog-actions>
