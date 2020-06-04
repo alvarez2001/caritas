@@ -8,9 +8,10 @@ import { CrearUsuarioComponent } from './modulo-usuarios/crear-usuario/crear-usu
 import { ListarUsuarioComponent } from './modulo-usuarios/listar-usuario/listar-usuario.component';
 import { CrearProyectoComponent } from './modulo-proyectos/crear-proyecto/crear-proyecto.component';
 import { ListarProyectosComponent } from './modulo-proyectos/listar-proyectos/listar-proyectos.component';
-import { RegistrarComponent } from './modulo-concepto/registrar/registrar.component';
 import { VerComponent } from './modulo-concepto/ver/ver.component';
 import { ListarBancosComponent } from './modulo-bancos/listar-bancos/listar-bancos.component';
+import { ListarSolicitudesComponent } from './modulo-solicitudes/listar-solicitudes/listar-solicitudes.component';
+import { RevisionSolicitudComponent } from './modulo-solicitudes/revision-solicitud/revision-solicitud.component';
 
 
 const routes: Routes = [
@@ -36,6 +37,12 @@ const routes: Routes = [
       },
       {
         path:'listar-bancos', component:ListarBancosComponent
+      },
+      {
+        path:'asignar-monto', component: ListarSolicitudesComponent
+      },
+      {
+        path:'revision-solicitud',component:RevisionSolicitudComponent
       }
     ],canActivate:[IdentityGuard],
   },

@@ -64,6 +64,8 @@ export class LoginComponent implements OnInit {
         this._loginService.loginUser(this.user, true).subscribe(response=>{
           this.identity = response;
 
+          
+
           sessionStorage.setItem('token', this.token);
           sessionStorage.setItem('identity', JSON.stringify(this.identity));
 
@@ -72,11 +74,13 @@ export class LoginComponent implements OnInit {
       }
     },
     err=> {
-      console.log(err)
       this.statusApi ='error';
       if(err.status == 0){
         this.message = 'Error de conexion, revise su internet';
       }
+      
+      
+    }, () => {
       this.carga = false;
       this.renderer.setAttribute(boton.nativeElement, "disabled", "false");
     })

@@ -31,7 +31,7 @@ export class LoginService {
 
   getIdentity(){
     const identity = JSON.parse(sessionStorage.getItem('identity'))
-    if(identity && identity !== undefined){
+    if(identity){
       this.identity = identity;
     }else{
       this.identity = null;

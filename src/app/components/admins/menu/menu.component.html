@@ -59,6 +59,23 @@
   
       </mat-expansion-panel>
 
+      <mat-expansion-panel >
+
+        <mat-expansion-panel-header>
+
+            <mat-panel-title>
+                <mat-icon class="mr-3">description</mat-icon>
+              Modulo Solicitud
+            </mat-panel-title>
+    
+          </mat-expansion-panel-header>
+          <a mat-raised-button class="w-100 mt-2 " (click)="drawer.close()" [routerLink]="['asignar-monto']">Asignar Monto</a>
+
+          <a mat-raised-button class="w-100 mt-2 " (click)="drawer.close()" [routerLink]="['revision-solicitud']">Revisión</a>
+    
+  
+      </mat-expansion-panel>
+
       <a mat-raised-button class="w-100 " [routerLink]="['/logout/1']" ><mat-icon class="float-left mt-2 ml-2 clearfix">exit_to_app</mat-icon> Cerrar Sesión</a>
 
   </mat-accordion>

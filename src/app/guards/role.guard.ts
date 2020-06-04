@@ -30,6 +30,11 @@ export class RoleGuard implements CanActivate{
             this._router.navigate(['panel-administrativo/master']);
             return true;
         }
+
+        else if(rol === 'admin'){
+            this._router.navigate(['panel-administrativo/master']);
+            return true;
+        }
         else{
             this._router.navigate(['login']);
             return false;

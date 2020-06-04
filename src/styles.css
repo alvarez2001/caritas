@@ -63,3 +63,35 @@ body, .fondoBg{
     width: 30px!important;
     height: 30px!important;
 }
+
+
+
+fieldset.scheduler-border,
+div.scheduler-border {
+    border: 1px solid rgba(0, 0, 0, 0.479) !important;
+    padding: 0 1.4em ;
+    margin: 0 0 1.5em 0;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;
+            border-radius: 10px;
+}
+div.scheduler-border{
+    position: relative;
+}
+
+legend.scheduler-border,
+h4.scheduler-border {
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    border:none;
+    width:100px;
+    
+}
+h4.scheduler-border{
+    position: absolute;
+    top: -10px;
+    background-color: #ffffff;
+    left: 20px;
+    margin: 0;
+}
