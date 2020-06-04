@@ -78,10 +78,13 @@ export class LoginComponent implements OnInit {
       if(err.status == 0){
         this.message = 'Error de conexion, revise su internet';
       }
-      
+      this.carga = false;
+      user.reset()
+      this.renderer.setAttribute(boton.nativeElement, "disabled", "false");
       
     }, () => {
       this.carga = false;
+      user.reset()
       this.renderer.setAttribute(boton.nativeElement, "disabled", "false");
     })
     

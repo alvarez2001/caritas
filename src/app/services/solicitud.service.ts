@@ -16,6 +16,7 @@ export class SolicitudService {
     this.url = Global.url;
   }
 
+  getSolicitudUsuario(id):Observable<any>{return this._http.get(`${this.url}solicitud/usuario/${id}`)}
 
   getProyectoId(id):Observable<any>{return this._http.get(`${this.url}proyecto/proyectoUsuario/${id}`)}
 
