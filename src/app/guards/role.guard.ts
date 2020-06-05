@@ -27,12 +27,12 @@ export class RoleGuard implements CanActivate{
             return true;
         }
         else if(rol === 'master'){
-            this._router.navigate(['panel-administrativo/master']);
+            this._router.navigate(['panel-administrativo']);
             return true;
         }
 
         else if(rol === 'admin'){
-            this._router.navigate(['panel-administrativo/master']);
+            this._router.navigate(['panel-administrativo']);
             return true;
         }
         else{

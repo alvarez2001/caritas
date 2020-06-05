@@ -10,7 +10,7 @@
 
     <a mat-raised-button class="w-100 " [routerLink]="['inicio']" (click)="drawer.close()" ><mat-icon class="float-left mt-2 ml-2 clearfix">home</mat-icon>Inicio</a>
     
-    <mat-expansion-panel  class="">
+    <mat-expansion-panel  class="" *ngIf="rol === 'MASTER'">
 
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -72,7 +72,10 @@
           <a mat-raised-button class="w-100 mt-2 " (click)="drawer.close()" [routerLink]="['asignar-monto']">Asignar Monto</a>
 
           <a mat-raised-button class="w-100 mt-2 " (click)="drawer.close()" [routerLink]="['revision-solicitud']">Revisión</a>
-    
+          
+          <a mat-raised-button class="w-100 mt-2 " (click)="drawer.close()" [routerLink]="['ejecucion']">Ejecución</a>
+
+          <a mat-raised-button class="w-100 mt-2 " (click)="drawer.close()" [routerLink]="['solicitudes']">Rechazadas / Finalizadas</a>
   
       </mat-expansion-panel>
 

@@ -30,9 +30,11 @@
                 <td>{{userData.rol | titlecase}}</td>
                 <td>{{userData.status | titlecase}}</td>
                 <td>
-                <button mat-icon-button matTooltip="Modificar Usuario" (click)="openDialog(userData)"  *ngIf="userData.id !== userActivo.sub">
-                    <mat-icon>create</mat-icon>
+              
+                  <button mat-icon-button matTooltip="Modificar Usuario" (click)="openDialog(userData)"  *ngIf="userData.id !== userActivo.sub  ">
+                    <mat-icon >create</mat-icon>
                 </button>
+              
                 <button mat-icon-button matTooltip="Ver Usuario" (click)="detallesUser(userData)"  >
                   <mat-icon>remove_red_eye</mat-icon>
               </button>

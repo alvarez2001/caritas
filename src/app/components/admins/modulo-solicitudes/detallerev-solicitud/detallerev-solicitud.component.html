@@ -31,7 +31,7 @@
             <h4 class="col-12 m-0">Total</h4>
             <small class="col-12 text-secondary m-0">Solicitud</small>
 
-            <p class="mb-0 col-12">{{data.total | currency:'BS':true:'1.2' }}</p>
+            <p class="mb-0 col-12">{{data.total | currency:' ':true:'1.2' }}</p>
         </div>
 
 
@@ -43,61 +43,73 @@
                                                 *ngIf="data.rubro.precio1 !== null">
             <div class="scheduler-border my-3" >
                 <h4 class="scheduler-border">Campo 1</h4>
-               
+                
                 <div class="row mt-3">
                     
-                    <div class="col-lg-4 text-center">
-                        <div class="col-12">
-                            <h5 class="m-0">Cantidad:</h5>
-                        </div>
-                        <div class="col-12">
-                            <p class="m-0 ">{{data.rubro.cantidad1 }}</p>
+                    <div class="col-12"> 
+                        <h4 class="text-center">Datos del producto:</h4>
+                        <div class="row">
+
+                            
+
+                            <div class="col-lg-4 text-center">
+                                <div class="col-12">
+                                    <h5 class="m-0">Cantidad:</h5>
+                                </div>
+                                <div class="col-12">
+                                    <p class="m-0 ">{{data.rubro.cantidad1 }}</p>
+                                </div>
+                            </div>
+        
+                            <div class="col-lg-4 text-center">
+                                <div class="col-12">
+                                    <h5 class="m-0">Precio:</h5>
+                                </div>
+                                <div class="col-12">
+                                    <p class="m-0">{{data.rubro.precio1 | currency:' ':true:'1.2' }}</p>
+                                </div>
+                            </div>
+        
+                            <div class="col-lg-4 text-center">
+                                <div class="col-12">
+                                    <h5 class="m-0">Total:</h5>
+                                </div>
+                                <div class="col-12">
+                                    <p class="m-0">{{data.rubro.cantidad1 * data.rubro.precio1 | currency:' ':true:'1.2' }}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-12 text-center">
+                                <div class="col-12">
+                                    <h5 class="m-0">Descripción:</h5>
+                                </div>
+                                <div class="col-12">
+                                    <p class="m-0">{{data.rubro.descripcion1}}</p>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
 
-                    <div class="col-lg-4 text-center">
-                        <div class="col-12">
-                            <h5 class="m-0">Precio:</h5>
-                        </div>
-                        <div class="col-12">
-                            <p class="m-0">{{data.rubro.precio1 | currency:'BS':true:'1.2' }}</p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 text-center">
-                        <div class="col-12">
-                            <h5 class="m-0">Total:</h5>
-                        </div>
-                        <div class="col-12">
-                            <p class="m-0">{{data.rubro.cantidad1 * data.rubro.precio1 | currency:'BS':true:'1.2' }}</p>
-                        </div>
-                    </div>
-
-                    <div class="col-12 text-center mt-1" *ngFor="let banco of bancosArr" >
-                        <div *ngIf="banco.id === data.rubro.banco1_id">
-                             
-                             <div class="row">
-                                 <div class="col-lg-6">
-                                     <h5 class="m-0 col-12">Titular</h5>
-                                     <p class="m-0"> {{banco.titular | titlecase}} </p>
+                    <div class="col-12 my-3">
+                        <h4 class="text-center">Datos para Transferencia:</h4>
+                        <div class="col-12  mt-1" *ngFor="let banco of bancosArr" >
+                            <div *ngIf="banco.id === data.rubro.banco1_id" class="text-center">
+                                 
+                                 <div class="row">
+                                     <div class="col-lg-6">
+                                         <h5 class="m-0 col-12">Titular</h5>
+                                         <p class="m-0"> {{banco.titular | titlecase}} </p>
+                                     </div>
+                                     <div class="col-lg-6">
+                                         <h5 class="m-0 col-12">Banco</h5>
+                                         <p class="m-0">{{banco.banco | titlecase}}</p>
+                                     </div>
                                  </div>
-                                 <div class="col-lg-6">
-                                     <h5 class="m-0 col-12">Cuenta</h5>
-                                     <p class="m-0">{{banco.banco | titlecase}}</p>
-                                 </div>
-                             </div>
-                        </div>
-                     </div>
-
-                    <div class="col-12 text-center my-1">
-                        <div class="col-12">
-                            <h5 class="m-0">Descripción:</h5>
-                        </div>
-                        <div class="col-12">
-                            <p class="m-0">{{data.rubro.descripcion1}}</p>
-                        </div>
+                            </div>
+                         </div>
                     </div>
-   
                 </div>
                 
             </div>
@@ -111,66 +123,78 @@
                                                     'col-12 col-md-8 mx-auto'  : data.rubro.precio3 === null
                                                 }"
                                                 *ngIf="data.rubro.precio2 !== null">
-            <div class="scheduler-border my-3" >
-                <h4 class="scheduler-border">Campo 2</h4>
-               
-                <div class="row mt-3">
+                <div class="scheduler-border my-3" >
+                    <h4 class="scheduler-border">Campo 2</h4>
                     
-                    <div class="col-lg-4 text-center">
-                        <div class="col-12">
-                            <h5 class="m-0">Cantidad:</h5>
+                    <div class="row mt-3">
+                        
+                        <div class="col-12"> 
+                            <h4 class="text-center">Datos del producto:</h4>
+                            <div class="row">
+    
+                                
+    
+                                <div class="col-lg-4 text-center">
+                                    <div class="col-12">
+                                        <h5 class="m-0">Cantidad:</h5>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="m-0 ">{{data.rubro.cantidad2 }}</p>
+                                    </div>
+                                </div>
+            
+                                <div class="col-lg-4 text-center">
+                                    <div class="col-12">
+                                        <h5 class="m-0">Precio:</h5>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="m-0">{{data.rubro.precio2 | currency:' ':true:'1.2' }}</p>
+                                    </div>
+                                </div>
+            
+                                <div class="col-lg-4 text-center">
+                                    <div class="col-12">
+                                        <h5 class="m-0">Total:</h5>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="m-0">{{data.rubro.cantidad2 * data.rubro.precio2 | currency:' ':true:'1.2' }}</p>
+                                    </div>
+                                </div>
+    
+                                <div class="col-12 text-center">
+                                    <div class="col-12">
+                                        <h5 class="m-0">Descripción:</h5>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="m-0">{{data.rubro.descripcion2}}</p>
+                                    </div>
+                                </div>
+    
+    
+                            </div>
                         </div>
-                        <div class="col-12">
-                            <p class="m-0 ">{{data.rubro.cantidad2 }}</p>
+    
+                        <div class="col-12 my-3">
+                            <h4 class="text-center">Datos para Transferencia:</h4>
+                            <div class="col-12  mt-1" *ngFor="let banco of bancosArr" >
+                                <div *ngIf="banco.id === data.rubro.banco2_id" class="text-center">
+                                        
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <h5 class="m-0 col-12">Titular</h5>
+                                                <p class="m-0"> {{banco.titular | titlecase}} </p>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <h5 class="m-0 col-12">Banco</h5>
+                                                <p class="m-0">{{banco.banco | titlecase}}</p>
+                                            </div>
+                                        </div>
+                                </div>
+                                </div>
                         </div>
                     </div>
-
-                    <div class="col-lg-4 text-center">
-                        <div class="col-12">
-                            <h5 class="m-0">Precio:</h5>
-                        </div>
-                        <div class="col-12">
-                            <p class="m-0">{{data.rubro.precio2 | currency:'BS':true:'1.2' }}</p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 text-center">
-                        <div class="col-12">
-                            <h5 class="m-0">Total:</h5>
-                        </div>
-                        <div class="col-12">
-                            <p class="m-0">{{data.rubro.cantidad2 * data.rubro.precio2 | currency:'BS':true:'1.2' }}</p>
-                        </div>
-                    </div>
-
-                    <div class="col-12 text-center mt-1" *ngFor="let banco of bancosArr" >
-                        <div *ngIf="banco.id === data.rubro.banco1_id">
-                             
-                             <div class="row">
-                                 <div class="col-lg-6">
-                                     <h5 class="m-0 col-12">Titular</h5>
-                                     <p class="m-0"> {{banco.titular | titlecase}} </p>
-                                 </div>
-                                 <div class="col-lg-6">
-                                     <h5 class="m-0 col-12">Cuenta</h5>
-                                     <p class="m-0">{{banco.banco | titlecase}}</p>
-                                 </div>
-                             </div>
-                        </div>
-                     </div>
-
-                    <div class="col-12 text-center my-1">
-                        <div class="col-12">
-                            <h5 class="m-0">Descripción:</h5>
-                        </div>
-                        <div class="col-12">
-                            <p class="m-0">{{data.rubro.descripcion2}}</p>
-                        </div>
-                    </div>
-   
+                    
                 </div>
-                
-            </div>
         </div>
         
         <!--campos3-->
@@ -179,68 +203,78 @@
                                                     'col-12 col-md-8 mx-auto'  : data.rubro.precio4 === null
                                                 }"
                                                 *ngIf="data.rubro.precio3 !== null">
-            <div class="scheduler-border my-3" >
-                <h4 class="scheduler-border">Campo 3</h4>
-               
-                <div class="row mt-3">
-                    
-                    <div class="col-lg-4 text-center">
-                        <div class="col-12">
-                            <h5 class="m-0">Cantidad:</h5>
-                        </div>
-                        <div class="col-12">
-                            <p class="m-0 ">{{data.rubro.cantidad3 }}</p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 text-center">
-                        <div class="col-12">
-                            <h5 class="m-0">Precio:</h5>
-                        </div>
-                        <div class="col-12">
-                            <p class="m-0">{{data.rubro.precio3 | currency:'BS':true:'1.2' }}</p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 text-center">
-                        <div class="col-12">
-                            <h5 class="m-0">Total:</h5>
-                        </div>
-                        <div class="col-12">
-                            <p class="m-0">{{data.rubro.cantidad3 * data.rubro.precio3 | currency:'BS':true:'1.2' }}</p>
-                        </div>
-                    </div>
-
-                    <div class="col-12 text-center mt-1" *ngFor="let banco of bancosArr" >
-                       <div *ngIf="banco.id === data.rubro.banco1_id">
+                    <div class="scheduler-border my-3" >
+                        <h4 class="scheduler-border">Campo 3</h4>
+                        
+                        <div class="row mt-3">
                             
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <h5 class="m-0 col-12">Titular</h5>
-                                    <p class="m-0"> {{banco.titular | titlecase}} </p>
-                                </div>
-                                <div class="col-lg-6">
-                                    <h5 class="m-0 col-12">Cuenta</h5>
-                                    <p class="m-0">{{banco.banco | titlecase}}</p>
+                            <div class="col-12"> 
+                                <h4 class="text-center">Datos del producto:</h4>
+                                <div class="row">
+        
+                                    
+        
+                                    <div class="col-lg-4 text-center">
+                                        <div class="col-12">
+                                            <h5 class="m-0">Cantidad:</h5>
+                                        </div>
+                                        <div class="col-12">
+                                            <p class="m-0 ">{{data.rubro.cantidad3 }}</p>
+                                        </div>
+                                    </div>
+                
+                                    <div class="col-lg-4 text-center">
+                                        <div class="col-12">
+                                            <h5 class="m-0">Precio:</h5>
+                                        </div>
+                                        <div class="col-12">
+                                            <p class="m-0">{{data.rubro.precio3 | currency:' ':true:'1.2' }}</p>
+                                        </div>
+                                    </div>
+                
+                                    <div class="col-lg-4 text-center">
+                                        <div class="col-12">
+                                            <h5 class="m-0">Total:</h5>
+                                        </div>
+                                        <div class="col-12">
+                                            <p class="m-0">{{data.rubro.cantidad3 * data.rubro.precio3 | currency:' ':true:'1.2' }}</p>
+                                        </div>
+                                    </div>
+        
+                                    <div class="col-12 text-center">
+                                        <div class="col-12">
+                                            <h5 class="m-0">Descripción:</h5>
+                                        </div>
+                                        <div class="col-12">
+                                            <p class="m-0">{{data.rubro.descripcion3}}</p>
+                                        </div>
+                                    </div>
+        
+        
                                 </div>
                             </div>
-                       </div>
-                    </div>
-
-
-
-                    <div class="col-12 text-center mb-1">
-                        <div class="col-12">
-                            <h5 class="m-0">Descripción:</h5>
+        
+                            <div class="col-12 my-3">
+                                <h4 class="text-center">Datos para Transferencia:</h4>
+                                <div class="col-12  mt-1" *ngFor="let banco of bancosArr" >
+                                    <div *ngIf="banco.id === data.rubro.banco3_id" class="text-center">
+                                            
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <h5 class="m-0 col-12">Titular</h5>
+                                                    <p class="m-0"> {{banco.titular | titlecase}} </p>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <h5 class="m-0 col-12">Banco</h5>
+                                                    <p class="m-0">{{banco.banco | titlecase}}</p>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    </div>
+                            </div>
                         </div>
-                        <div class="col-12">
-                            <p class="m-0">{{data.rubro.descripcion3}}</p>
-                        </div>
+                        
                     </div>
-   
-                </div>
-                
-            </div>
         </div>
         
         <!--campos4-->
@@ -248,67 +282,76 @@
                                                     'col-md-6': data.rubro.precio5 !== null,
                                                     'col-12 col-md-8 mx-auto'  : data.rubro.precio5 === null
                                                 }"
-                                                *ngIf="data.rubro.precio4 !== null">
+            *ngIf="data.rubro.precio4 !== null">
             <div class="scheduler-border my-3" >
                 <h4 class="scheduler-border">Campo 4</h4>
-               
+                
                 <div class="row mt-3">
                     
-                    <div class="col-lg-4 text-center">
-                        <div class="col-12">
-                            <h5 class="m-0">Cantidad:</h5>
-                        </div>
-                        <div class="col-12">
-                            <p class="m-0 ">{{data.rubro.cantidad4 }}</p>
+                    <div class="col-12"> 
+                        <h4 class="text-center">Datos del producto:</h4>
+                        <div class="row">
+
+                            
+
+                            <div class="col-lg-4 text-center">
+                                <div class="col-12">
+                                    <h5 class="m-0">Cantidad:</h5>
+                                </div>
+                                <div class="col-12">
+                                    <p class="m-0 ">{{data.rubro.cantidad4 }}</p>
+                                </div>
+                            </div>
+        
+                            <div class="col-lg-4 text-center">
+                                <div class="col-12">
+                                    <h5 class="m-0">Precio:</h5>
+                                </div>
+                                <div class="col-12">
+                                    <p class="m-0">{{data.rubro.precio4 | currency:' ':true:'1.2' }}</p>
+                                </div>
+                            </div>
+        
+                            <div class="col-lg-4 text-center">
+                                <div class="col-12">
+                                    <h5 class="m-0">Total:</h5>
+                                </div>
+                                <div class="col-12">
+                                    <p class="m-0">{{data.rubro.cantidad4 * data.rubro.precio4 | currency:' ':true:'1.2' }}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-12 text-center">
+                                <div class="col-12">
+                                    <h5 class="m-0">Descripción:</h5>
+                                </div>
+                                <div class="col-12">
+                                    <p class="m-0">{{data.rubro.descripcion4}}</p>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
 
-                    <div class="col-lg-4 text-center">
-                        <div class="col-12">
-                            <h5 class="m-0">Precio:</h5>
-                        </div>
-                        <div class="col-12">
-                            <p class="m-0">{{data.rubro.precio4 | currency:'BS':true:'1.2' }}</p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 text-center">
-                        <div class="col-12">
-                            <h5 class="m-0">Total:</h5>
-                        </div>
-                        <div class="col-12">
-                            <p class="m-0">{{data.rubro.cantidad4 * data.rubro.precio4 | currency:'BS':true:'1.2' }}</p>
-                        </div>
-                    </div>
-
-                    <div class="col-12 text-center mt-1" *ngFor="let banco of bancosArr" >
-                        <div *ngIf="banco.id === data.rubro.banco1_id">
-                             
-                             <div class="row">
-                                 <div class="col-lg-6">
-                                     <h5 class="m-0 col-12">Titular</h5>
-                                     <p class="m-0"> {{banco.titular | titlecase}} </p>
+                    <div class="col-12 my-3">
+                        <h4 class="text-center">Datos para Transferencia:</h4>
+                        <div class="col-12  mt-1" *ngFor="let banco of bancosArr" >
+                            <div *ngIf="banco.id === data.rubro.banco4_id" class="text-center">
+                                 
+                                 <div class="row">
+                                     <div class="col-lg-6">
+                                         <h5 class="m-0 col-12">Titular</h5>
+                                         <p class="m-0"> {{banco.titular | titlecase}} </p>
+                                     </div>
+                                     <div class="col-lg-6">
+                                         <h5 class="m-0 col-12">Banco</h5>
+                                         <p class="m-0">{{banco.banco | titlecase}}</p>
+                                     </div>
                                  </div>
-                                 <div class="col-lg-6">
-                                     <h5 class="m-0 col-12">Cuenta</h5>
-                                     <p class="m-0">{{banco.banco | titlecase}}</p>
-                                 </div>
-                             </div>
-                        </div>
-                     </div>
-
-                    <div class="col-12 text-center my-1">
-
-                        <div class="col-12">
-                            <h5 class="m-0">Descripción:</h5>
-                        </div>
-
-                        <div class="col-12">
-                            <p class="m-0">{{data.rubro.descripcion4}}</p>
-                        </div>
-
+                            </div>
+                         </div>
                     </div>
-   
                 </div>
                 
             </div>
@@ -318,61 +361,73 @@
         <div  [ngClass]="{'col-12 col-md-8 mx-auto': data.rubro.precio5 !== null}" *ngIf="data.rubro.precio5 !== null">
             <div class="scheduler-border my-3" >
                 <h4 class="scheduler-border">Campo 5</h4>
-               
+                
                 <div class="row mt-3">
                     
-                    <div class="col-lg-4 text-center">
-                        <div class="col-12">
-                            <h5 class="m-0">Cantidad:</h5>
-                        </div>
-                        <div class="col-12">
-                            <p class="m-0 ">{{data.rubro.cantidad5 }}</p>
+                    <div class="col-12"> 
+                        <h4 class="text-center">Datos del producto:</h4>
+                        <div class="row">
+
+                            
+
+                            <div class="col-lg-4 text-center">
+                                <div class="col-12">
+                                    <h5 class="m-0">Cantidad:</h5>
+                                </div>
+                                <div class="col-12">
+                                    <p class="m-0 ">{{data.rubro.cantidad5 }}</p>
+                                </div>
+                            </div>
+        
+                            <div class="col-lg-4 text-center">
+                                <div class="col-12">
+                                    <h5 class="m-0">Precio:</h5>
+                                </div>
+                                <div class="col-12">
+                                    <p class="m-0">{{data.rubro.precio5 | currency:' ':true:'1.2' }}</p>
+                                </div>
+                            </div>
+        
+                            <div class="col-lg-4 text-center">
+                                <div class="col-12">
+                                    <h5 class="m-0">Total:</h5>
+                                </div>
+                                <div class="col-12">
+                                    <p class="m-0">{{data.rubro.cantidad5 * data.rubro.precio5 | currency:' ':true:'1.2' }}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-12 text-center">
+                                <div class="col-12">
+                                    <h5 class="m-0">Descripción:</h5>
+                                </div>
+                                <div class="col-12">
+                                    <p class="m-0">{{data.rubro.descripcion5}}</p>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
 
-                    <div class="col-lg-4 text-center">
-                        <div class="col-12">
-                            <h5 class="m-0">Precio:</h5>
-                        </div>
-                        <div class="col-12">
-                            <p class="m-0">{{data.rubro.precio5 | currency:'BS':true:'1.2' }}</p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 text-center">
-                        <div class="col-12">
-                            <h5 class="m-0">Total:</h5>
-                        </div>
-                        <div class="col-12">
-                            <p class="m-0">{{data.rubro.cantidad5 * data.rubro.precio5 | currency:'BS':true:'1.2' }}</p>
-                        </div>
-                    </div>
-
-                    <div class="col-12 text-center mt-1" *ngFor="let banco of bancosArr" >
-                        <div *ngIf="banco.id === data.rubro.banco1_id">
-                             
-                             <div class="row">
-                                 <div class="col-lg-6">
-                                     <h5 class="m-0 col-12">Titular</h5>
-                                     <p class="m-0"> {{banco.titular | titlecase}} </p>
+                    <div class="col-12 my-3">
+                        <h4 class="text-center">Datos para Transferencia:</h4>
+                        <div class="col-12  mt-1" *ngFor="let banco of bancosArr" >
+                            <div *ngIf="banco.id === data.rubro.banco5_id" class="text-center">
+                                 
+                                 <div class="row">
+                                     <div class="col-lg-6">
+                                         <h5 class="m-0 col-12">Titular</h5>
+                                         <p class="m-0"> {{banco.titular | titlecase}} </p>
+                                     </div>
+                                     <div class="col-lg-6">
+                                         <h5 class="m-0 col-12">Banco</h5>
+                                         <p class="m-0">{{banco.banco | titlecase}}</p>
+                                     </div>
                                  </div>
-                                 <div class="col-lg-6">
-                                     <h5 class="m-0 col-12">Cuenta</h5>
-                                     <p class="m-0">{{banco.banco | titlecase}}</p>
-                                 </div>
-                             </div>
-                        </div>
-                     </div>
-
-                    <div class="col-12 text-center my-1">
-                        <div class="col-12">
-                            <h5 class="m-0">Descripción:</h5>
-                        </div>
-                        <div class="col-12">
-                            <p class="m-0">{{data.rubro.descripcion5}}</p>
-                        </div>
+                            </div>
+                         </div>
                     </div>
-   
                 </div>
                 
             </div>
@@ -382,6 +437,8 @@
 
 <mat-dialog-actions class="float-right">
     <button mat-button mat-dialog-close>Cerrar</button>
-    <button mat-button (click)="rechazar(data.id)">Rechazar</button>
+<div *ngIf="rol === 'MASTER'"> 
+    <button mat-button (click)="rechazar(data.id)" >Rechazar</button>
     <button mat-button (click)="autorizar(data.id)"> Autorizar </button>
+</div>
 </mat-dialog-actions>

@@ -45,4 +45,14 @@ export class SolicitudService {
     const params = 'json='+json;
     return this._http.put(`${this.url}solicitud/autorizarsolicitud/${idActivo}`,params);
   }
+
+  getSolicitudAutorizadas():Observable<any>{return this._http.get(`${this.url}solicitudes/autorizada`)}
+
+  getSolicitudRechazadas():Observable<any>{return this._http.get(`${this.url}solicitudes/rechazada`)}
+
+  RechazarSolicitud(user,id):Observable<any>{
+    const json = JSON.stringify(user);
+    const params = 'json='+json;
+    return this._http.put(`${this.url}solicitud/rechazarsolicitud/${id}`,params);
+  }
 }

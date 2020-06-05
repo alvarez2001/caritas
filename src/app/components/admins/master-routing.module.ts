@@ -12,11 +12,13 @@ import { VerComponent } from './modulo-concepto/ver/ver.component';
 import { ListarBancosComponent } from './modulo-bancos/listar-bancos/listar-bancos.component';
 import { ListarSolicitudesComponent } from './modulo-solicitudes/listar-solicitudes/listar-solicitudes.component';
 import { RevisionSolicitudComponent } from './modulo-solicitudes/revision-solicitud/revision-solicitud.component';
+import { SolicitudesDuoComponent } from './modulo-solicitudes/solicitudes-duo/solicitudes-duo.component';
+import { ListarAutorizadasComponent } from './modulo-solicitudes/listar-autorizadas/listar-autorizadas.component';
 
 
 const routes: Routes = [
   {
-    path: 'panel-administrativo/master',component: PanelAdministrativoComponent,
+    path: 'panel-administrativo',component: PanelAdministrativoComponent,
     children:[
        {path: '', component:AdministradorComponent},
       {path: 'inicio', component:AdministradorComponent},
@@ -43,6 +45,12 @@ const routes: Routes = [
       },
       {
         path:'revision-solicitud',component:RevisionSolicitudComponent
+      },
+      {
+        path:'solicitudes',component:SolicitudesDuoComponent
+      },
+      {
+        path:'ejecucion',component:ListarAutorizadasComponent
       }
     ],canActivate:[IdentityGuard],
   },

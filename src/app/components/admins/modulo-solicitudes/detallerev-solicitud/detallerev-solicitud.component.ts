@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 export class DetallerevSolicitudComponent implements OnInit {
 
   public bancosArr:Banco[];
+  public rol;
 
   constructor(
     public dialogRef: MatDialogRef<DetallerevSolicitudComponent>,
@@ -22,12 +23,17 @@ export class DetallerevSolicitudComponent implements OnInit {
     private conSV:ConceptoService,
     private logSV:LoginService,
     private solSV:SolicitudService
-  ) { }
+  ) {
+    this.rol = this.logSV.getIdentity().rol;
+   }
 
   ngOnInit(): void {
     this.bancos()
   }
   rechazar(id){
+
+    const usuario = { usuario: this.logSV.getIdentity().sub }
+
     Swal.fire({
       title: 'Estas seguro?',
       text: `Desea rechazar la solicitud #${id}?`,
@@ -39,7 +45,18 @@ export class DetallerevSolicitudComponent implements OnInit {
       cancelButtonText:'Cancelar'
     }).then((result) => {
       if (result.value) {
-        
+        this.solSV.RechazarSolicitud(usuario, id).subscribe(res => {
+          console.log(res)
+          Swal.fire({
+            toast:true,
+            timer:5000,
+            timerProgressBar:true,
+            title:`Solicitud #${id} Rechazada`,
+            icon:'warning',
+            position:'bottom-end'
+          })
+          this.dialogRef.close(true);
+        })
       }
     })    
   }

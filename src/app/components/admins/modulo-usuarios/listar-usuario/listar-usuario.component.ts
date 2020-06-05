@@ -25,8 +25,7 @@ export class ListarUsuarioComponent implements OnInit {
   public cargaFallida:string;
   public token:string;
   public url:string;
-  
-
+  public rol;
   
   constructor(
     public dialog: MatDialog,
@@ -36,7 +35,9 @@ export class ListarUsuarioComponent implements OnInit {
       this.token = this._loginService.getToken();
       this.userActivo = this._loginService.getIdentity();
       this.url = Global.url;
-   }
+      this.rol = this._loginService.getIdentity().rol;
+      console.log(this.rol)
+   }  
 
   ngOnInit(): void {
     this.mostrarUsuarios()

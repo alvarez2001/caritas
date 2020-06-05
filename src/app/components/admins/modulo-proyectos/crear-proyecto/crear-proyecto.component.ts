@@ -42,7 +42,7 @@ export class CrearProyectoComponent implements OnInit {
     ) { 
 
 
-    this.proyecto = new ProyectosModel(null,'','',null,null,null,'ACTIVO',null,null,'','');
+    this.proyecto = new ProyectosModel(null,'','',null,null,0.00,'ACTIVO',null,null,'','');
 
 
     this.validarFormulario();
@@ -52,7 +52,7 @@ export class CrearProyectoComponent implements OnInit {
 
 
   calcularPorcentaje(){
-    if(this.comisionInput !== null && this.proyecto.aprobado !== null){
+    if(this.proyecto.aprobado !== null){
       
       this.proyecto.aprobado = +this.proyecto.aprobado;
       this.proyecto.comision = this.proyecto.aprobado * this.comisionInput;
@@ -68,7 +68,7 @@ export class CrearProyectoComponent implements OnInit {
   validarFormulario(){
     this.aprobado = new FormControl(null, [Validators.required]);
     this.disponible = new FormControl(null, [Validators.required]);
-    this.comision = new FormControl(null, [Validators.required]);
+    this.comision = new FormControl(0.00, [Validators.required]);
 
     this.nombre = new FormControl(null, [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ0-9 ]+')]);
     this.codigo = new FormControl(null, [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ0-9- ]+')]);
@@ -97,6 +97,7 @@ export class CrearProyectoComponent implements OnInit {
   }
 
   register(form){
+    console.log()
     const dialogRef = this.dialog.open(DetalleCrearProyectoComponent, {
       width: '300px',
       data: {

@@ -48,5 +48,5 @@
   </mat-dialog-content>
   <mat-dialog-actions [attr.align]="'end'" *ngIf="user">
     <button mat-button mat-dialog-close>Cancelar</button>
-    <button mat-button (click)="updateUserData(updateUser)" [disabled]="!updateUser.valid">Actualizar Información</button>
+    <button mat-button (click)="updateUserData(updateUser)" [disabled]="!updateUser.valid" >Actualizar Información</button>
   </mat-dialog-actions>

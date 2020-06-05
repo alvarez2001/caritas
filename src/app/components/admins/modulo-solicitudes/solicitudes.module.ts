@@ -9,10 +9,12 @@ import { ListarSolicitudesComponent } from './listar-solicitudes/listar-solicitu
 import { RevisionSolicitudComponent } from './revision-solicitud/revision-solicitud.component';
 import { DetallerevSolicitudComponent } from './detallerev-solicitud/detallerev-solicitud.component';
 import { CamposDetalleComponent } from './campos-detalle/campos-detalle.component';
+import { SolicitudesDuoComponent } from './solicitudes-duo/solicitudes-duo.component';
+import { ListarAutorizadasComponent } from './listar-autorizadas/listar-autorizadas.component';
 
 
 @NgModule({
-  declarations: [AsignarMontoComponent, ListarSolicitudesComponent, RevisionSolicitudComponent, DetallerevSolicitudComponent, CamposDetalleComponent],
+  declarations: [AsignarMontoComponent, ListarSolicitudesComponent, RevisionSolicitudComponent, DetallerevSolicitudComponent, CamposDetalleComponent, SolicitudesDuoComponent, ListarAutorizadasComponent],
   imports: [
     CommonModule,
     MaterialModule,

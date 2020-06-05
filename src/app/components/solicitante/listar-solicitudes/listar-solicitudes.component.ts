@@ -16,7 +16,7 @@ export class ListarSolicitudesComponent implements OnInit {
 
   constructor(private solSV:SolicitudService, private logSV:LoginService) { }
 
-  displayedColumns: string[] = ['numero', 'proyecto', 'status','acciones'];
+  displayedColumns: string[] = ['numero', 'proyecto', 'creado', 'status','acciones'];
   dataSource = new MatTableDataSource();
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
