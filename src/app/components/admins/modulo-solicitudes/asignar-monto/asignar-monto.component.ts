@@ -19,7 +19,7 @@ export class AsignarMontoComponent implements OnInit {
   public allBancos:Array<any>;
   private idAdmin:number;
   public TotalEnvio:number;
-  private productos:ProductosModel;
+  public productos:ProductosModel;
   
   private total1:number = 0;
   private total2:number = 0;
