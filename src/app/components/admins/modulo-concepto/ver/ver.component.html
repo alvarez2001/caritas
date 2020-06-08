@@ -1,7 +1,7 @@
 
 
-<mat-card class="col-12 mx-auto col-md-10">
-    <mat-card-title class="text-center">
+<mat-card class="col-12 mx-auto col-md-10 text-center">
+    <mat-card-title class="text-center tituloPrincipalPagina">
         Listado de Conceptos
         
     </mat-card-title>
@@ -21,11 +21,11 @@
                       </thead>
                       <tbody >
             
-                        <tr class="text-center" *ngFor="let element of conceptos; let index = index">
+                        <tr class="text-center" *ngFor="let element of conceptos; let index = index" class="botones-theme">
                             <td >{{index + 1}}</td>
                             <td>{{element.descripcion}}</td>
                             <td>
-                            <button mat-icon-button matTooltip="Eliminar Concepto"  (click)="eliminarConcepto(element.id)">
+                            <button mat-icon-button matTooltip="Eliminar Concepto"  (click)="eliminarConcepto(element.id)" color="warn">
                                 <mat-icon>delete_forever</mat-icon>
                             </button>
                             </td>   

@@ -40,7 +40,7 @@ export class ListarSolicitudesComponent implements OnInit {
 
   asignarMontoDialog(data){
     const dialogRef = this.dialog.open(AsignarMontoComponent, {
-      width: '700px',
+      width: '1000px',
       data: data
     });
 

@@ -1,10 +1,19 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark position-fixed fixed-top">
+<nav class="navbar navbar-expand navbar-light barraNavegacion position-fixed fixed-top" >
   
   <button mat-icon-button (click)="menu.open()" class="text-white navbar-brand">
     <mat-icon class="tamañoMenu mr-3">menu</mat-icon>
   </button>
 
-    <a class="navbar-brand" class="px-3" >
-      <img src="/assets/panel/logoCaritas.png" width="50" height="50">
+    <a class="navbar-brand" class="px-3 text-white text-uppercase">
+      <img src="./assets/panel/logoCaritas.png" width="50" height="40" class="d-inline-block">
     </a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="navbar-nav mr-auto"></div>
+      <div class="navbar-nav navbar-right ">
+        <a  [routerLink]="['/logout/1']"  class="text-white exit">
+          <mat-icon class="salida">exit_to_app</mat-icon>
+        </a>
+      </div>
+    </div>
 </nav>

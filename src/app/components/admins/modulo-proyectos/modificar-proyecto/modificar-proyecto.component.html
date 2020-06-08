@@ -49,8 +49,8 @@
 
 
     </mat-dialog-content>
-    <mat-dialog-actions  *ngIf="projectInfo">
-        <button mat-button mat-dialog-close [ngClass]="'float-left'">Cerrar</button>
-        <button mat-button [ngClass]="'float-rigth'" [type]="'submit'" #buttonSave  [disabled]="!putProject.valid" (click)="actualizar(putProject, buttonSave._elementRef)">Actualizar Proyecto</button>
+    <mat-dialog-actions  *ngIf="projectInfo" class="botones-theme">
+        <button mat-raised-button mat-dialog-close [ngClass]="'float-left'" color="warn">Cerrar</button>
+        <button mat-raised-button class="float-rigth text-white" [type]="'submit'" #buttonSave  [disabled]="!putProject.valid" (click)="actualizar(putProject, buttonSave._elementRef)" color="primary">Actualizar Proyecto</button>
     </mat-dialog-actions>
 </form>

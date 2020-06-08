@@ -48,7 +48,7 @@
 
 
 </mat-dialog-content>
-<mat-dialog-actions  [ngClass]="'mx-auto'">
-  <button mat-button mat-dialog-close>No guardar</button>
-  <button mat-button (click)="crearProyecto(infoProyecto, buttonSave._elementRef)" #buttonSave>Guardar</button>
+<mat-dialog-actions  class="mx-auto botones-theme">
+  <button mat-raised-button mat-dialog-close color="accent">No guardar</button>
+  <button mat-raised-button (click)="crearProyecto(infoProyecto, buttonSave._elementRef)" #buttonSave color="primary">Guardar</button>
 </mat-dialog-actions>

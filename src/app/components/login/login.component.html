@@ -12,11 +12,12 @@
     
                         <form class="mb-3" [formGroup]="userLogin"   (ngSubmit)="iniciarSesion(userLogin, botonIncio._elementRef)"  novalidate>
                             
-                            <mat-form-field class="col-10 mt-3">
+                            <mat-form-field class="col-10 mt-3" appearance="outline">
                                 <mat-label>Email:</mat-label>
                                 <input matInput type="email" formControlName="email" [(ngModel)]="user.email" autocomplete="off" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
                             </mat-form-field>
-                            <mat-form-field class="col-10">
+                            
+                            <mat-form-field class="col-10"  appearance="outline">
                                 <mat-label>Password:</mat-label>
                                 <input matInput type="password" formControlName="password" [(ngModel)]="user.password" autocomplete="off">
                             </mat-form-field>
@@ -33,7 +34,7 @@
                                     </span>
                                 </button>
                             </mat-card-actions>
-
+                            
                             
     
                         </form>

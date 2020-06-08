@@ -6,7 +6,7 @@
 
 html { height: 100%; margin: 0;}
 body, .fondoBg{
-    background-color: #eceff1 ;
+    background-color: #f8f8f8 ;
 }
 .minh-100{
     height: 100vh;
@@ -85,7 +85,7 @@ h4.scheduler-border {
     font-weight: bold !important;
     text-align: left !important;
     border:none;
-    width:100px;
+    width:110px;
     
 }
 h4.scheduler-border{
@@ -95,3 +95,24 @@ h4.scheduler-border{
     left: 20px;
     margin: 0;
 }
+.barraNavegacion{
+    background-color: #870e03;
+}
+.tituloPrincipalPagina{
+    display: inline-block!important;
+    position: relative!important;
+    box-shadow: 0px 1px;
+    text-shadow: 1px 1px #ff0000;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+/*
+.tituloPrincipalPagina::after{
+    content: 'o';
+    position: absolute; 
+    display: inline-block;
+    top: 16px;
+    left:45%;
+    
+}
+*/

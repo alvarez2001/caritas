@@ -5,6 +5,7 @@ import { ConceptoService } from 'src/app/services/concepto.service';
 import { LoginService } from 'src/app/services/login.service';
 import { SolicitudService } from 'src/app/services/solicitud.service';
 import Swal from 'sweetalert2';
+import { ProductosModel } from 'src/app/models/productos.model';
 
 @Component({
   selector: 'app-asignar-monto',
@@ -18,6 +19,7 @@ export class AsignarMontoComponent implements OnInit {
   public allBancos:Array<any>;
   private idAdmin:number;
   public TotalEnvio:number;
+  private productos:ProductosModel;
   
   private total1:number = 0;
   private total2:number = 0;
@@ -34,14 +36,17 @@ export class AsignarMontoComponent implements OnInit {
     private solSV:SolicitudService
     ) { 
       this.idAdmin = this.logSV.getIdentity().sub
+      this.productos = new ProductosModel(this.idAdmin,null,null,null,null,null,null,null,null,null,null)
     }
 
   ngOnInit(): void {
     this.validacion();
     this.bancos();
     this.validacionVacio()
-
+    
   }
+
+
 
   multiplicardor(precio, cantidad, numero){
     switch (numero){
@@ -72,8 +77,8 @@ export class AsignarMontoComponent implements OnInit {
   }
 
   enviarDatos(form, id){
-    
-    this.solSV.registerMontoBanco(form.value, id).subscribe(res => {
+    console.log(this.productos);
+    this.solSV.registerMontoBanco(this.productos, id).subscribe(res => {
       Swal.fire({
         toast:true,
         timer:5000,
@@ -124,6 +129,16 @@ export class AsignarMontoComponent implements OnInit {
 
   validacion(){
     this.asignacion = this._formBuilder.group({
+      cantidad1:[this.data.rubro.cantidad1],
+      descripcion1:[this.data.rubro.descripcion1],
+      cantidad2:[this.data.rubro.cantidad2],
+      descripcion2:[this.data.rubro.descripcion2],
+      cantidad3:[this.data.rubro.cantidad3],
+      descripcion3:[this.data.rubro.descripcion3],
+      cantidad4:[this.data.rubro.cantidad4],
+      descripcion4:[this.data.rubro.descripcion4],
+      cantidad5:[this.data.rubro.cantidad5],
+      descripcion5:[this.data.rubro.descripcion5],
       admin:[this.idAdmin,[Validators.required]],
       precio1: [null, [Validators.required,Validators.min(1),Validators.minLength(1)]],
       banco1_id:[null, [Validators.required]],

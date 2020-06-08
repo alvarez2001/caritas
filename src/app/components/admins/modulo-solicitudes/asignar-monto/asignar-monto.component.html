@@ -11,22 +11,30 @@
 
 
         <fieldset class="scheduler-border" *ngIf="data.rubro.cantidad1 !== null">
-            <legend class="scheduler-border">Campo 1</legend>
+            <legend class="scheduler-border">Operación 1</legend>
     
             <div class="row">
 
-                <p class="col-md-6 col-12">Cantidad: {{data.rubro.cantidad1}}</p>
-                <p class="col-md-6 col-12">descripción: {{data.rubro.descripcion1}}</p>
+                <mat-form-field appearance="outline" class="col-12 col-md-6 col-lg-3">
+                    <mat-label>Cantidad</mat-label>
+                    <input type="text" readonly formControlName="cantidad1"  matInput autocomplete="off">
+                </mat-form-field>
 
-                <mat-form-field appearance="outline" class="col-12 col-md-6">
+                <mat-form-field appearance="outline" class="col-12 col-md-6 col-lg-3">
+                    <mat-label>Descripción</mat-label>
+                    
+                    <textarea readonly formControlName="descripcion1" matInput style="max-height:25px;"></textarea>
+                </mat-form-field>
+
+<mat-form-field appearance="outline" class="col-12 col-md-6 col-lg-3">
                     <mat-label>Precio Unitario</mat-label>
-                    <input type="number" step="0.01" min="1" matInput autocomplete="off" #precio1 formControlName="precio1"  (blur)="multiplicardor(precio1, data.rubro.cantidad1,1)">
+                    <input type="number" step="0.01" min="1" matInput autocomplete="off" #precio1 formControlName="precio1"  (blur)="multiplicardor(precio1, data.rubro.cantidad1,1)" [(ngModel)]="productos.precio1">
                     <p class="mb-0 mt-2">{{precio1.value | currency:'BS':true:'1.2' }}</p>
                 </mat-form-field>
 
-                <mat-form-field appearance="outline" class="col-12 col-md-6">
+<mat-form-field appearance="outline" class="col-12 col-md-6 col-lg-3">
                     <mat-label>Seleccione el banco</mat-label>
-                    <mat-select formControlName="banco1_id">
+                    <mat-select formControlName="banco1_id" [(ngModel)]="productos.banco1_id">
                       <mat-option *ngFor="let banco of allBancos" [value]="banco.id"> {{banco.titular |titlecase}} | {{banco.banco |titlecase}} </mat-option>
                     </mat-select>
         
@@ -37,23 +45,30 @@
         </fieldset>
 
         <fieldset class="scheduler-border" *ngIf="data.rubro.cantidad2 !== null">
-            <legend class="scheduler-border">Campo 2</legend>
+            <legend class="scheduler-border">Operación 2</legend>
     
             <div class="row">
 
-                <p class="col-md-6 col-12">Cantidad: {{data.rubro.cantidad2}}</p>
-                <p class="col-md-6 col-12">descripción: {{data.rubro.descripcion2}}</p>
+                <mat-form-field appearance="outline" class="col-12 col-md-6 col-lg-3">
+                    <mat-label>Cantidad</mat-label>
+                    <input type="text" readonly formControlName="cantidad2" matInput autocomplete="off">
+                </mat-form-field>
 
-                <mat-form-field appearance="outline" class="col-12 col-md-6">
+                <mat-form-field appearance="outline" class="col-12 col-md-6 col-lg-3">
+                    <mat-label>Descripción</mat-label>
+                    <textarea readonly formControlName="descripcion2" matInput style="max-height:25px;"></textarea>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="col-12 col-md-6 col-lg-3">
                     <mat-label>Precio Unitario</mat-label>
-                    <input type="number" step="0.01" min="1" matInput autocomplete="off" formControlName="precio2" #precio2 (blur)="multiplicardor(precio2, data.rubro.cantidad2,2)">
+                    <input type="number" step="0.01" min="1" matInput autocomplete="off" formControlName="precio2" #precio2 (blur)="multiplicardor(precio2, data.rubro.cantidad2,2)" [(ngModel)]="productos.precio2">
                     <p class="mb-0 mt-2">{{precio2.value | currency:'BS':true:'1.2' }}</p>
     
                 </mat-form-field>
 
-                <mat-form-field appearance="outline" class="col-12 col-md-6">
+                <mat-form-field appearance="outline" class="col-12 col-md-6 col-lg-3">
                     <mat-label>Seleccione el banco</mat-label>
-                    <mat-select formControlName="banco2_id">
+                    <mat-select formControlName="banco2_id" [(ngModel)]="productos.banco2_id">
                       <mat-option *ngFor="let banco of allBancos" [value]="banco.id"> {{banco.titular |titlecase}} | {{banco.banco |titlecase}} </mat-option>
                     </mat-select>
         
@@ -63,22 +78,29 @@
         </fieldset>
 
         <fieldset class="scheduler-border" *ngIf="data.rubro.cantidad3 !== null">
-            <legend class="scheduler-border">Campo 3</legend>
+            <legend class="scheduler-border">Operación 3</legend>
     
             <div class="row">
 
-                <p class="col-md-6 col-12">Cantidad: {{data.rubro.cantidad3}}</p>
-                <p class="col-md-6 col-12">descripción: {{data.rubro.descripcion3}}</p>
+                <mat-form-field appearance="outline" class="col-12 col-md-6 col-lg-3">
+                    <mat-label>Cantidad</mat-label>
+                    <input type="text" readonly formControlName="cantidad3" matInput autocomplete="off">
+                </mat-form-field>
 
-                <mat-form-field appearance="outline" class="col-12 col-md-6">
+                <mat-form-field appearance="outline" class="col-12 col-md-6 col-lg-3">
+                    <mat-label>Descripción</mat-label>
+                    <textarea readonly formControlName="descripcion3" matInput style="max-height:25px;"></textarea>
+                </mat-form-field>
+
+<mat-form-field appearance="outline" class="col-12 col-md-6 col-lg-3">
                     <mat-label>Precio Unitario</mat-label>
-                    <input type="number" step="0.01" min="1" matInput autocomplete="off" formControlName="precio3" #precio3 (blur)="multiplicardor(precio3, data.rubro.cantidad3,3)">
+                    <input type="number" step="0.01" min="1" matInput autocomplete="off" formControlName="precio3" #precio3 (blur)="multiplicardor(precio3, data.rubro.cantidad3,3)" [(ngModel)]="productos.precio3">
                     <p class="mb-0 mt-2">{{precio3.value | currency:'BS':true:'1.2' }}</p>
                 </mat-form-field>
 
-                <mat-form-field appearance="outline" class="col-12 col-md-6">
+<mat-form-field appearance="outline" class="col-12 col-md-6 col-lg-3">
                     <mat-label>Seleccione el banco</mat-label>
-                    <mat-select formControlName="banco3_id">
+                    <mat-select formControlName="banco3_id" [(ngModel)]="productos.banco3_id">
                       <mat-option *ngFor="let banco of allBancos" [value]="banco.id"> {{banco.titular |titlecase}} | {{banco.banco |titlecase}} </mat-option>
                     </mat-select>
         
@@ -89,22 +111,30 @@
 
 
         <fieldset class="scheduler-border" *ngIf="data.rubro.cantidad4 !== null">
-            <legend class="scheduler-border">Campo 4</legend>
+            <legend class="scheduler-border">Operación 4</legend>
     
             <div class="row">
 
-                <p class="col-md-6 col-12">Cantidad: {{data.rubro.cantidad4}}</p>
-                <p class="col-md-6 col-12">descripción: {{data.rubro.descripcion4}}</p>
+                <mat-form-field appearance="outline" class="col-12 col-md-6 col-lg-3">
+                    <mat-label>Cantidad</mat-label>
+                    <input type="text" readonly formControlName="cantidad4" matInput autocomplete="off">
+                </mat-form-field>
 
-                <mat-form-field appearance="outline" class="col-12 col-md-6">
+                <mat-form-field appearance="outline" class="col-12 col-md-6 col-lg-3">
+                    <mat-label>Descripción</mat-label>
+                    <textarea readonly formControlName="descripcion4" matInput style="max-height:25px;"></textarea>
+                </mat-form-field>
+                
+
+<mat-form-field appearance="outline" class="col-12 col-md-6 col-lg-3">
                     <mat-label>Precio Unitario</mat-label>
-                    <input type="number" step="0.01" min="1" matInput autocomplete="off" formControlName="precio4" #precio4 (blur)="multiplicardor(precio4, data.rubro.cantidad4,4)">
+                    <input type="number" step="0.01" min="1" matInput autocomplete="off" formControlName="precio4" #precio4 (blur)="multiplicardor(precio4, data.rubro.cantidad4,4)" [(ngModel)]="productos.precio4">
                     <p class="mb-0 mt-2">{{precio4.value | currency:'BS':true:'1.2' }}</p>
                 </mat-form-field>
 
-                <mat-form-field appearance="outline" class="col-12 col-md-6">
+<mat-form-field appearance="outline" class="col-12 col-md-6 col-lg-3">
                     <mat-label>Seleccione el banco</mat-label>
-                    <mat-select formControlName="banco4_id">
+                    <mat-select formControlName="banco4_id" [(ngModel)]="productos.banco4_id">
                       <mat-option *ngFor="let banco of allBancos" [value]="banco.id"> {{banco.titular |titlecase}} | {{banco.banco |titlecase}} </mat-option>
                     </mat-select>
         
@@ -114,22 +144,29 @@
         </fieldset>
 
         <fieldset class="scheduler-border" *ngIf="data.rubro.cantidad5 !== null">
-            <legend class="scheduler-border">Campo 5</legend>
+            <legend class="scheduler-border">Operación 5</legend>
     
             <div class="row">
 
-                <p class="col-md-6 col-12">Cantidad: {{data.rubro.cantidad5}}</p>
-                <p class="col-md-6 col-12">descripción: {{data.rubro.descripcion5}}</p>
+                <mat-form-field appearance="outline" class="col-12 col-md-6 col-lg-3">
+                    <mat-label>Cantidad</mat-label>
+                    <input type="text" readonly formControlName="cantidad5" matInput autocomplete="off">
+                </mat-form-field>
 
-                <mat-form-field appearance="outline" class="col-12 col-md-6">
+                <mat-form-field appearance="outline" class="col-12 col-md-6 col-lg-3">
+                    <mat-label>Descripción</mat-label>
+                    <textarea readonly formControlName="descripcion5" matInput style="max-height:25px;"></textarea>
+                </mat-form-field>
+
+<mat-form-field appearance="outline" class="col-12 col-md-6 col-lg-3">
                     <mat-label>Precio Unitario</mat-label>
-                    <input type="number" step="0.01" min="1" matInput autocomplete="off" formControlName="precio5" #precio5 (blur)="multiplicardor(precio5, data.rubro.cantidad5,5)">
+                    <input type="number" step="0.01" min="1" matInput autocomplete="off" formControlName="precio5" #precio5 (blur)="multiplicardor(precio5, data.rubro.cantidad5,5)" [(ngModel)]="productos.precio5">
                     <p class="mb-0 mt-2">{{precio5.value | currency:'BS':true:'1.2' }}</p>
                 </mat-form-field>
 
-                <mat-form-field appearance="outline" class="col-12 col-md-6">
+<mat-form-field appearance="outline" class="col-12 col-md-6 col-lg-3">
                     <mat-label>Seleccione el banco</mat-label>
-                    <mat-select formControlName="banco5_id">
+                    <mat-select formControlName="banco5_id" [(ngModel)]="productos.banco5_id">
                       <mat-option *ngFor="let banco of allBancos" [value]="banco.id"> {{banco.titular |titlecase}} | {{banco.banco |titlecase}}</mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -139,8 +176,8 @@
     </form>
 </div>
 
-<div mat-dialog-actions class="float-right clearfix">
+<div mat-dialog-actions class="float-right clearfix botones-theme">
 
-    <button mat-button (click)="enviarDatos(asignacion, data.id)" [disabled]="!asignacion.valid" >Guardar Monto</button>
+    <button mat-raised-button (click)="enviarDatos(asignacion, data.id)" [disabled]="!asignacion.valid" class="text-white" color="primary">Guardar Monto</button>
 </div>
 

@@ -1,53 +1,64 @@
-<h1 class="text-center mb-4">Listado de usuarios</h1>
-
-<div *ngIf="!users" class="">
-  <div class="alert alert-danger col-12 col-md-10 col-lg-8 mx-auto" *ngIf="cargaFallida">
-    {{cargaFallida}}
-  </div>
-  <p class="text-center" *ngIf="!cargaFallida">Cargando...</p>
-  <mat-spinner class="mx-auto"></mat-spinner>
-</div>
 
 
-<div class="table-responsive" *ngIf="users">
-    <table  class="mat-elevation-z10 col-12 col-md-10 col-lg-8 mx-auto  table table-light  table-hover table-striped text-center" >
-        <thead class="thead-dark">
-            <tr>
-              <th scope="col">Nº</th>
-              <th scope="col">Nombres</th>
-              <th scope="col">Apellidos</th>
-              <th scope="col">Rol</th>
-              <th scope="col">Status</th>
-              <th scope="col">Acciones</th>
-            </tr>
-          </thead>
-          <tbody >
+<mat-card class="text-center">
+  <mat-card-title class="text-center mb-4 tituloPrincipalPagina">
+    Listado de usuarios
+  </mat-card-title>
 
-            <tr *ngFor="let userData of users; let index = index" >
-                <td >{{index +1}}</td>
-                <td>{{userData.nombres | titlecase}}</td>
-                <td>{{userData.apellidos | titlecase}}</td>
-                <td>{{userData.rol | titlecase}}</td>
-                <td>{{userData.status | titlecase}}</td>
-                <td>
-              
-                  <button mat-icon-button matTooltip="Modificar Usuario" (click)="openDialog(userData)"  *ngIf="userData.id !== userActivo.sub  ">
-                    <mat-icon >create</mat-icon>
-                </button>
-              
-                <button mat-icon-button matTooltip="Ver Usuario" (click)="detallesUser(userData)"  >
-                  <mat-icon>remove_red_eye</mat-icon>
-              </button>
-                <button mat-icon-button matTooltip="Eliminar Usuario" (click)="deleteUser(userData.id)" *ngIf="userData.id !== userActivo.sub" >
-                    <mat-icon>delete_forever</mat-icon>
-                </button>
-                </td>   
-            </tr>
-
-          </tbody>
+  <mat-card-content>
+    <div *ngIf="!users" class="">
+      <div class="alert alert-danger col-12 col-md-10 col-lg-8 mx-auto" *ngIf="cargaFallida">
+        {{cargaFallida}}
+      </div>
+      <p class="text-center" *ngIf="!cargaFallida">Cargando...</p>
+      <mat-spinner class="mx-auto"></mat-spinner>
+    </div>
     
-    </table>
-</div>
+    
+    <div class="table-responsive" *ngIf="users">
+        <table  class="mat-elevation-z10 col-12 col-md-10 mx-auto  table table-light  table-hover table-striped text-center" >
+            <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Nº</th>
+                  <th scope="col">Nombres</th>
+                  <th scope="col">Apellidos</th>
+                  <th scope="col">Rol</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Acciones</th>
+                </tr>
+              </thead>
+              <tbody class="botones-theme">
+    
+                <tr *ngFor="let userData of users; let index = index" >
+                    <td >{{index +1}}</td>
+                    <td>{{userData.nombres | titlecase}}</td>
+                    <td>{{userData.apellidos | titlecase}}</td>
+                    <td>{{userData.rol | titlecase}}</td>
+                    <td>{{userData.status | titlecase}}</td>
+                    <td>
+                  
+                      <button mat-icon-button matTooltip="Modificar Usuario" (click)="openDialog(userData)"  *ngIf="userData.id !== userActivo.sub  " color="accent">
+                        <mat-icon >create</mat-icon>
+                    </button>
+                  
+                    <button mat-icon-button matTooltip="Ver Usuario" (click)="detallesUser(userData)"  >
+                      <mat-icon>remove_red_eye</mat-icon>
+                  </button>
+                    <button mat-icon-button matTooltip="Eliminar Usuario" (click)="deleteUser(userData.id)" *ngIf="userData.id !== userActivo.sub" color="warn">
+                        <mat-icon>delete_forever</mat-icon>
+                    </button>
+                    </td>   
+                </tr>
+    
+              </tbody>
+        
+        </table>
+    </div>
+    
+  </mat-card-content>
+</mat-card>
+
+
 
 
 
