@@ -8,6 +8,8 @@ import { ModificarUsuarioComponent } from './modificar-usuario/modificar-usuario
 import { DetalleUsuarioComponent } from './detalle-usuario/detalle-usuario.component';
 import { MaterialModule } from 'src/app/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { VistaModuloComponent } from '../vistasModulo/vista-modulo/vista-modulo.component';
+
 
 
 @NgModule({
@@ -16,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ListarUsuarioComponent,
     ModificarUsuarioComponent,
     DetalleUsuarioComponent,
+    VistaModuloComponent,
   ],
   imports: [
     CommonModule,

@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { RegistrarComponent } from '../registrar/registrar.component';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+
+
 import { Concepto } from 'src/app/models/concepto';
 import { ConceptoService } from 'src/app/services/concepto.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
 
 
 @Component({
@@ -12,34 +15,43 @@ import Swal from 'sweetalert2';
   styleUrls: ['./ver.component.css'],
   providers:[ConceptoService]
 })
-export class VerComponent implements OnInit {
+export class VerComponent implements OnInit, AfterViewInit {
+  
 
-  constructor(public dialog: MatDialog,
-    private _conSV:ConceptoService) { }
-
+  constructor(private _conSV:ConceptoService, private route:Router) { }
+  
+  ngAfterViewInit(): void {
+    this.paginator._intl.itemsPerPageLabel = 'Conceptos Mostrados';
+  }
+  displayedColumns: string[] = ['position', 'concepto', 'acciones'];
+  dataSource = new MatTableDataSource();
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  
   public conceptos:Concepto;
 
   ngOnInit(): void {
+    this.dataSource.paginator = this.paginator;
     this.cargarConceptos();
+    setInterval(()=> {this.cargarConceptos(); console.log('set')}, 180000)
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(RegistrarComponent, {
-      width: '350px'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if(result = true){
-        this.cargarConceptos();
-      }
-    });
-  }
+  
 
   cargarConceptos(){
     this._conSV.getAll().subscribe(res => {
       this.conceptos = res.listado;
+      this.dataSource.data = res.listado
     },
-    err=> alert('ha ocurrido un error'))
+    err=> {
+      Swal.fire({
+        icon:'error',
+        title:'Ha ocurrido un error de conexión',
+        timer:3000,
+        timerProgressBar:true,
+        showConfirmButton:false
+      })
+      this.route.navigate(['panel-administrativo','modulos-extras']);
+    })
   }
 
   eliminarConcepto(id:number){

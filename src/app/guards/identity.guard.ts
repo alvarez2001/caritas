@@ -1,35 +1,43 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate, CanLoad, UrlSegment, Route } from '@angular/router';
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree} from '@angular/router';
 import { LoginService } from '../services/login.service';
-import { Observable } from 'rxjs';
 
 @Injectable()
-export class IdentityGuard implements CanActivate, CanLoad{
+export class IdentityGuard implements CanActivate{
     
     constructor(
         private _router:Router,
         private _loginService:LoginService
     ){}
+
+
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | import("rxjs").Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+        const ruta = route.routeConfig.path;
+        return this.checkLogin(ruta);
+    }
     
 
-    canActivate(){
-        return this.checkLogin();
-    }
+    
 
 
-    canLoad(route:Route, segments: UrlSegment[]): boolean | Observable<boolean> | Promise<boolean> {
-        return this.checkLogin();
-    }
+    
 
-
-    checkLogin(){
+    checkLogin(ruta){
         const identity = this._loginService.getIdentity();
-
+        const rol = this._loginService.getIdentity().rol.toLowerCase();
+        let valor;
         if(identity){
-            return true;
+            valor = true;
+            if(rol === 'admin' || rol === 'master'){
+                this._router.navigate(['panel-administrativo']);
+            }
+            else{
+                this._router.navigate(['solicitante']);
+            }
         }else{
-            this._router.navigate(['login']);
-            return false;
+            this._router.navigate(['/']);
+            valor = false
         }
+        return valor;
     }
 }

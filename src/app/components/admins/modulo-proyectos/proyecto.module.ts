@@ -9,6 +9,7 @@ import { DetalleProyectoComponent } from './detalle-proyecto/detalle-proyecto.co
 import { DetalleCrearProyectoComponent } from './detalle-crear-proyecto/detalle-crear-proyecto.component';
 import { MaterialModule } from 'src/app/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { VistaModuloProyectosComponent } from '../vistasModulo/vista-modulo-proyectos/vista-modulo-proyectos.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ListarProyectosComponent,
     ModificarProyectoComponent,
     DetalleProyectoComponent,
-    DetalleCrearProyectoComponent
+    DetalleCrearProyectoComponent,
+    VistaModuloProyectosComponent
   ],
   imports: [
     CommonModule,

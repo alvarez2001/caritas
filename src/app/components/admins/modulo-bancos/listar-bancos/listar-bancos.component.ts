@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,12 +12,15 @@ import { DetalleBancoComponent } from '../detalle-banco/detalle-banco.component'
   templateUrl: './listar-bancos.component.html',
   styleUrls: ['./listar-bancos.component.css']
 })
-export class ListarBancosComponent implements OnInit {
+export class ListarBancosComponent implements OnInit, AfterViewInit {
 
   constructor(
     public dialog: MatDialog,
     private concepSV:ConceptoService
     ) { }
+  ngAfterViewInit(): void {
+    this.paginator._intl.itemsPerPageLabel = 'Bancos Mostrados';
+  }
 
   displayedColumns: string[] = ['titular', 'banco', 'created_at', 'acciones'];
   dataSource = new MatTableDataSource();
@@ -27,18 +30,6 @@ export class ListarBancosComponent implements OnInit {
   ngOnInit() {
     this.listarBancos();
     this.dataSource.paginator = this.paginator;
-  }
-
-  dialogCrearBanco(): void {
-    const dialogRef = this.dialog.open(CrearBancoComponent, {
-      width: '400px'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if(result){ 
-        this.listarBancos()
-      }
-    });
   }
 
   dialogDetalleBanco(data): void {

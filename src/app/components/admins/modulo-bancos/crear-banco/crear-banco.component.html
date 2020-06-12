@@ -1,10 +1,15 @@
-<h2 mat-dialog-title>Agregar  Banco</h2>
-<mat-dialog-content>
 
-    <form [formGroup]="formBanco" novalidate>
-        <mat-form-field class="col-12">
+<div class="text-center">
+    <h1 class="titulosPagina">Crear Banco</h1>
+</div>
+
+<div class="row mt-5">
+
+    <form [formGroup]="formBanco" novalidate class="col-12 col-md-8 mx-auto">
+        <mat-form-field class="col-12 col-sm-6" appearance="outline">
             <mat-label>Titular</mat-label>
             <input autocomplete="off" matInput type="text" formControlName="titular" [(ngModel)]="banco.titular"> 
+            <mat-icon matSuffix>person</mat-icon>
             <mat-error *ngIf="formBanco.get('titular')">
                 <span *ngIf="formBanco.get('titular').hasError('required')">
                     Campo obligatorio
@@ -15,9 +20,10 @@
             </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="col-12">
-            <mat-label>Cedula/Rif</mat-label>
+        <mat-form-field class="col-12 col-sm-6" appearance="outline">
+            <mat-label>Cedula / R.I.F</mat-label>
             <input autocomplete="off" matInput type="text" placeholder="ej: V0000000 / J000000" formControlName="cedula" maxlength="20" [(ngModel)]="banco.rif">
+            <mat-icon matSuffix>folder_shared</mat-icon>
             <mat-error *ngIf="formBanco.get('cedula')">
                 <span *ngIf="formBanco.get('cedula').hasError('required')">
                     Campo obligatorio
@@ -28,9 +34,10 @@
             </mat-error>
         </mat-form-field>
         
-        <mat-form-field class="col-12">
+        <mat-form-field class="col-12" appearance="outline">
             <mat-label>Banco</mat-label>
             <input autocomplete="off" matInput type="text" formControlName="banco" [(ngModel)]="banco.banco">
+            <mat-icon matSuffix>account_balance</mat-icon>
             <mat-error *ngIf="formBanco.get('banco')">
                 <span *ngIf="formBanco.get('banco').hasError('required')">
                     Campo obligatorio
@@ -41,9 +48,10 @@
             </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="col-12">
+        <mat-form-field class="col-12" appearance="outline">
             <mat-label>Numero de cuenta</mat-label>
             <input autocomplete="off" matInput type="text" maxlength="20" formControlName="cuenta" [(ngModel)]="banco.numero">
+            <mat-icon matSuffix>payment</mat-icon>
             <mat-error *ngIf="formBanco.get('cuenta')">
                 <span *ngIf="formBanco.get('cuenta').hasError('required')">
                     Campo obligatorio
@@ -59,8 +67,15 @@
     </form>
 
 
-</mat-dialog-content>
-<mat-dialog-actions class="botones-theme">
-  <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
-  <button mat-raised-button color="primary" class="text-white" [disabled]="formBanco.invalid" (click)="formularioRegistro(formBanco)">Guardar</button>
-</mat-dialog-actions>
+</div>
+
+ <div class="row mx-auto">
+    
+    <button [disabled]="statusForm" class="mx-auto btn btn-outline-colormain my-3 col-12 col-md-6 col-lg-4" (click)="formularioRegistro(formBanco)">
+        <span class="spinner" *ngIf="statusForm">
+            <mat-spinner color="primary" class="mx-auto"></mat-spinner>
+        </span>
+        <span *ngIf="!statusForm">Guardar Banco <mat-icon>send</mat-icon></span> 
+    </button>
+
+  </div>

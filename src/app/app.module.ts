@@ -36,10 +36,10 @@ import { RoleGuard } from './guards/role.guard';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    routing,
     MasterModule,
     SolicitanteModule,
     MaterialModule,
-    routing,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,

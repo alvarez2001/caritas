@@ -38,13 +38,17 @@ export class ListarProyectosComponent implements OnInit, AfterViewInit {
   
 
   ngOnInit() {
+    this.cargarTodo();
+  }
+
+  cargarTodo(){
     this.getAdmins();
     this.getSolicitantes();
     this.getAllProject();
   }
 
   ngAfterViewInit(){
-    this.paginator._intl.itemsPerPageLabel = 'Proyectos mostrados';
+    this.paginator._intl.itemsPerPageLabel = 'Proyectos Mostrados';
     this.paginator._intl.nextPageLabel = 'Pagina Siguiente';
     this.paginator._intl.previousPageLabel = 'Pagina anterior';
     this.paginator._intl.firstPageLabel = 'Primera pagina';
@@ -56,7 +60,7 @@ export class ListarProyectosComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  getAllProject(){
+  private getAllProject(){
     this._projeServi.getAll().subscribe(
       res=>{
         if(res){
@@ -100,13 +104,13 @@ export class ListarProyectosComponent implements OnInit, AfterViewInit {
     });
   }  
 
-  getAdmins(){
+  private getAdmins(){
     this._projeServi.getAllAdmins().subscribe(res => {
         this.admins = res.solicitantes;
     },
     err => console.log(err));
   }
-  getSolicitantes(){
+  private getSolicitantes(){
     this._projeServi.getAllSolicitantes().subscribe(res => {
         this.solicitantes = res.solicitantes;
     }, err=> console.log(err));

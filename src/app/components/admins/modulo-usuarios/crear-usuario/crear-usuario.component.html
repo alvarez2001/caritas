@@ -1,55 +1,45 @@
 
 
-   
+<div class="text-center">
+    <h1 class="titulosPagina">Crear Usuario</h1>
+</div>
 
-<div class="text-center row ">
+<div class="text-center row mt-3">    
 
-    
+    <div class="col-12">
+        <mat-card class="col-12 col-md-8 mx-auto">
 
-    <div class="col-12" >
-        <mat-card class="col-12 mx-auto">
-
-            <mat-card-subtitle class="alert alert-success" *ngIf="statusRegistro =='success'">
+            <div class="alert alert-success" *ngIf="statusRegistro =='success'">
                Registro exitoso
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-            </mat-card-subtitle>
+            </div>
 
-            <mat-card-subtitle class="alert alert-danger" *ngIf="statusRegistro == 'failed'">
+            <div class="alert alert-danger" *ngIf="statusRegistro == 'failed'">
                 Ha ocurrido un error
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-            </mat-card-subtitle>
-
-            <mat-card-title class="mb-4 tituloPrincipalPagina">
-                Crear un usuario
-            </mat-card-title>
+            </div>
 
            
-            <form action="" [formGroup]="registerUser" (ngSubmit)="register(registerUser, buttonSave._elementRef)" novalidate>
+            <form action="" [formGroup]="registerUser" novalidate>
                 <mat-card-content>
                     
 
                     
-                    <mat-form-field appearance="outline" class="col-12 col-md-6">
+                    <mat-form-field appearance="outline" class="col-12 col-sm-6">
                         <mat-label>Nombres</mat-label>
                         <input matInput [type]="'text'" autocomplete="off" required [formControl]="nombres" [(ngModel)]="user.nombres">
+                        <mat-icon matSuffix>person</mat-icon>
                         <mat-error *ngIf="nombres.invalid"> {{ getErrorMessage(nombres, 'Debe ingresar el nombre', 'Campo valido solo para letras') }} </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field appearance="outline" class="col-12 col-md-6">
+                    <mat-form-field appearance="outline" class="col-12 col-sm-6">
                         <mat-label>Apellidos</mat-label>
                         <input matInput [type]="'text'" autocomplete="off" required [formControl]="apellidos"  [(ngModel)]="user.apellidos">
+                        <mat-icon matSuffix>person</mat-icon>
                         <mat-error *ngIf="apellidos.invalid"> {{ getErrorMessage(apellidos, 'Debe ingresar el apellido', 'Campo valido solo para letras') }} </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field appearance="outline" class="col-12">
-                        <mat-label>Email</mat-label>
-                        <input matInput [type]="'text'" autocomplete="off"  [formControl]="email" required [(ngModel)]="user.email">  
-                        <mat-error *ngIf="email.invalid"> {{ getErrorMessage(email, 'Debes ingresar un email', 'Email no valido') }} </mat-error>
-                        <small class="mb-0 invalid-feedback" *ngIf="mostrarValidacion">Revisando Email</small>
-                    </mat-form-field>
-                    
-
-                    <mat-form-field appearance="outline" class="col-12 col-md-6">
+                    <mat-form-field appearance="outline" class="col-12 col-sm-6">
                         <mat-label>Password</mat-label>
                         <input matInput [type]="hide ? 'password' : 'text'" [formControl]="password" required [(ngModel)]="user.password">
                         <button mat-icon-button matSuffix (click)="hide = !hide" >
@@ -58,21 +48,36 @@
                         <mat-error *ngIf="password.invalid"> {{ getErrorMessage(password, 'Debe ingresar una contraseña') }} </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field appearance="outline" class="col-12 col-md-6">
+                    <mat-form-field appearance="outline" class="col-12 col-sm-6">
                         <mat-label>Seleccione el rol</mat-label>
                         <mat-select required [formControl]="rol" [(ngModel)]="user.rol">
                             <mat-option value="MASTER">Master</mat-option>
                             <mat-option value="ADMIN">Administrador</mat-option>
                             <mat-option value="SOLICITANTE">Solicitante</mat-option>
                         </mat-select>
+                        <mat-icon matSuffix>vpn_key</mat-icon>
                         <mat-error *ngIf="rol.invalid"> {{ getErrorMessage(rol, 'Debe seleccionar un rol de usuario') }} </mat-error>
                     </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="col-12">
+                        <mat-label>Email</mat-label>
+                        <input matInput [type]="'text'" autocomplete="off"  [formControl]="email" required [(ngModel)]="user.email">  
+                        <mat-icon matSuffix>email</mat-icon>
+                        <mat-error *ngIf="email.invalid"> {{ getErrorMessage(email, 'Debes ingresar un email', 'Email no valido') }} </mat-error>
+                        <small class="mb-0 invalid-feedback" *ngIf="mostrarValidacion">Revisando Email</small>
+                    </mat-form-field>
+                    
+
+                    
 
 
                 </mat-card-content>
 
-                <mat-card-actions class="mb-3">
-                    <button mat-raised-button color="primary" [type]="'submit'" [disabled]="!registerUser.valid" #buttonSave>Guardar Usuario</button>
+                <mat-card-actions class="mb-3 row">
+                   
+                    
+                        <button class="mx-auto btn btn-outline-colormain my-3 col-12 col-md-6 col-lg-4" type="submit"  #buttonSave (click)="register(registerUser, buttonSave)" [disabled]="disabledButton">Guardar Usuario <mat-icon>send</mat-icon></button>
+                   
                 </mat-card-actions>
             </form>
             
@@ -82,11 +87,5 @@
         
         
     </div>
-
-
-    <div class="col-12">
-        
-    </div>
-
 
   </div>

@@ -1,19 +1,26 @@
 
-<h2 mat-dialog-title class="text-center">Registrar Concepto</h2>
-<mat-dialog-content>
+<div class="text-center mb-5">
+    <h1 class="titulosPagina">Crear Proyecto</h1>
+</div>
 
-    <form [formGroup]="ConceptoForm" novalidate>
-        <mat-form-field class="col-12">
+<div class="row text-center">
+    <div class="col-12 col-md-10 col-lg-6 mx-auto"> 
+        <form [formGroup]="ConceptoForm" novalidate>
+            <mat-form-field class="col-12" appearance="outline">
+    
+                <mat-label>Concepto</mat-label>
+                <input matInput formControlName="concepto" [(ngModel)]="concepto.descripcion" autocomplete="off" type="text" maxlength="200" required>
+                <mat-icon matSuffix>description</mat-icon>
+                <mat-error *ngIf="ConceptoForm.get('concepto')">
+                    <span *ngIf="ConceptoForm.get('concepto').hasError('required')">Concepto Requerido</span>
+                </mat-error>
+            </mat-form-field>
+        </form>
+    </div>
+</div>
 
-            <mat-label>Concepto</mat-label>
-            <input matInput formControlName="concepto" [(ngModel)]="concepto.descripcion" autocomplete="off" type="text" maxlength="200" required>
-            
-        </mat-form-field>
-    </form>
+  <div class="row mx-auto">
 
-</mat-dialog-content>
+    <button (click)="guardar(ConceptoForm)" class="mx-auto btn btn-outline-colormain my-3 col-12 col-md-6 col-lg-3" >Guardar Concepto <mat-icon>send</mat-icon></button>
 
-<mat-dialog-actions class="botones-theme">
-  <button mat-raised-button mat-dialog-close color="warn">Cancel</button>
-  <button mat-raised-button (click)="guardar(ConceptoForm)" [disabled]="ConceptoForm.invalid" class="text-white" color="primary">Guardar Concepto</button>
-</mat-dialog-actions>
+  </div>

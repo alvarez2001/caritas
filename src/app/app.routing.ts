@@ -11,13 +11,12 @@ import { RoleGuard } from './guards/role.guard';
 
 //definir routes
 const appRoutes:Routes = [
-    {path: '',  redirectTo: '/login', pathMatch: 'full' },
+    {path: '',  component:LoginComponent},
     {path: 'login',component:LoginComponent},
     {path: 'logout/:sure',component:LoginComponent},
-    {path: 'redireccion', component:RedireccionComponent, canActivate:[IdentityGuard, RoleGuard]},
+    {path: 'redireccion', component:RedireccionComponent, canActivate:[IdentityGuard]},
     {path : '**', component:Pag404Component}
 
-    
 ];
 
 //exportar routes

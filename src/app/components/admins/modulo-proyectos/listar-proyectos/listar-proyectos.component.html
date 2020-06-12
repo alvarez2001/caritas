@@ -1,20 +1,17 @@
 
-
-
    
+<div class="text-center ">
+    <h1 class="titulosPagina">Listar Proyectos</h1>
+  </div>
        
 
 
 <mat-card>
-        <mat-card-title class="text-center">
-            <h1 class="text-center tituloPrincipalPagina">Listado de proyectos</h1>
-        </mat-card-title>
-
-        <mat-form-field class="float-right">
-            <mat-label>Busqueda de proyecto</mat-label>
-            <input matInput (keyup)="applyFilter($event)">
-            <mat-icon matSuffix>search</mat-icon>
-        </mat-form-field>
+    <mat-form-field class="float-right">
+        <mat-label>Busqueda de proyecto</mat-label>
+        <input matInput (keyup)="applyFilter($event)">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
 
 
         <mat-card-content class="table-responsive">
@@ -35,7 +32,7 @@
                 
                 <ng-container matColumnDef="disponible">
                     <th mat-header-cell *matHeaderCellDef> Disponible </th>
-                    <td mat-cell *matCellDef="let element">{{element.disponible | currency:'€ ':true:'1.2'}}</td>
+                    <td mat-cell *matCellDef="let element">{{element.disponible | currency:'Bs':true:'1.2'}}</td>
                 </ng-container>
             
                 
@@ -65,18 +62,11 @@
             </table>
             
             <div *ngIf="!ocultarCarga">
-                <div [ngClass]="'alert alert-danger col-12 col-md-10 col-lg-8 mx-auto mt-2'" *ngIf="cargaFallida">
-                    {{cargaFallida}}
-                </div>
-
-                <div [ngClass]="'alert alert-info col-12 col-md-10 col-lg-8 mx-auto mt-2'" *ngIf="!solicitantes">
-                    Cargando Solicitantes
-                </div>
-                <div [ngClass]="'alert alert-info col-12 col-md-10 col-lg-8 mx-auto mt-2'" *ngIf="!admins">
-                    Cargando Administradores
+                <div [ngClass]="'alert alert-danger col-12 text-center mt-2'" *ngIf="cargaFallida">
+                    {{cargaFallida}} <button class="bnt btn-primary" (click)="cargarTodo()">Volver a cargar</button>
                 </div>
                 
-                <mat-spinner [ngClass]="'mx-auto my-3'" *ngIf="!cargaFallida && !admins && !solicitantes"></mat-spinner>
+                <mat-spinner [ngClass]="'mx-auto my-3'" *ngIf="!admins && !solicitantes"></mat-spinner>
             </div>
 
             <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5"   showFirstLastButtons></mat-paginator>

@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
   providers:[UserService]
 })
 export class CrearUsuarioComponent implements OnInit, Validator {
+  public disabledButton:boolean = false;
   public email:FormControl;
   public nombres:FormControl;
   public apellidos:FormControl;
@@ -23,7 +24,7 @@ export class CrearUsuarioComponent implements OnInit, Validator {
   public registerUser: FormGroup;
 
 
-  public hide:boolean;
+  public hide:boolean = true;
   
 
   constructor(
@@ -31,8 +32,7 @@ export class CrearUsuarioComponent implements OnInit, Validator {
     private _userService:UserService,
     private renderer:Renderer2
   ) { 
-    this.hide = true;
-
+    
     this.user = new UserModel('','','','','','',1,'','','');
 
 
@@ -108,23 +108,31 @@ export class CrearUsuarioComponent implements OnInit, Validator {
 
 
   ngOnInit(): void {
-    
   }
 
   register(form, button){
-    this.renderer.setAttribute(button.nativeElement, "disabled", "true");
-    this._userService.registrarUser(this.user).subscribe(res => {
-      if(res.status == 'success'){
-        this.statusRegistro = 'success';
-        form.reset();
-      }else{
+    
+    if(form.valid){
+      this.disabledButton = true
+      this._userService.registrarUser(this.user).subscribe(res => {
+        if(res.status == 'success'){
+          this.statusRegistro = 'success';
+          console.log(button);
+          
+          form.reset();
+        }else{
+          this.statusRegistro = 'failed';
+          
+        }
+      },
+      err =>{
         this.statusRegistro = 'failed';
-      }
-    },
-    err =>{
-      this.statusRegistro = 'failed';
-      console.log(err)
-    }, ()=>  this.renderer.setAttribute(button.nativeElement, "disabled", "false"))
+        
+      },
+      ()=>{
+        this.disabledButton = false
+      })
+    }
   }
 
   

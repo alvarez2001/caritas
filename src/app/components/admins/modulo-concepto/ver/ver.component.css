@@ -2,7 +2,16 @@
 .tamañoIcon{
     font-size: 35px;
 }
-
-.table td{
-    vertical-align:middle!important;
-}
+td,th{
+    text-align: center!important; 
+    min-width: 150px!important;
+    }
+    
+    table{
+        overflow-x: auto;
+        min-width: 850px!important;
+    }
+    mat-paginator{
+        min-width: 850px!important;
+        overflow-x: auto;
+    }

@@ -1,25 +1,31 @@
-<mat-drawer-container  class="minh-100">
-    <!--SIDEBAR-->
-        <mat-drawer #drawer class="tamaño" >
-            
-            <app-menu [menu]="drawer"></app-menu>
 
-        </mat-drawer>
-    <!--SIDEBAR-->
+
+<div>
+    <app-menu></app-menu>
+</div>
+<div class="mt-4 pt-5">
+
+
+      <breadcrumb #parent>  
+        <ol class="breadcrumb">
+          <ng-template ngFor let-route [ngForOf]="parent.breadcrumbs">
+            <li *ngIf="!route.terminal" class="breadcrumb-item">
+              <a href="" [routerLink]="[route.url]">{{ route.displayName }}</a>
+            </li>
+            <li *ngIf="route.terminal" class="breadcrumb-item active" aria-current="page">{{ route.displayName }}</li>
+          </ng-template>
+        </ol>
+      </breadcrumb>  
+
+</div>
+<div class="container pb-5">
     
-    <!--CONTENIDO-->
-        <mat-drawer-content class="fondoBg">
-            <app-menu-header [menu]="drawer"></app-menu-header>
-        
-            <div class="container mt-5 pt-5 pb-5">
 
-                <router-outlet></router-outlet>
-        
-            </div>
 
-        </mat-drawer-content>
-    <!--CONTENIDO-->
+    <router-outlet></router-outlet>
 
-</mat-drawer-container>
+</div>
 
-  
+<div>
+    <app-footer></app-footer>
+</div>

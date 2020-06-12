@@ -1,0 +1,31 @@
+<div class="text-center">
+    <h1 class="titulosPagina">Modulo Proyectos</h1>
+</div>
+
+<div class="row justify-content-center align-items-center vh-67">
+    <div class="col-12 col-sm-6 col-md-6 col-lg-4" >
+        <a  [routerLink]="['crear-proyecto']">
+            <div class="card cardParaIconos">
+                <div class="iconoCard">
+                    <mat-icon>note_add</mat-icon>
+                </div>
+                <div class="nombreCard">
+                    <h4>Nuevo Proyecto</h4>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-6 col-lg-4" >
+        <a [routerLink]="['listar-proyectos']">
+            <div class="card cardParaIconos">
+                <div class="iconoCard">
+                    <mat-icon>library_books</mat-icon>
+                </div>
+                <div class="nombreCard">
+                    <h4>Listar Proyectos</h4>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

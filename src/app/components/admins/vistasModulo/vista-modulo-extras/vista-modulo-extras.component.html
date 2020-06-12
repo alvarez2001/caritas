@@ -1,39 +1,13 @@
 <div class="text-center">
-    <h1 class="titulosPagina">Bienvenido(a) {{nombreUsuario | titlecase}} {{apellidoUsuario | titlecase}}</h1>
+    <h1 class="titulosPagina">Modulos Extras</h1>
 </div>
+
 <div class="row justify-content-center align-items-center vh-67">
     <div class="col-12 col-sm-6 col-md-4 col-lg-3" >
-        <a [routerLink]="['modulo-usuarios', 'usuarios']">
-            <div class="card cardParaIconos">
-                <div class="iconoCard">
-                    <mat-icon>person_add</mat-icon>
-                </div>
-                <div class="nombreCard">
-                    <h4>Nuevo Usuario</h4>
-                </div>
-            </div>
-        </a>
-    </div>
-
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3" >
-        <a [routerLink]="['modulo-proyectos', 'crear-proyecto']">
+        <a  [routerLink]="['crear-concepto']">
             <div class="card cardParaIconos">
                 <div class="iconoCard">
                     <mat-icon>note_add</mat-icon>
-                </div>
-                <div class="nombreCard">
-                    <h4>Nuevo Proyecto</h4>
-                </div>
-            </div>
-        </a>
-    </div>
-
-
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3" >
-        <a [routerLink]="['modulos-extras', 'crear-concepto']">
-            <div class="card cardParaIconos">
-                <div class="iconoCard">
-                    <mat-icon>wysiwyg</mat-icon>
                 </div>
                 <div class="nombreCard">
                     <h4>Nuevo Concepto</h4>
@@ -43,10 +17,23 @@
     </div>
 
     <div class="col-12 col-sm-6 col-md-4 col-lg-3" >
-        <a [routerLink]="['modulos-extras','crear-banco']">
+        <a [routerLink]="['listar-conceptos']">
             <div class="card cardParaIconos">
                 <div class="iconoCard">
-                    <mat-icon>account_balance</mat-icon>
+                    <mat-icon>assignment</mat-icon>
+                </div>
+                <div class="nombreCard">
+                    <h4>Listar Conceptos</h4>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3" >
+        <a [routerLink]="['crear-banco']">
+            <div class="card cardParaIconos">
+                <div class="iconoCard">
+                    <mat-icon>payment</mat-icon>
                 </div>
                 <div class="nombreCard">
                     <h4>Nuevo Banco</h4>
@@ -55,6 +42,16 @@
         </a>
     </div>
 
-    
-
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3" >
+        <a [routerLink]="['listar-bancos']">
+            <div class="card cardParaIconos">
+                <div class="iconoCard">
+                    <mat-icon>account_balance</mat-icon>
+                </div>
+                <div class="nombreCard">
+                    <h4>Listar Bancos</h4>
+                </div>
+            </div>
+        </a>
+    </div>
 </div>

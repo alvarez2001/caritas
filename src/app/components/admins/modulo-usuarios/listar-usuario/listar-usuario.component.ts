@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { UserModel } from 'src/app/models/user.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ModificarUsuarioComponent } from '../modificar-usuario/modificar-usuario.component';
@@ -8,6 +8,10 @@ import { DetalleUsuarioComponent } from '../detalle-usuario/detalle-usuario.comp
 import { UserService } from 'src/app/services/user.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Global } from 'src/app/services/global';
+
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
+
 declare let alertify:any;
 
 
@@ -18,11 +22,17 @@ declare let alertify:any;
   styleUrls: ['./listar-usuario.component.css'],
   providers:[UserService,LoginService]
 })
-export class ListarUsuarioComponent implements OnInit {
+export class ListarUsuarioComponent implements OnInit, AfterViewInit {
+
+  displayedColumns: string[] = ['numero','nombres','apellidos','rol','status','acciones'];
+  dataSource = new MatTableDataSource();
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  public cargaStatus:boolean = true;
+
   public users:Array<UserModel>;
   public user:UserModel;
   public userActivo;
-  public cargaFallida:string;
+  public cargaFallida:string = 'Cargando Usuarios...';
   public token:string;
   public url:string;
   public rol;
@@ -38,16 +48,24 @@ export class ListarUsuarioComponent implements OnInit {
       this.rol = this._loginService.getIdentity().rol;
       console.log(this.rol)
    }  
+  ngAfterViewInit(): void {
+    this.paginator._intl.itemsPerPageLabel = 'Usuarios Mostrados';
+  }
 
   ngOnInit(): void {
+    this.dataSource.paginator = this.paginator;
     this.mostrarUsuarios()
   }
 
+
+
   mostrarUsuarios(){
+    this.cargaStatus = true;
     this._userService.mostrarUsuarios().subscribe(res=>{
       if(res.status === 'success'){
-        
-        this.users = res.usuarios;
+        this.dataSource.data = res.usuarios;
+        this.cargaStatus = false;
+  
       }else{
         this.cargaFallida = 'Fallo al cargar usuarios';
       }
@@ -56,7 +74,7 @@ export class ListarUsuarioComponent implements OnInit {
     err=> {
       console.log(err);
       if(err.status == 0){
-        this.cargaFallida = 'Carga fallida, Revise su internet';
+        this.cargaFallida = 'Carga fallida, Revise su internet ';
       }
     })
   }
@@ -75,6 +93,7 @@ export class ListarUsuarioComponent implements OnInit {
       }
     });
   }
+
 
 
   detallesUser(datosUser){

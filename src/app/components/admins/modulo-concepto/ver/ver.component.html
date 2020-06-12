@@ -1,40 +1,45 @@
 
 
+<div class="text-center">
+    <h1 class="titulosPagina">Listar Conceptos</h1>
+</div>
+
 <mat-card class="col-12 mx-auto col-md-10 text-center">
-    <mat-card-title class="text-center tituloPrincipalPagina">
-        Listado de Conceptos
-        
-    </mat-card-title>
-    <mat-card-content class="mb-3">
-        <div class="container" >
-            <span  matTooltip="Agregar Concepto" class="float-right mt-0" (click)="openDialog()">
-                <mat-icon class="tamañoIcon">add_circle_outline</mat-icon>
-            </span>
-            <div class="table-responsive">
-                <table  class="mat-elevation-z7 col-12 mx-auto  table table-light  table-hover table-striped text-center" >
-                    <thead class="thead-dark">
-                        <tr>
-                          <th scope="col">Nº</th>
-                          <th scope="col">Concepto</th>
-                          <th scope="col">Accion</th>
-                        </tr>
-                      </thead>
-                      <tbody >
-            
-                        <tr class="text-center" *ngFor="let element of conceptos; let index = index" class="botones-theme">
-                            <td >{{index + 1}}</td>
-                            <td>{{element.descripcion}}</td>
-                            <td>
-                            <button mat-icon-button matTooltip="Eliminar Concepto"  (click)="eliminarConcepto(element.id)" color="warn">
-                                <mat-icon>delete_forever</mat-icon>
-                            </button>
-                            </td>   
-                        </tr>
-            
-                      </tbody>
-                
+    <mat-card-content class="">
+        <div class="table-responsive">
+
+            <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource" class="w-100">
+              
+                  
+                  <ng-container matColumnDef="position">
+                    <th mat-header-cell *matHeaderCellDef> No. </th>
+                    <td mat-cell *matCellDef="let element "> {{element.id}} </td>
+                  </ng-container>
+              
+                  
+                  <ng-container matColumnDef="concepto">
+                    <th mat-header-cell *matHeaderCellDef> Concepto </th>
+                    <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+                  </ng-container>
+              
+                  
+                  <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                    <td mat-cell *matCellDef="let element" class="botones-theme"> 
+                        <button mat-icon-button matTooltip="Eliminar Concepto"  (click)="eliminarConcepto(element.id)" color="warn">
+                            <mat-icon>delete_forever</mat-icon>
+                        </button>
+                    </td>
+                  </ng-container>
+              
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
-            </div>
+              
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+              </div>
+              
         </div>
     </mat-card-content>
 </mat-card>

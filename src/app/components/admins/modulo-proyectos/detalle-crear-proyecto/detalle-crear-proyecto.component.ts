@@ -34,7 +34,6 @@ export class DetalleCrearProyectoComponent implements OnInit {
   }
 
   crearProyecto(form, button){
-    console.log(button)
     let msj:string;
     this.renderer.setAttribute(button.nativeElement, "disabled", "true");
     this._projeServi.crearProyecto(form).subscribe(res =>{

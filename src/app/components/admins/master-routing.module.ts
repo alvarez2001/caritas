@@ -4,56 +4,32 @@ import { PanelAdministrativoComponent } from './panel-administrativo/panel-admin
 import { IdentityGuard } from 'src/app/guards/identity.guard';
 import { AdministradorComponent } from './administrador/administrador.component';
 
-import { CrearUsuarioComponent } from './modulo-usuarios/crear-usuario/crear-usuario.component';
-import { ListarUsuarioComponent } from './modulo-usuarios/listar-usuario/listar-usuario.component';
-import { CrearProyectoComponent } from './modulo-proyectos/crear-proyecto/crear-proyecto.component';
-import { ListarProyectosComponent } from './modulo-proyectos/listar-proyectos/listar-proyectos.component';
-import { VerComponent } from './modulo-concepto/ver/ver.component';
-import { ListarBancosComponent } from './modulo-bancos/listar-bancos/listar-bancos.component';
-import { ListarSolicitudesComponent } from './modulo-solicitudes/listar-solicitudes/listar-solicitudes.component';
-import { RevisionSolicitudComponent } from './modulo-solicitudes/revision-solicitud/revision-solicitud.component';
-import { SolicitudesDuoComponent } from './modulo-solicitudes/solicitudes-duo/solicitudes-duo.component';
-import { ListarAutorizadasComponent } from './modulo-solicitudes/listar-autorizadas/listar-autorizadas.component';
-
-
 const routes: Routes = [
   {
-    path: 'panel-administrativo',component: PanelAdministrativoComponent,
+    path: 'panel-administrativo',component: PanelAdministrativoComponent ,data: { breadcrumb: 'Inicio'},
     children:[
-       {path: '', component:AdministradorComponent},
-      {path: 'inicio', component:AdministradorComponent},
+      {path: '', component:AdministradorComponent },
+      
+      {path: 'inicio', component:AdministradorComponent },
       {
-        path: 'usuarios', component:CrearUsuarioComponent
+        path: 'modulo-usuarios', data: { breadcrumb: 'Modulo Usuarios'},
+        loadChildren:'./modulo-usuarios/usuarios.module#UsuariosModule'
       },
       {
-        path: 'listar-usuarios', component:ListarUsuarioComponent
+        path:'modulo-proyectos' ,data:{ breadcrumb: 'Modulo Proyectos'},
+        loadChildren:'./modulo-proyectos/proyecto.module#ProyectoModule'
+
       },
       {
-        path: 'crear-proyecto', component:CrearProyectoComponent
+        path:'modulos-extras',data: { breadcrumb: 'Modulos Extras'} ,
+        loadChildren:'./modulos-extras/modulos-extras.module#ModulosExtrasModule'
       },
       {
-        path: 'listar-proyectos', component:ListarProyectosComponent
-      },
-      {
-        path:'listar-concepto', component:VerComponent
-      },
-      {
-        path:'listar-bancos', component:ListarBancosComponent
-      },
-      {
-        path:'asignar-monto', component: ListarSolicitudesComponent
-      },
-      {
-        path:'revision-solicitud',component:RevisionSolicitudComponent
-      },
-      {
-        path:'solicitudes',component:SolicitudesDuoComponent
-      },
-      {
-        path:'ejecucion',component:ListarAutorizadasComponent
+        path:'modulo-solicitudes',data:{breadcrumb : 'Modulo Solicitudes'},
+        loadChildren:'./modulo-solicitudes/solicitudes.module#SolicitudesModule'
       }
-    ],canActivate:[IdentityGuard],
-  },
+    ]
+  }
 ];
 
 @NgModule({

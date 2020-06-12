@@ -68,7 +68,7 @@ export class CrearProyectoComponent implements OnInit {
   validarFormulario(){
     this.aprobado = new FormControl(null, [Validators.required]);
     this.disponible = new FormControl(null, [Validators.required]);
-    this.comision = new FormControl(0.00, [Validators.required]);
+  
 
     this.nombre = new FormControl(null, [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ0-9 ]+')]);
     this.codigo = new FormControl(null, [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ0-9- ]+')]);
@@ -97,22 +97,29 @@ export class CrearProyectoComponent implements OnInit {
   }
 
   register(form){
-    console.log()
-    const dialogRef = this.dialog.open(DetalleCrearProyectoComponent, {
-      width: '300px',
-      data: {
-        infoProyecto:this.proyecto,
-        infoSolicitantes:this.solicitantes,
-        infoAdmins:this.admins
-      }
-    });
+    if(form.valid){
+      const dialogRef = this.dialog.open(DetalleCrearProyectoComponent, {
+        width: '300px',
+        data: {
+          infoProyecto:this.proyecto,
+          infoSolicitantes:this.solicitantes,
+          infoAdmins:this.admins
+        }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.registro = result;
+  
+        if(result === 'exitoso') {
+          console.log(this.proyecto);
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.registro = result;
+          form.reset();
+          
+        }
+        
+      });
+    }
 
-      if(result === 'exitoso') {form.reset();}
-      
-    });
+    
   }
 
   
