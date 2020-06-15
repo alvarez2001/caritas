@@ -1,169 +1,145 @@
-<div class="container my-4">
-    <mat-card>
-
-        <mat-card-title>
-            <h1 class="text-center">Registrar Solicitud</h1>
-        </mat-card-title>
-
-        <mat-card-content>
-            <mat-horizontal-stepper linear="true" #stepper>
-
-                <mat-step [stepControl]="firstFormGroup">
-                    <form [formGroup]="firstFormGroup" class="text-center" novalidate>
-                        <ng-template matStepLabel>Datos Solicitud</ng-template>
-
-                        <div class="row">
-                            <mat-form-field class="col-12 col-md-6 col-lg-5 text-center mx-auto">
-                                <mat-label>Responsable del proyecto</mat-label>
-                                <input matInput formControlName="responsableProyecto" [(ngModel)]="solicitud.responsable" required autocomplete="off">
-                                <mat-error *ngIf="firstFormGroup.get('responsableProyecto')"> {{ getErrorMessage(firstFormGroup.get('responsableProyecto'), 'campo Requerido', 'Solo estan permitidos letras') }} </mat-error>
-                            </mat-form-field>
-                        </div>
-                        
-
-
-                        <div class="row mt-3">
-                            <mat-form-field class="col-12 col-md-6 col-lg-5 text-center mx-auto">
-                                <mat-label>Proyecto</mat-label>
-                                <mat-select required formControlName="idProyecto" [(ngModel)]="solicitud.proyecto_id">
-                                    <mat-option [value]="proyecto.id" *ngFor="let proyecto of proyectos">{{proyecto.nombre}}</mat-option>
-                                </mat-select>
-                                <mat-error *ngIf="firstFormGroup.get('idProyecto')">
-                                    {{ getErrorMessage(firstFormGroup.get('idProyecto'), 'campo Requerido') }}
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-
-                        <div class="row mt-3">
-                            <mat-form-field class="col-12 col-md-6 col-lg-5 text-center mx-auto">
-                                <mat-label>Concepto</mat-label>
-                                <mat-select required formControlName="conceptoId" [(ngModel)]="solicitud.concepto_id">
-                                    <mat-option [value]="concepto.id" *ngFor="let concepto of conceptos">{{concepto.descripcion}}</mat-option>
-                                </mat-select>
-                                <mat-error *ngIf="firstFormGroup.get('conceptoId')">
-                                    {{ getErrorMessage(firstFormGroup.get('conceptoId'), 'campo Requerido') }}
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-                        
-
-                        <div class="mt-3">
-                            <button mat-button matStepperNext>Siguiente</button>
-                        </div>
-                    </form>
-                </mat-step>
- 
-                <mat-step [stepControl]="secondFormGroup" >
-                    <form [formGroup]="secondFormGroup" class="text-center">
-                        <ng-template matStepLabel>Rubros</ng-template>
-
-                        <div class="row ">
-                            <mat-form-field class="col-5 col-md-3 text-center mx-auto">
-                                <mat-label>Cantidad</mat-label>
-                                <input matInput formControlName="cantidad1" required type="number" step="0.01" min="0" max="1000" autocomplete="off" [(ngModel)]="solicitud.cantidad1">
-                                <mat-error *ngIf="secondFormGroup.get('cantidad1')">
-                                    {{ getErrorMessage(secondFormGroup.get('cantidad1'), 'campo Requerido', 'patron invalido', 'cantidad maxima: 1000') }}
-                                </mat-error>
-                            </mat-form-field>
-
-                            <mat-form-field class="col-7 col-md-5 text-center mx-auto">
-                                <mat-label>Producto</mat-label>
-                                <input matInput required autocomplete="off" maxlength="200" formControlName="producto1" [(ngModel)]="solicitud.descripcion1">
-                                <mat-error *ngIf="secondFormGroup.get('producto1')">
-                                    {{ getErrorMessage(secondFormGroup.get('producto1'), 'campo Requerido') }}
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-
-                        <div class="row ">
-                            <mat-form-field class="col-5 col-md-3 text-center mx-auto">
-                                <mat-label>Cantidad</mat-label>
-                                <input matInput formControlName="cantidad2" type="number" step="0.01" min="0" max="1000" autocomplete="off" [(ngModel)]="solicitud.cantidad2">
-                                <mat-error *ngIf="secondFormGroup.get('cantidad2')">
-                                    {{ getErrorMessage(secondFormGroup.get('cantidad2'), 'campo Requerido', 'patron invalido', 'cantidad maxima: 1000') }}
-                                </mat-error>
-                            </mat-form-field>
-
-                            <mat-form-field class="col-7 col-md-5 text-center mx-auto">
-                                <mat-label>Producto</mat-label>
-                                <input matInput autocomplete="off" maxlength="200" formControlName="producto2" [(ngModel)]="solicitud.descripcion2">
-                                <mat-error *ngIf="secondFormGroup.get('producto2')">
-                                    {{ getErrorMessage(secondFormGroup.get('producto2'), 'campo Requerido') }}
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-
-                        <div class="row ">
-                            <mat-form-field class="col-5 col-md-3 text-center mx-auto">
-                                <mat-label>Cantidad</mat-label>
-                                <input matInput formControlName="cantidad3" type="number" step="0.01" min="0" max="1000" autocomplete="off" [(ngModel)]="solicitud.cantidad3">
-                                <mat-error *ngIf="secondFormGroup.get('cantidad3')">
-                                    {{ getErrorMessage(secondFormGroup.get('cantidad3'), 'campo Requerido', 'patron invalido', 'cantidad maxima: 1000') }}
-                                </mat-error>
-                            </mat-form-field>
-
-                            <mat-form-field class="col-7 col-md-5 text-center mx-auto">
-                                <mat-label>Producto</mat-label>
-                                <input matInput autocomplete="off" maxlength="200" formControlName="producto3" [(ngModel)]="solicitud.descripcion3">
-                                <mat-error *ngIf="secondFormGroup.get('producto3')">
-                                    {{ getErrorMessage(secondFormGroup.get('producto3'), 'campo Requerido') }}
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-
-                        <div class="row ">
-                            <mat-form-field class="col-5 col-md-3 text-center mx-auto">
-                                <mat-label>Cantidad</mat-label>
-                                <input matInput formControlName="cantidad4" type="number" step="0.01" min="0" max="1000" autocomplete="off" [(ngModel)]="solicitud.cantidad4">
-                                <mat-error *ngIf="secondFormGroup.get('cantidad4')">
-                                    {{ getErrorMessage(secondFormGroup.get('cantidad4'), 'campo Requerido', 'patron invalido', 'cantidad maxima: 1000') }}
-                                </mat-error>
-                            </mat-form-field>
-
-                            <mat-form-field class="col-7 col-md-5 text-center mx-auto">
-                                <mat-label>Producto</mat-label>
-                                <input matInput autocomplete="off" maxlength="200" formControlName="producto4" [(ngModel)]="solicitud.descripcion4">
-                                <mat-error *ngIf="secondFormGroup.get('producto4')">
-                                    {{ getErrorMessage(secondFormGroup.get('producto4'), 'campo Requerido') }}
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-
-                        <div class="row ">
-                            <mat-form-field class="col-5 col-md-3 text-center mx-auto">
-                                <mat-label>Cantidad</mat-label>
-                                <input matInput formControlName="cantidad5" type="number" step="0.01" min="0" max="1000" autocomplete="off" [(ngModel)]="solicitud.cantidad5">
-                                <mat-error *ngIf="secondFormGroup.get('cantidad5')">
-                                    {{ getErrorMessage(secondFormGroup.get('cantidad5'), 'campo Requerido', 'patron invalido', 'cantidad maxima: 1000') }}
-                                </mat-error>
-                            </mat-form-field>
-
-                            <mat-form-field class="col-7 col-md-5 text-center mx-auto">
-                                <mat-label>Producto</mat-label>
-                                <input matInput autocomplete="off" maxlength="200" formControlName="producto5" [(ngModel)]="solicitud.descripcion5">
-                                <mat-error *ngIf="secondFormGroup.get('producto5')">
-                                    {{ getErrorMessage(secondFormGroup.get('producto5'), 'campo Requerido') }}
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-
-
-                        <div>
-                            <button mat-button matStepperPrevious>Anterior</button>
-                            <button mat-button matStepperNext>Siguiente</button>
-                        </div>
-                    </form>
-                </mat-step>
-                <mat-step>
-                    <ng-template matStepLabel>Envio</ng-template>
-                    <p class="text-center">Has completado la solicitud por favor presione Enviar.</p>
-                    <div class="text-center">
-                    <button mat-button matStepperPrevious>Anterior</button>
-                    <button mat-button (click)="enviarFormulario(stepper)">Enviar</button>
-                    </div>
-                </mat-step>
-            </mat-horizontal-stepper>
-        </mat-card-content>
-
-    </mat-card>
+<div class="text-center mt-4">
+    <h1 class="tituloPrincipalSolicitante">Registrar Solicitud</h1>
 </div>
+ 
+
+<mat-horizontal-stepper linear="true" #stepper>
+
+    <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup" class="text-center" novalidate>
+            <ng-template matStepLabel>Datos</ng-template>           
+
+
+            <div class="row mt-3">
+
+                <mat-form-field  appearance="outline"  class="col-12 col-md-10 mx-auto">
+                    <mat-label>Proyecto</mat-label>
+                    <mat-select  formControlName="idProyecto" [(ngModel)]="solicitud.proyecto">
+                        <mat-option [value]="proyecto.id" *ngFor="let proyecto of proyectos">{{proyecto.codigo}} | {{proyecto.nombre}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="firstFormGroup.get('idProyecto')">
+                        {{ getErrorMessage(firstFormGroup.get('idProyecto'), 'campo Requerido') }}
+                    </mat-error>
+                </mat-form-field>
+
+
+                <mat-form-field class="col-12 col-md-4 mx-auto" appearance="outline" >
+                    <mat-label>Responsable</mat-label>
+                    <input matInput formControlName="responsableProyecto" [(ngModel)]="solicitud.responsable"  autocomplete="off">
+                    <mat-error *ngIf="firstFormGroup.get('responsableProyecto')"> {{ getErrorMessage(firstFormGroup.get('responsableProyecto'), 'campo Requerido', 'Solo estan permitidos letras') }} </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="col-12 col-md-4 mx-auto" appearance="outline" >
+                    <mat-label>Concepto</mat-label>
+                    <mat-select  formControlName="conceptoId" [(ngModel)]="solicitud.concepto">
+                        <mat-option [value]="concepto.id" *ngFor="let concepto of conceptos">{{concepto.descripcion}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="firstFormGroup.get('conceptoId')">
+                        {{ getErrorMessage(firstFormGroup.get('conceptoId'), 'campo Requerido') }}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            
+
+            <div class="mt-3">
+                <button class="btn btn-outline-solicitud px-4" matStepperNext>Siguiente</button>
+            </div>
+        </form>
+    </mat-step>
+
+    <mat-step [stepControl]="thirtyFormGroup">
+        <form [formGroup]="thirtyFormGroup" novalidate >
+            <ng-template matStepLabel>Descripción</ng-template>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="centradoText">
+                        <mat-form-field appearance="outline" class="textareaSolicitud" >
+                            <mat-label>Descripción de la actividad</mat-label>
+                            <textarea matInput maxlength="200" required formControlName="descripcion" [(ngModel)]="solicitud.descripcion"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 text-center">
+                    <button class="btn btn-outline-solicitud mx-2" matStepperPrevious>Anterior</button>
+                    <button class="btn btn-outline-solicitud mx-2" matStepperNext>Siguiente</button>
+                </div>
+            </div>
+        </form>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup" >
+        <form [formGroup]="secondFormGroup" class="text-center">
+            <ng-template matStepLabel>Rubros</ng-template>
+
+            <div class="row mb-4 ">
+                <div class="col-12 col-md-10 mx-auto">
+                    <div class="row lineado">
+                        <mat-form-field class="col-5 col-md-5 col-lg-3" appearance="outline">
+                            <mat-label>Cantidad</mat-label>
+                            <input matInput   type="number" step="0.01" min="0" max="1000" autocomplete="off" [(ngModel)]="cantidadSolicitud" formControlName="cantidad">
+                            <mat-error *ngIf="secondFormGroup.get('cantidad')">
+                                {{ getErrorMessage(secondFormGroup.get('cantidad'), 'campo Requerido', 'patron invalido', 'cantidad maxima: 1000') }}
+                            </mat-error>
+                        </mat-form-field>
+        
+                        <mat-form-field class="col-7 col-md-7 col-lg-6" appearance="outline">
+                            <mat-label>Producto</mat-label>
+                            <input matInput  autocomplete="off" maxlength="200" formControlName="producto" [(ngModel)]="productoSolicitud">
+                            <mat-error>
+                                {{ getErrorMessage(secondFormGroup.get('producto'), 'campo Requerido') }}
+                            </mat-error>
+                        </mat-form-field>
+        
+                        <div class="col-12 col-md-5 col-lg-3 mx-auto">
+                            <button class="btn btn-outline-solicitud solicitudBtn col-12" (click)="agregarOperacion()">
+                                <mat-icon>queue</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <div *ngFor="let array of arrayProductos;let index = index" >
+                        <div class="row lineado tamañoCapsula" >
+                            <div class="col-5 col-md-5 col-lg-3 text-center ">
+                                <p>{{array.cantidad}}</p>
+                            </div>
+            
+                            <div class="col-7 col-md-7 col-lg-6 text-center ">
+                                <p>{{array.descripcion}}</p>
+                            </div>
+            
+                            <div class="col-12 col-md-5 col-lg-3 mx-auto ">
+                                <button class="btn btn-outline-solicitud borradoBtn col-12" (click)="borrarOperacion(index)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            
+
+            <div class="row">
+                <div class="col-12 text-center">
+                    <button class="btn btn-outline-solicitud mx-2" matStepperPrevious>Anterior</button>
+                    <button class="btn btn-outline-solicitud mx-2" [disabled]="comprobar()" matStepperNext>Siguiente</button>
+                </div>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step >
+        <ng-template matStepLabel>Envio</ng-template>
+        <p class="text-center">Has completado la solicitud por favor presione Enviar.</p>
+        <div class="text-center">
+        <button mat-button matStepperPrevious>Anterior</button>
+        <button mat-button (click)="enviarFormulario(stepper)" [disabled]="comprobar()" >Enviar</button>
+        </div>
+    </mat-step>
+</mat-horizontal-stepper>

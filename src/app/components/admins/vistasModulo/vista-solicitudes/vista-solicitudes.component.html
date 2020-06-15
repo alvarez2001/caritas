@@ -1,0 +1,70 @@
+<div class="text-center mt-0 mb-2">
+    <h1 class="titulosPagina">Modulo Solicitudes</h1>
+</div>
+
+<div class="row justify-content-center align-items-center vh-67">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4" >
+        <a  [routerLink]="['asignar-monto']">
+            <div class="card cardParaIconos">
+                <div class="iconoCard">
+                    <mat-icon>add_circle_outline</mat-icon>
+                </div>
+                <div class="nombreCard">
+                    <h4>Asignación</h4>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4" >
+        <a [routerLink]="['revision-solicitud']">
+            <div class="card cardParaIconos">
+                <div class="iconoCard">
+                    <mat-icon>search</mat-icon>
+                </div>
+                <div class="nombreCard">
+                    <h4>Revisión</h4>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4" >
+        <a [routerLink]="['ejecucion']">
+            <div class="card cardParaIconos">
+                <div class="iconoCard">
+                    <mat-icon>play_arrow</mat-icon>
+                </div>
+                <div class="nombreCard">
+                    <h4>Ejecución</h4>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4" >
+        <a [routerLink]="['listar-bancos']">
+            <div class="card cardParaIconos">
+                <div class="iconoCard">
+                    <mat-icon>check_circle_outline</mat-icon>
+                </div>
+                <div class="nombreCard">
+                    <h4>Finalizadas</h4>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4" >
+        <a [routerLink]="['listar-bancos']">
+            <div class="card cardParaIconos">
+                <div class="iconoCard">
+                    <mat-icon>highlight_off</mat-icon>
+                </div>
+                <div class="nombreCard">
+                    <h4>Rechazadas</h4>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

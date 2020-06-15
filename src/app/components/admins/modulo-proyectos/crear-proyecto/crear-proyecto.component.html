@@ -7,17 +7,6 @@
 
     <div class="col-12" >
         <mat-card class="col-12 col-md-8 mx-auto">
-
-            <div [ngClass]="'alert alert-success'" *ngIf="registro === 'exitoso'">
-               Registro exitoso
-                <button type="button" [ngClass]="'close'" data-dismiss="alert">&times;</button>
-            </div>
-
-            <div [ngClass]="'alert alert-danger'" *ngIf="registro === 'fallido'">
-                Ha ocurrido un error, revise su internet.
-                <button type="button" [ngClass]="'close'" data-dismiss="alert">&times;</button>
-            </div>
-
            
             <div *ngIf="!cargaUser || !cargaAdmin">
             
@@ -59,7 +48,7 @@
                         <mat-label>Usuario del proyecto</mat-label> 
                         <mat-select formControlName="usuario_id" required [(ngModel)]="proyecto.usuario_id">
                             <mat-option *ngFor="let solici of solicitantes" [value]="solici.id">
-                                {{solici.nombres | titlecase}} {{solici.apellidos | titlecase}}
+                                {{solici.name | titlecase}} {{solici.surname | titlecase}}
                             </mat-option>
                             
                         </mat-select>
@@ -72,7 +61,7 @@
                         <mat-label>Administrador del proyecto</mat-label>
                         <mat-select formControlName="admin_id" required [(ngModel)]="proyecto.admin_id">
                             <mat-option *ngFor="let admin of admins" [value]="admin.id">
-                                {{admin.nombres | titlecase}} {{admin.apellidos | titlecase}}
+                                {{admin.name | titlecase}} {{admin.surname | titlecase}}
                             </mat-option>
                         </mat-select>
                         <mat-icon matSuffix>engineering</mat-icon>

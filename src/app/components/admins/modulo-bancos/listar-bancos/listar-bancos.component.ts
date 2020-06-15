@@ -22,7 +22,7 @@ export class ListarBancosComponent implements OnInit, AfterViewInit {
     this.paginator._intl.itemsPerPageLabel = 'Bancos Mostrados';
   }
 
-  displayedColumns: string[] = ['titular', 'banco', 'created_at', 'acciones'];
+  displayedColumns: string[] = ['numero','titular', 'banco', 'acciones'];
   dataSource = new MatTableDataSource();
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

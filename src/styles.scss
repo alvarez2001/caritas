@@ -4,7 +4,9 @@
     font-family: 'Varela', sans-serif;
 }
 
-@mixin btn-outline ($color:$mainColor, $border-color:$mainColor, $border-style:dashed,$colorHover:white){
+
+
+@mixin btn-outline ($color:$mainColor, $border-color:$mainColor,$backHover:$mainColorSinTransparencia, $border-style:dashed,$colorHover:white){
     color: $color!important;
     border-color:$border-color!important;
     border-width: 2px!important;
@@ -14,17 +16,14 @@
     text-align: center!important;
     position: relative;
 
-    mat-icon{
-        position: absolute;
-        display: inline-block;
-        margin-left: 15px;
-    }
+   
 
     &:hover {
-        background-color: $mainColorSinTransparencia;
+        background-color: $backHover;
         color: $colorHover!important;
     }
 }
+
 
 @mixin hoverBoton($color, $radius) {
     background-color: $color;
@@ -39,10 +38,35 @@
     $ColorNav:rgba(111, 5, 7, .64);
     $grisCard:rgba(230,230,230,68);
     $colorDorado:rgba(152,112,78,1);
+    $solicitanteColor: #50B2E6;
+    $solicitanteOscuro:#4C6EB9;
+
     $fontBerkshire:'Berkshire Swash', cursive;
     $fontVarela:'Varela', sans-serif;
-  /*GENERALES*/
-  
+    $fontBreeSerif:'Bree Serif', "serif";
+    /*Variables fuentes*/
+    
+
+    
+
+    
+  /*variables*/
+
+  .tituloPrincipalPagina{
+    display: inline-block!important;
+    position: relative!important;
+    box-shadow: 0px 1px;
+    text-shadow: 1px 1px #ff0000;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.interlineado{
+    padding-top: 10px;
+    box-shadow: 0px -2px $mainColor ;
+}
+
+  /*generales*/
 .breadcrumb{
     margin-bottom: 0px!important;
     background-color: #ffffff!important;
@@ -59,35 +83,49 @@
 }
 
 .bg-Caritas{
-    background-color: $ColorNav !important;
+    background-color: $ColorNav ;
     border-color: transparent;
+    .nav-item{
+        transition: all .5s ease;
+        a.nav-link {
+            color: white!important;
+            text-align: center;
+        }
+       
+        &:hover{
+            @include hoverBoton($mainColor, 12px)
+        }
+        @media screen and (max-width:765px){
+            .nav-item a.nav-link {
+                padding: 15px 0!important;
+            }
+            .navbar-toggler{
+                color: white!important;
+                border-color: transparent!important;
+            }
+        }
+    }
     
+}
+
+.bg-solicitante{
+    @extend .bg-Caritas;
+    background-color: $solicitanteColor;
+    .nav-item{
+        &:hover{
+            @include hoverBoton(rgba($solicitanteOscuro,.5), 12px)
+        }
+    }
+}
+
+.hoverSolicitante{
+    @include hoverBoton($solicitanteOscuro, 12px)
 }
 
 .hoverCaritas{
     @include hoverBoton($mainColor, 12px)
 }
 
-.nav-item{
-    transition: all .5s ease;
-    a.nav-link {
-        color: white!important;
-        text-align: center;
-    }
-   
-    &:hover{
-        @include hoverBoton($mainColor, 12px)
-    }
-    @media screen and (max-width:765px){
-        .nav-item a.nav-link {
-            padding: 15px 0!important;
-        }
-        .navbar-toggler{
-            color: white!important;
-            border-color: transparent!important;
-        }
-    }
-}
 
 
 
@@ -99,8 +137,8 @@
     background-color: $grisCard!important;
     border: 1px solid $mainColor!important;
     border-radius: 15px!important;
-    margin-bottom: 30px;
-    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-top: 0px;
     transition: all .5s ease-in-out;
 
     .iconoCard{
@@ -148,24 +186,7 @@
 }
 
 
-.footerAdmin{
-    background-color: $mainColor;
-    color: white;
-    border-radius:0px ;
-    font-family:$fontBerkshire;
-    position: fixed;
-    bottom: 0px;
-    height: 50px;
-    left: 0px;
-    right: 0px;
-    display: flex;
-    align-items: center;
-    h4{
-        font-family:$fontBerkshire;
-        margin: 0px auto;
-        text-align: center;
-    }
-}
+
 .vh-67{ 
     height: 67vh;
 }
@@ -185,6 +206,35 @@
 
 .btn-outline-colormain{
     @include btn-outline();
+    mat-icon{
+        position: absolute;
+        display: inline-block;
+        margin-left: 15px;
+    }
+}
+.btn-outline-rojo{
+    @include btn-outline(red,red,red,#fff)
+}
+
+.btn-outline-solicitud{
+    @include btn-outline($solicitanteColor, $solicitanteColor,$solicitanteColor)   
+}
+.solicitudBtn{
+    text-align: center;
+    margin: .25em 0;
+    height: 50px;
+    mat-icon{
+        margin: auto;
+        display: block;
+        font-size: 25px;
+        
+    }
+}
+
+.borradoBtn{
+    &:hover{
+        color: red!important;
+    }
 }
 
 /*Botones*/
@@ -197,52 +247,152 @@
     color: white!important;
 }
 /*Iconos*/
-
-
-
-
-
-
-.tamañoMenu{
-    font-size: 40px;
+.fondoImg{
+    position: relative;
+    &::after{
+        content: '';
+        background-image: url('./assets/josue.jpg') ;
+        display: block;
+        position: fixed;
+        background-position: center!important;
+        background-size: cover;
+        background-repeat: no-repeat!important;
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        z-index: -1;
+    }
+    .transparent{
+        background-color: rgba(245, 245, 245, 0.541);
+    }
 }
+/*Login*/
 .pageError{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-image: url('assets/error404.png');
 }
-.fondo{
+.vh100{
+    height: 100vh;
+}
+/*PAGINA ERROR*/
+.footerAdmin{
+    background-color: $mainColor;
+    color: white;
+    border-radius:0px ;
+    font-family:$fontBerkshire;
+    position: fixed;
+    bottom: 0px;
+    height: 50px;
+    left: 0px;
+    right: 0px;
+    display: flex;
+    align-items: center;
+    h4{
+        font-family:$fontBerkshire;
+        margin: 0px auto;
+        text-align: center;
+    }
+}
 
-    background-repeat: no-repeat;
-    background-size: cover!important;
-    background-position: center!important;
-    background-image: url('assets/josue.jpg') ;
+.footerSolicitante{
+    @extend .footerAdmin;
+    background-color: $solicitanteColor;
 }
-.transparent{
-    opacity: .6;
-    animation-name: opacidad;
-    animation-duration: 3s;
+/*FOOTERS*/
+
+.vh-76{
+    height: 76vh;
 }
-@keyframes opacidad{
-    0%{
-        transition: all ease-in-out;
-        opacity: 0;
-    }
-    15%{opacity: .15;}
-    25%{
-        opacity: .25;
-    }
-    50%{
-        opacity: .5;
-    }
-    75%{
-        opacity: .55;
-    }
-    100%{
-        opacity: .6;
+
+.fondoTransparente{
+    position: relative;
+    &::before{
+        content: '';
+        position: fixed;
+        background-position: center!important;
+        background-size: cover;
+        background-repeat: no-repeat!important;
+        background-color: rgba(#ffffff, .52);
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        z-index: 0;
     }
 }
+
+.card-solicitante{
+    min-width: 60%;
+    height: 300px;
+    padding: 15px;
+    border-radius: 15px!important;
+    .card-centrado{
+        margin: auto;
+        text-align: center;
+        .card-title-solicitante{
+            font-family: $fontBreeSerif;
+            color: black!important;
+            margin-bottom: 15px;
+    
+        }
+        
+    }
+    @media screen and(min-width:780px){
+        width: 60%;
+    }
+}
+
+.tituloPrincipalSolicitante{
+    @extend .titulosPagina;
+    box-shadow: 0px 2px $solicitanteOscuro;
+    text-shadow: 1px 1px $solicitanteColor;
+    font-family: $fontBreeSerif;
+}
+
+.textareaSolicitud{
+    
+    width: 60%;
+    textarea{
+        height: 250px;
+        min-height: 250px!important;
+        max-height: 250px!important;
+    }
+    @media screen and (max-width:1000px){
+        width: 100%;
+    }
+}
+.centradoText {
+    text-align: center;
+}
+
+.tamañoCapsula{
+    
+    min-height: 80px;
+    div{
+        align-self: center;
+    }
+    @media screen and (max-width:1000px){
+        padding: 15px 0;
+    }
+}
+.lineado{
+    box-shadow: 0px 1px $solicitanteOscuro;
+}
+
+/*SOLICITANTE*/
+
+.tamañoMenu{
+    font-size: 40px;
+}
+
+
 .vh-75{
     height: 75vh;
 }
@@ -290,21 +440,4 @@ h4.scheduler-border{
 .barraNavegacion{
     background-color: #870e03;
 }
-.tituloPrincipalPagina{
-    display: inline-block!important;
-    position: relative!important;
-    box-shadow: 0px 1px;
-    text-shadow: 1px 1px #ff0000;
-    padding-left: 15px;
-    padding-right: 15px;
-}
-/*
-.tituloPrincipalPagina::after{
-    content: 'o';
-    position: absolute; 
-    display: inline-block;
-    top: 16px;
-    left:45%;
-    
-}
-*/
+

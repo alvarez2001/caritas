@@ -26,18 +26,18 @@ export class UserService {
   actualizarUsuario(user, userId):Observable<any>{
     const json = JSON.stringify(user);
     const params = 'json='+json;
-    return this._http.put(`${this.url}usuario/${userId}`, params )
+    return this._http.put(`${this.url}users/${userId}`, params )
   }
 
-  mostrarUsuarios():Observable<any>{ return this._http.get(this.url+'usuario' ) }
+  mostrarUsuarios():Observable<any>{ return this._http.get(this.url+'users' ) }
 
   registrarUser(user):Observable<any>{
     const json = JSON.stringify(user);
     const params = 'json='+json;
-    return this._http.post(`${this.url}usuario`,params )
+    return this._http.post(`${this.url}users`,params )
   }
 
-  deleteUser(id):Observable<any>{ return this._http.delete(`${this.url}usuario/${id}` ) }
+  deleteUser(id):Observable<any>{ return this._http.delete(`${this.url}users/${id}` ) }
 
 
   

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConceptoService } from 'src/app/services/concepto.service';
 import { Concepto } from 'src/app/models/concepto';
 import Swal from 'sweetalert2';
+import { FuncionesCompartidas } from 'src/app/models/shared/funcionesCompartidas';
 declare let alertify:any;
 
 @Component({
@@ -34,22 +35,18 @@ export class RegistrarComponent implements OnInit {
 
   guardar(form){
     if(form.valid){
-      this._concepSV.create(this.concepto).subscribe(res => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Concepto Creado Exitosamente',
-          showConfirmButton: false,
-          timer: 1500
-        });
+      FuncionesCompartidas.funcionesCompartidas(2500,'info','enviando información');
+      this._concepSV.create(this.concepto).subscribe(res => {      
+        FuncionesCompartidas.funcionesCompartidas(2500,'success',res)
         form.reset();
       },
       err => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error de conexión',
-          showConfirmButton: false,
-          timer: 1500
-        });
+        if(err.status !== 0){
+          FuncionesCompartidas.funcionesCompartidas(2500,'error',`${err.error.mensaje} o el concepto ya se encuentra registrado`);
+        }
+        else {
+          FuncionesCompartidas.funcionesCompartidas(2500,'error','ha ocurrido un fallo de conexion')
+        }
       })
     }
   }

@@ -106,13 +106,13 @@ export class ListarProyectosComponent implements OnInit, AfterViewInit {
 
   private getAdmins(){
     this._projeServi.getAllAdmins().subscribe(res => {
-        this.admins = res.solicitantes;
+        this.admins = res;
     },
     err => console.log(err));
   }
   private getSolicitantes(){
     this._projeServi.getAllSolicitantes().subscribe(res => {
-        this.solicitantes = res.solicitantes;
+        this.solicitantes = res;
     }, err=> console.log(err));
   }
 

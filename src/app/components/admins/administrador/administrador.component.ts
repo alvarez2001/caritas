@@ -21,8 +21,8 @@ export class AdministradorComponent implements OnInit {
   }
 
   private nombresApellidosUsuario(){
-    this.nombreUsuario = this.logSV.getIdentity().nombres;
-    this.apellidoUsuario = this.logSV.getIdentity().apellidos;
+    this.nombreUsuario = this.logSV.getIdentity().name;
+    this.apellidoUsuario = this.logSV.getIdentity().surname;
   }
 
 

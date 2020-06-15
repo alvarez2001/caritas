@@ -3,6 +3,7 @@ import { ProyectosModel } from 'src/app/models/proyectos.model';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UserModel } from 'src/app/models/user.model';
 import { ProjectService } from 'src/app/services/project.service';
+import { FuncionesCompartidas } from 'src/app/models/shared/funcionesCompartidas';
 declare let alertify:any;
 
 
@@ -30,29 +31,23 @@ export class DetalleCrearProyectoComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    
   }
 
   crearProyecto(form, button){
     let msj:string;
     this.renderer.setAttribute(button.nativeElement, "disabled", "true");
     this._projeServi.crearProyecto(form).subscribe(res =>{
-      if(res.status === 'success'){
-        msj = 'exitoso';
-        
-      }else{
-        msj = 'fallido';
-      }
+     FuncionesCompartidas.funcionesCompartidas(2500,'success',res)
+     this.dialogRef.close(true);
     },
-    err => { msj = 'fallido';},
+    err => {
+      console.log(err)
+      FuncionesCompartidas.funcionesCompartidas(2500,'error','ha ocurrido un error inesperado')
+      this.dialogRef.close(false);
+    },
     () => {
-      if(msj == 'exitoso'){
-        alertify.notify('Registro exitoso del proyecto', 'success',5);
-      }else{
-        alertify.notify('Ha ocurrido un error al registrar', 'error',5);
-      }
       this.renderer.setAttribute(button.nativeElement, "disabled", "false");
-      this.dialogRef.close(msj);
+      
     } );
   
   }

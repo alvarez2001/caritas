@@ -58,24 +58,18 @@ export class ListarUsuarioComponent implements OnInit, AfterViewInit {
   }
 
 
-
   mostrarUsuarios(){
     this.cargaStatus = true;
     this._userService.mostrarUsuarios().subscribe(res=>{
-      if(res.status === 'success'){
-        this.dataSource.data = res.usuarios;
+      console.log(res)
+        this.dataSource.data = res.data;
         this.cargaStatus = false;
   
-      }else{
-        this.cargaFallida = 'Fallo al cargar usuarios';
-      }
     },
 
     err=> {
       console.log(err);
-      if(err.status == 0){
-        this.cargaFallida = 'Carga fallida, Revise su internet ';
-      }
+      
     })
   }
 

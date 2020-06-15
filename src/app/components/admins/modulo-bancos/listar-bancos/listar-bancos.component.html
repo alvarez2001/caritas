@@ -9,6 +9,11 @@
     <div class="table-responsive">
       <table mat-table [dataSource]="dataSource" class="w-100">
     
+        <ng-container matColumnDef="numero">
+          <th mat-header-cell *matHeaderCellDef>Nº</th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
         <!-- Position Column -->
         <ng-container matColumnDef="titular">
           <th mat-header-cell *matHeaderCellDef>Titular</th>
@@ -19,12 +24,6 @@
         <ng-container matColumnDef="banco">
           <th mat-header-cell *matHeaderCellDef> Banco </th>
           <td mat-cell *matCellDef="let element"> {{element.banco | titlecase}} </td>
-        </ng-container>
-    
-        <!-- Weight Column -->
-        <ng-container matColumnDef="created_at">
-          <th mat-header-cell *matHeaderCellDef> creado </th>
-          <td mat-cell *matCellDef="let element"> {{element.created_at | date: 'mediumDate'}} </td>
         </ng-container>
     
         <!-- Symbol Column -->

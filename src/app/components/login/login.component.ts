@@ -2,7 +2,9 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import {FormControl, Validators, FormBuilder, FormGroup, AbstractControl, Validator} from '@angular/forms';
-import { UserModel } from 'src/app/models/user.model';
+
+import { UserModelNuevo } from 'src/app/models/modelos/user.model';
+import { FuncionesCompartidas } from 'src/app/models/shared/funcionesCompartidas';
 
 
 @Component({
@@ -13,11 +15,15 @@ import { UserModel } from 'src/app/models/user.model';
 })
 export class LoginComponent implements OnInit {
 
-  public user:UserModel;
+  public user:UserModelNuevo;
+  public identity:UserModelNuevo;
+
   public userLogin: FormGroup;
   public email:FormControl;
   public password:FormControl;
-  public identity:UserModel;
+  
+  
+
   public token:string;
   public message:string;
   public statusApi:string;
@@ -30,7 +36,7 @@ export class LoginComponent implements OnInit {
     private _loginService:LoginService,
     private renderer:Renderer2
   ) {
-    this.user = new UserModel('','','','','','',1,'','','');
+    this.user = new UserModelNuevo(null,null,null,null,null,null)
     this.validarFormulario();
    }
 
@@ -56,32 +62,21 @@ export class LoginComponent implements OnInit {
   iniciarSesion(user, boton){
     this.carga = true;
     this.renderer.setAttribute(boton.nativeElement, "disabled", "true");
+    FuncionesCompartidas.funcionesCompartidas(null,'info','porfavor espere un momento',false)        
 
     this._loginService.loginUser(this.user).subscribe(res=>{
-      if(res.status !== 'error'){
-        this.token = res
-        
-        this._loginService.loginUser(this.user, true).subscribe(response=>{
-          this.identity = response;
-
-          
-
-          sessionStorage.setItem('token', this.token);
-          sessionStorage.setItem('identity', JSON.stringify(this.identity));
-
-          this._route.navigate(['redireccion']);
-        })
-      }
+      FuncionesCompartidas.funcionesCompartidas(2500,'success','Bienvenido al sistema',false)
+      sessionStorage.setItem('token', JSON.stringify(res.token));
+      sessionStorage.setItem('identity', JSON.stringify(res.usuario));
+      this._route.navigate(['redireccion']);
     },
     err=> {
       this.statusApi ='error';
-      if(err.status == 0){
-        this.message = 'Error de conexion, revise su internet';
+      if(err.status !== 0){
+        this.message = err;
+        FuncionesCompartidas.funcionesCompartidas(2500,'error',err,false)        
       }
-      this.carga = false;
-      user.reset()
-      this.renderer.setAttribute(boton.nativeElement, "disabled", "false");
-      
+      FuncionesCompartidas.funcionesCompartidas(2500,'error','ha ocurrido un error inesperado',false)      
     }, () => {
       this.carga = false;
       user.reset()

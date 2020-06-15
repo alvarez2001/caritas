@@ -3,14 +3,14 @@
 <mat-dialog-content class="mat-typography">
 
 
-    <div *ngIf="data.nombres">
+    <div *ngIf="data.name">
         <p class="mb-0">Nombres:</p>
-        <h3 class="font-weight-bold ">{{data.nombres | titlecase}}</h3>
+        <h3 class="font-weight-bold ">{{data.name | titlecase}}</h3>
     </div>
 
-    <div *ngIf="data.apellidos">
+    <div *ngIf="data.surname">
         <p class="mb-0">Apellidos:</p>
-        <h3 class="font-weight-bold ">{{data.apellidos | titlecase}}</h3>
+        <h3 class="font-weight-bold ">{{data.surname | titlecase}}</h3>
     </div>
 
     <div *ngIf="data.email">

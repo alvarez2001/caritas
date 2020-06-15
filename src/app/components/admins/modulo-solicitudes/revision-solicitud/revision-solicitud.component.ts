@@ -2,8 +2,9 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { SolicitudService } from 'src/app/services/solicitud.service';
-import { MatDialog } from '@angular/material/dialog';
-import { DetallerevSolicitudComponent } from '../detallerev-solicitud/detallerev-solicitud.component';
+import { LoginService } from 'src/app/services/login.service';
+import { FuncionesCompartidas } from 'src/app/models/shared/funcionesCompartidas';
+
 
 
 
@@ -11,38 +12,67 @@ import { DetallerevSolicitudComponent } from '../detallerev-solicitud/detallerev
   selector: 'app-revision-solicitud',
   templateUrl: './revision-solicitud.component.html',
   styleUrls: ['./revision-solicitud.component.css'],
-  providers:[SolicitudService]
+  providers:[SolicitudService, LoginService]
 })
 export class RevisionSolicitudComponent implements OnInit {
 
   
-  displayedColumns: string[] = ['idSolicitud', 'nombre','responsable', 'total', 'disponible', 'acciones'];
+  displayedColumns: string[] = ['numero', 'proyecto', 'concepto', 'total', 'acciones'];
   dataSource = new MatTableDataSource();
+
+  public noHay:boolean;
+  public idAdmin:number;
+  public rolAdmin:string;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor(private solSV:SolicitudService,public dialog: MatDialog) { }
+  constructor(private solSV:SolicitudService, private logSV:LoginService, private funciones:FuncionesCompartidas) { }
 
   ngOnInit() {
-    this.getAllRevision();
+    this.rolAdmin = this.logSV.getIdentity().rol.toLocaleLowerCase();
+    this.idAdmin = this.logSV.getIdentity().id;
+    this.cargarInformacion();
     this.dataSource.paginator = this.paginator;
   }
 
-  getAllRevision(){
-    this.solSV.getSolicitudesRevisada().subscribe(res => {
-      this.dataSource.data = res.solicitudes      
+  cargarInformacion(valor = false){
+    if(!valor){
+      FuncionesCompartidas.funcionesCompartidas(null,'warning','Porfavor espere un momento')
+    }
+
+    this.solSV.getSolicitudRevision().subscribe(res => {
+      if(!valor){
+        FuncionesCompartidas.funcionesCompartidas(5000,'success','Informacion cargada')
+      }
+      if(res <= 0){
+        this.noHay = true;
+      }     
+      else{
+        this.noHay = false;
+      }
+
+      this.dataSource.data = res;
+    }, err => {
+      console.log(err);
+      FuncionesCompartidas.funcionesCompartidas(7000,'error','Hubo un error inesperado');
     })
   }
 
-  abrirDetalle(data): void{
-    const dialogRef = this.dialog.open(DetallerevSolicitudComponent, {
-      width: '1000px',
-      data: data
-    });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.getAllRevision();
-    });
+
+  AnularSolicitud(id){
+    const datos = {usuario: this.idAdmin}
+    this.funciones.AlertConfirmPublic('Estas seguro?', `Borraras la solicitud #${id}`,'warning',true,'Cancelar','Eliminar').then((result) => {
+      if(result.value){
+        this.solSV.anularSolicitud(datos,id).subscribe(res=>{
+          FuncionesCompartidas.funcionesCompartidas(6000,'success',res)
+          this.cargarInformacion(true);
+        }, err => {
+          console.log(err);
+          FuncionesCompartidas.funcionesCompartidas(6000,'error','ha ocurrido un error inesperado')
+        })
+      }
+    })
   }
 
 }

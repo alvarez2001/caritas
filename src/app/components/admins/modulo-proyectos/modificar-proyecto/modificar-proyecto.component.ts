@@ -37,19 +37,16 @@ export class ModificarProyectoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.projectInfo)
   }
   actualizar(proyecto, button){
-    this.renderer.setAttribute(button.nativeElement, 'disabled', 'true');
-
+    console.log(this.proyecto)
     this._serviceProject.putProject(this.proyecto).subscribe(res=>{
-      if(res.code === 200){
-        this.dialogRef.close(true);
-        this.renderer.setAttribute(button.nativeElement, 'disabled', 'false');
-      }else{
-        this.statusPut = true;
-      }
+      console.log(res)
     },
-    err=> this.statusPut = true)
+    err=>{
+      console.log(err)
+    })
   }
 
   validarFormulario(){

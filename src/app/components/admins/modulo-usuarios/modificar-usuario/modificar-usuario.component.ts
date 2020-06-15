@@ -5,6 +5,8 @@ import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms'
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { LoginService } from 'src/app/services/login.service';
 import { UserService } from 'src/app/services/user.service';
+import { UserModelNuevo } from 'src/app/models/modelos/user.model';
+import { FuncionesCompartidas } from 'src/app/models/shared/funcionesCompartidas';
 
 
 @Component({
@@ -22,17 +24,17 @@ import { UserService } from 'src/app/services/user.service';
     public status:FormControl;
 
     public updateUser: FormGroup;
-    public user:UserModel;
+    public user:UserModelNuevo;
     public statusPut:boolean;
 
 
     constructor(
       public _formBuilder: FormBuilder,
       public dialogRef: MatDialogRef<ModificarUsuarioComponent>,
-      @Inject(MAT_DIALOG_DATA) public data:UserModel,
+      @Inject(MAT_DIALOG_DATA) public data:any,
       private _userSer:UserService
       ) {
-        this.user = new UserModel(this.data.nombres,this.data.apellidos,'','',this.data.rol,'',this.data.id,this.data.status,'','')
+        this.user = new UserModelNuevo(this.data.name,this.data.surname,this.data.rol,this.data.status,null,null)
       this.validarFormulario();
       
     }
@@ -53,29 +55,31 @@ import { UserService } from 'src/app/services/user.service';
 
 
     updateUserData(data){
-      let actualizar = {
-        nombres: this.user.nombres,
-        apellidos:this.user.apellidos,
-        rol:this.user.rol,
-        status:this.user.status
-      }
+      
 
-      this._userSer.actualizarUsuario(actualizar, this.user.id).subscribe(res=>{
-        if(res.status === 'success'){
-          this.dialogRef.close(true);
-        }else{
-          this.statusPut = true;
-        }
+      FuncionesCompartidas.funcionesCompartidas(null,'info','Porfavor espere un momento', false)
+
+      this._userSer.actualizarUsuario(this.user, this.data.id).subscribe(res=>{
+        console.log(res)
+        //this.dialogRef.close(true);
+        FuncionesCompartidas.funcionesCompartidas(null,'success','se ha actualizado', true)
       },
       err => {
-        this.statusPut = true;
+        console.log(err)
+        if(err.status !== 0){
+          FuncionesCompartidas.funcionesCompartidas(null,'error',err.error,true);
+        }
+        else{
+          FuncionesCompartidas.funcionesCompartidas(null,'error','ha ocurrido un error inesperado');
+        }
+        
       })
 
     }
   
     validarFormulario(){
-      this.nombres = new FormControl(this.data.nombres, [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ ]+')]);
-      this.apellidos = new FormControl(this.data.apellidos, [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ ]+')]);
+      this.nombres = new FormControl(this.data.name, [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ ]+')]);
+      this.apellidos = new FormControl(this.data.surname, [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ ]+')]);
       this.rol = new FormControl(this.data.rol, [Validators.required]);
       this.status = new FormControl(this.data.status, [Validators.required]);
   

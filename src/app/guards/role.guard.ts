@@ -11,8 +11,9 @@ export class RoleGuard implements CanActivate{
         private _loginService:LoginService
     ){}
     
-    canActivate() {
-        return this.checkRol();
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+        
+        return this.checkRol(route.routeConfig.path);
     }
     
 
@@ -20,29 +21,37 @@ export class RoleGuard implements CanActivate{
 
 
 
-    checkRol(){
+    checkRol(ruta){
         const identity = this._loginService.getIdentity();
         const rol = identity.rol.toLowerCase();
-        console.log(identity);
+            console.log(ruta)
         let status ;
-        if(rol === 'solicitante'){
-            this._router.navigate(['/solicitante']);
+        if(ruta === 'panel-administrativo' && (rol === 'master' || rol === 'admin')){
             status = true;
         }
-        else if(rol === 'master'){
-            this._router.navigate(['/panel-administrativo']);
-            status = true;
-        }
-
-        else if(rol === 'admin'){
-            this._router.navigate(['/panel-administrativo']);
+        else if(ruta === 'solicitante' && rol === 'solicitante' ){
             status = true;
         }
         else{
-            this._router.navigate(['/login']);
+            this.redireccion(rol);
             status = false;
         }
 
         return status;
     }
+
+    redireccion(rol){
+        switch (rol) {
+            case 'master' || 'admin':
+                this._router.navigate(['/panel-administrativo']);
+                break;
+            case 'solicitante':
+                this._router.navigate(['/solicitante']);
+                break;
+            default:
+                this._router.navigate(['/login']);
+                break;
+        }
+    }
+
 }

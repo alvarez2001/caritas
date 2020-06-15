@@ -15,27 +15,27 @@ export class ConceptoService {
   constructor(private _http:HttpClient) { 
     this.url = Global.url;
   }
-  getAll():Observable<any>{return this._http.get(`${this.url}concepto`)}
+  getAll():Observable<any>{return this._http.get(`${this.url}conceptos`)}
 
   create(concepto):Observable<Concepto>{
     const json = JSON.stringify(concepto);
     const params = 'json='+json;
-    return this._http.post<Concepto>(`${this.url}concepto`, params);
+    return this._http.post<Concepto>(`${this.url}conceptos`, params);
   }
   
   delete(id):Observable<any>{
-    return this._http.delete(`${this.url}concepto/${id}`);   
+    return this._http.delete(`${this.url}conceptos/${id}`);   
   }
 
-  createBanco(banco:Banco):Observable<Banco>{
+  createBanco(banco:Banco):Observable<any>{
     const json = JSON.stringify(banco);
     const params = 'json='+json;
-    return this._http.post<Banco>(`${this.url}banco`, params);
+    return this._http.post<Banco>(`${this.url}bancos`, params);
   }
 
-  getAllBanco():Observable<Banco[]>{ return this._http.get<Banco[]>(`${this.url}banco`)}
+  getAllBanco():Observable<any>{ return this._http.get<Banco[]>(`${this.url}bancos`)}
 
   deleteBanco(id):Observable<any>{
-    return this._http.delete(`${this.url}banco/${id}`)
+    return this._http.delete(`${this.url}bancos/${id}`)
   }
 }

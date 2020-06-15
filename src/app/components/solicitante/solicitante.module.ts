@@ -9,6 +9,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { PanelSoliComponent } from './panel-soli/panel-soli.component';
 import { ListarSolicitudesComponent } from './listar-solicitudes/listar-solicitudes.component';
 import { RegistrarSolicitudComponent } from './registrar-solicitud/registrar-solicitud.component';
+import { FooterSoliComponent } from './footer-soli/footer-soli.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { RegistrarSolicitudComponent } from './registrar-solicitud/registrar-sol
     HeaderSoliComponent,
     PanelSoliComponent,
     ListarSolicitudesComponent,
-    RegistrarSolicitudComponent
+    RegistrarSolicitudComponent,
+    FooterSoliComponent
   ],
   imports: [
     CommonModule,

@@ -31,7 +31,7 @@
         <p [ngClass]="'mb-0'">Usuario del proyecto:</p>
         <div *ngFor="let solicitante of solicitantes">
             <h3 [ngClass]="'font-weight-bold'" *ngIf="infoProyecto.usuario_id === solicitante.id">
-                {{solicitante.nombres | titlecase}} {{solicitante.apellidos | titlecase}}
+                {{solicitante.name | titlecase}} {{solicitante.surname | titlecase}}
             </h3>
         </div>
     </div>

@@ -1,7 +1,27 @@
-<div class="container">
-    <div class=" row vh-88 justify-content-center align-items-center">
+<div class="row vh-76 justify-content-center align-items-center fondoImg">
 
-       <h1 class="text-center col-12">Bienvenido al modulo de solicitantes</h1>
-
+    <div class="card fondoTransparente card-solicitante">
+        <div class="card-centrado">
+            <div class="card-title-solicitante">
+                <h1>Bienvenido(a) {{nombre | titlecase}} {{apellido | titlecase}}</h1>
+            </div>
+    
+            <div class="card-content">
+                <p>Que opción desea realizar?</p>
+                <div class="row">
+                    <div class="col-6">
+                        <a [routerLink]="['listar-solicitudes']" class="btn btn-outline-solicitud">
+                            Mis Solicitudes
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a [routerLink]="['registrar-solicitud']" class="btn btn-outline-solicitud">
+                            Nueva Solicitud
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>  
+
+</div>

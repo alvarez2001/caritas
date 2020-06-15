@@ -5,6 +5,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import { UserModel } from 'src/app/models/user.model';
 import {MatDialog} from '@angular/material/dialog';
 import { DetalleCrearProyectoComponent } from '../detalle-crear-proyecto/detalle-crear-proyecto.component';
+import { FuncionesCompartidas } from 'src/app/models/shared/funcionesCompartidas';
 
 
 @Component({
@@ -36,6 +37,7 @@ export class CrearProyectoComponent implements OnInit {
   
 
   constructor(
+    private funciones:FuncionesCompartidas,
     public _formBuilder: FormBuilder,
     private _projeServi:ProjectService,
     public dialog: MatDialog 
@@ -109,8 +111,8 @@ export class CrearProyectoComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         this.registro = result;
   
-        if(result === 'exitoso') {
-          console.log(this.proyecto);
+        if(result) {
+          
 
           form.reset();
           
@@ -137,16 +139,17 @@ export class CrearProyectoComponent implements OnInit {
 
   getAdmins(){
     this._projeServi.getAllAdmins().subscribe(res => {
+        
         this.cargaAdmin = true;
-        this.admins = res.solicitantes;
+        this.admins = res;
     },
     err => console.log(err));
   }
   getSolicitantes(){
     this._projeServi.getAllSolicitantes().subscribe(res => {
         this.cargaUser = true;
-        this.solicitantes = res.solicitantes;
-    });
+        this.solicitantes = res;
+    },err => console.log(err));
   }
 
 

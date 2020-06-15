@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+import { FuncionesCompartidas } from 'src/app/models/shared/funcionesCompartidas';
 
 
 @Component({
@@ -32,25 +33,25 @@ export class VerComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
     this.cargarConceptos();
-    setInterval(()=> {this.cargarConceptos(); console.log('set')}, 180000)
+    setInterval(()=> {this.cargarConceptos();}, 180000)
   }
 
   
 
   cargarConceptos(){
     this._conSV.getAll().subscribe(res => {
-      this.conceptos = res.listado;
-      this.dataSource.data = res.listado
+      this.dataSource.data = res
+      
     },
     err=> {
-      Swal.fire({
-        icon:'error',
-        title:'Ha ocurrido un error de conexión',
-        timer:3000,
-        timerProgressBar:true,
-        showConfirmButton:false
-      })
-      this.route.navigate(['panel-administrativo','modulos-extras']);
+      FuncionesCompartidas.alertConfirmSwal('ha ocurrido un error inesperado',null,'error',true,'cancelar','intentar nuevamente').then((result) => {
+        if(result.value){
+          this.cargarConceptos();
+        }else{
+          this.route.navigate(['panel-administrativo','modulos-extras']);
+        }
+      });
+      
     })
   }
 
@@ -73,13 +74,15 @@ export class VerComponent implements OnInit, AfterViewInit {
           showConfirmButton:false
         })
         this._conSV.delete(id).subscribe(res=>{
+          console.log(res)
           Swal.fire(
-            'Concepto eliminado correctamente',
+            res,
             '',
             'success'
           );
           this.cargarConceptos()
         },error =>{
+          console.log(error)
           Swal.fire(
             'Error al procesar la solicitud',
             'Porfavor intente mas tarde',

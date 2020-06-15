@@ -16,29 +16,37 @@ export class SolicitudService {
     this.url = Global.url;
   }
 
-  getSolicitudUsuario(id):Observable<any>{return this._http.get(`${this.url}solicitud/usuario/${id}`)}
+  getSolicitudUsuario(id):Observable<any>{return this._http.get(`${this.url}solicitud/solicitante/${id}`)}
 
-  getProyectoId(id):Observable<any>{return this._http.get(`${this.url}proyecto/proyectoUsuario/${id}`)}
+  getProyectoId(id):Observable<any>{return this._http.get(`${this.url}proyecto/solicitante/${id}`)}
 
-  getConcepto():Observable<any>{return this._http.get(`${this.url}concepto`)}
+  getConcepto():Observable<any>{return this._http.get(`${this.url}conceptos`)}
 
   createSolicitud(form):Observable<any>{
     const json = JSON.stringify(form);
     const params = 'json='+json;
-    return this._http.post<SolicitudModel>(`${this.url}solicitud`, params);
+    return this._http.post<SolicitudModel>(`${this.url}solicitudes`, params);
   }
 
   getAllSolicitudes():Observable<any>{ return this._http.get(`${this.url}solicitud`) }
 
-  registerMontoBanco(form, id):Observable<any>{
-    const json = JSON.stringify(form);
+  registerMontoBanco(data, id):Observable<any>{
+    const json = JSON.stringify(data);
     const params = 'json='+json;
-    return this._http.put(`${this.url}solicitud/asignarmontobanco/${id}`,params);
+    return this._http.put(`${this.url}solicitud/${id}`,params);
   }
 
-  getsoliPendientes():Observable<any>{ return this._http.get(`${this.url}solicitudes/pendiente`)}
+  getsoliPendientes():Observable<any>{ return this._http.get(`${this.url}solicitud/pendientes`)}
 
-  getSolicitudesRevisada():Observable<any>{ return this._http.get(`${this.url}solicitudes/revisada`)}
+  getSolicitudesRevisada():Observable<any>{ return this._http.get(`${this.url}solicitud/revisada`)}
+
+  getSolicitudRevision():Observable<any> { return this._http.get(`${this.url}solicitud/solicitudes`) }
+
+  getSolicitudAutorizadas():Observable<any>{return this._http.get(`${this.url}solicitud/autorizadas`)}
+
+  getSolicitudRechazadas():Observable<any>{return this._http.get(`${this.url}solicitud/anuladas`)}
+
+  getOneSolicitud(id):Observable<any>{ return this._http.get(`${this.url}solicitudes/${id}`)}
 
   postSolicitudRevisada(user, idActivo):Observable<any>{
     const json = JSON.stringify(user);
@@ -46,9 +54,17 @@ export class SolicitudService {
     return this._http.put(`${this.url}solicitud/autorizarsolicitud/${idActivo}`,params);
   }
 
-  getSolicitudAutorizadas():Observable<any>{return this._http.get(`${this.url}solicitudes/autorizada`)}
+  anularSolicitud(datos,id):Observable<any>{
+    const json = JSON.stringify(datos);
+    const params = 'json='+json;
+    return this._http.put(`${this.url}solicitud/anular/${id}`, params)
+  }
 
-  getSolicitudRechazadas():Observable<any>{return this._http.get(`${this.url}solicitudes/rechazada`)}
+  autorizarSolicitud(datos,id):Observable<any>{
+    const json = JSON.stringify(datos);
+    const params = 'json='+json;
+    return this._http.put(`${this.url}solicitud/autorizar/${id}`, params)
+  }
 
   RechazarSolicitud(user,id):Observable<any>{
     const json = JSON.stringify(user);

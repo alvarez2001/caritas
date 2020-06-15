@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Banco } from 'src/app/models/banco.model';
 import { ConceptoService } from 'src/app/services/concepto.service';
-import Swal from 'sweetalert2';
+import { FuncionesCompartidas } from 'src/app/models/shared/funcionesCompartidas';
 
 @Component({
   selector: 'app-crear-banco',
@@ -32,31 +31,19 @@ export class CrearBancoComponent implements OnInit {
 
   formularioRegistro(form){
     if(form.valid){
-
       this.statusForm = true;
       this._conSV.createBanco(this.banco).subscribe(res => {
-        Swal.fire({
-          showConfirmButton:false,
-          timer:5000,
-          timerProgressBar:true,
-          onOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-          },
-          icon:'success',
-          title: 'Registro Exitoso'
-        });
+       FuncionesCompartidas.funcionesCompartidas(2500,'success',res)
         form.reset();
         this.statusForm = false;
       },
       err => { 
-        Swal.fire({
-          title:'ha ocurrido un error',
-          icon:'error',
-          timerProgressBar:true,
-          timer:3000,
-          showConfirmButton:false
-        })
+        console.log(err);
+        if(err.status !== 0){
+          FuncionesCompartidas.funcionesCompartidas(2500,'error',err.error.mensaje) 
+        }else{
+          FuncionesCompartidas.funcionesCompartidas(2500,'error','ha ocurrido un error inesperado')
+        }
         this.statusForm = false;
        });
     }

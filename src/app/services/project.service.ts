@@ -17,22 +17,22 @@ export class ProjectService {
       this.url = Global.url;
     }
 
-    getAll():Observable<ProyectosModel[]>{return this._http.get<ProyectosModel[]>(`${this.url}proyecto`)}
+    getAll():Observable<ProyectosModel[]>{return this._http.get<ProyectosModel[]>(`${this.url}proyectos`)}
 
-    getAllAdmins():Observable<any>{ return this._http.get(`${this.url}usuarios/admin` )}
+    getAllAdmins():Observable<any>{ return this._http.get(`${this.url}user/admin` )}
 
-    getAllSolicitantes():Observable<any>{return this._http.get(`${this.url}usuarios/solicitante`)}
+    getAllSolicitantes():Observable<any>{return this._http.get(`${this.url}user/solicitante`)}
 
     crearProyecto(project):Observable<any>{
       const json = JSON.stringify(project);
       const params = 'json='+json;
-      return this._http.post(`${this.url}proyecto`, params);
+      return this._http.post(`${this.url}proyectos `, params);
     }
 
     putProject(project):Observable<any>{
       const json = JSON.stringify(project);
       const params = 'json='+json;
-      return this._http.put(`${this.url}proyecto/${project.id}`, params)
+      return this._http.put(`${this.url}proyectos/${project.id}`, params)
     }
 
 }

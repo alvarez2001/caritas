@@ -1,22 +1,22 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-md bg-solicitante fixed-top">
 
   <a class="navbar-brand">
     <img src="/assets/logoTransparencia.png" width="130" height="50" alt="" >
   </a>
     
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <mat-icon class="iconoGrande">menu</mat-icon>
     </button>
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item " routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['panel']">Inicio</a>
+        <li class="nav-item ">
+          <a class="nav-link" [routerLink]="['/solicitante']">Inicio</a>
         </li>
-        <li class="nav-item" routerLinkActive="active">
+        <li class="nav-item" routerLinkActive="hoverSolicitante">
           <a class="nav-link" [routerLink]="['listar-solicitudes']">Ver Solicitudes</a>
         </li>
-        <li class="nav-item" routerLinkActive="active">
+        <li class="nav-item" routerLinkActive="hoverSolicitante">
           <a class="nav-link"  [routerLink]="['registrar-solicitud']">Registrar Solicitud</a>
         </li>
 
@@ -25,11 +25,10 @@
       <ul class="navbar-nav navbar-right">
         <li class="nav-item dropleft">
           <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{_lgService.getIdentity().nombres | titlecase}} {{_lgService.getIdentity().apellidos | titlecase}}
+            {{_lgService.getIdentity().name | titlecase}} {{_lgService.getIdentity().surname | titlecase}}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item">Configuracion</a>
-            <a class="dropdown-item" >Another action</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item " [routerLink]="['/logout/1']">Cerrar Sesión</a>
           </div>

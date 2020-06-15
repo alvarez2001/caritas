@@ -11,10 +11,11 @@ import { DetallerevSolicitudComponent } from './detallerev-solicitud/detallerev-
 import { CamposDetalleComponent } from './campos-detalle/campos-detalle.component';
 import { SolicitudesDuoComponent } from './solicitudes-duo/solicitudes-duo.component';
 import { ListarAutorizadasComponent } from './listar-autorizadas/listar-autorizadas.component';
+import { VistaSolicitudesComponent } from '../vistasModulo/vista-solicitudes/vista-solicitudes.component';
 
 
 @NgModule({
-  declarations: [AsignarMontoComponent, ListarSolicitudesComponent, RevisionSolicitudComponent, DetallerevSolicitudComponent, CamposDetalleComponent, SolicitudesDuoComponent, ListarAutorizadasComponent],
+  declarations: [AsignarMontoComponent, ListarSolicitudesComponent, RevisionSolicitudComponent, DetallerevSolicitudComponent, CamposDetalleComponent, SolicitudesDuoComponent, ListarAutorizadasComponent,VistaSolicitudesComponent],
   imports: [
     CommonModule,
     MaterialModule,

@@ -1,8 +1,10 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import {FormControl, Validators, FormBuilder, FormGroup, AbstractControl, Validator} from '@angular/forms';
-import { UserModel } from 'src/app/models/user.model';
+
 import { UserService } from 'src/app/services/user.service';
 import { Observable } from 'rxjs';
+import { UserModelNuevo } from 'src/app/models/modelos/user.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -20,7 +22,7 @@ export class CrearUsuarioComponent implements OnInit, Validator {
   public mostrarValidacion:boolean;
   public statusRegistro:string;
 
-  public user:UserModel;
+  public user:UserModelNuevo;
   public registerUser: FormGroup;
 
 
@@ -33,7 +35,7 @@ export class CrearUsuarioComponent implements OnInit, Validator {
     private renderer:Renderer2
   ) { 
     
-    this.user = new UserModel('','','','','','',1,'','','');
+    this.user = new UserModelNuevo(null,null,null,'ACTIVO',null,null)
 
 
     this.validarFormulario();
@@ -57,7 +59,7 @@ export class CrearUsuarioComponent implements OnInit, Validator {
 
 
   validarFormulario(){
-    this.email = new FormControl(null, [Validators.required, Validators.email, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')], [this.compruebaEmail.bind(this)] );
+    this.email = new FormControl(null, [Validators.required, Validators.email, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')], [/*this.compruebaEmail.bind(this)*/] );
     this.nombres = new FormControl(null, [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ ]+')]);
     this.apellidos = new FormControl(null, [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ ]+')]);
     this.password = new FormControl(null, [Validators.required]);
@@ -70,10 +72,11 @@ export class CrearUsuarioComponent implements OnInit, Validator {
       password:this.password,
       rol:this.rol,
       email:this.email
-    },
+    }/*,
     {
       updateOn:'blur'
-    });
+    }
+    */);
   }
 
   compruebaEmail(control: AbstractControl){
@@ -110,23 +113,32 @@ export class CrearUsuarioComponent implements OnInit, Validator {
   ngOnInit(): void {
   }
 
+  private alertas(position,icono,texto,timer,buttonShow=false){
+    Swal.fire({
+      position: position,
+      icon: icono,
+      title: texto,
+      showConfirmButton: buttonShow,
+      timer: timer
+    })
+  }
+
   register(form, button){
-    
+  
     if(form.valid){
       this.disabledButton = true
+      this.alertas('center','info','porfavor espere',2500)
       this._userService.registrarUser(this.user).subscribe(res => {
-        if(res.status == 'success'){
-          this.statusRegistro = 'success';
-          console.log(button);
-          
+        this.alertas('center','success',res,2500)
           form.reset();
-        }else{
-          this.statusRegistro = 'failed';
-          
-        }
       },
       err =>{
-        this.statusRegistro = 'failed';
+        if(err.status !== 0){
+          this.alertas('center','error',err.error.mensaje,2500)
+        }
+        else{
+          this.alertas('center','error','porfavor revise su internet',2500)
+        }
         
       },
       ()=>{

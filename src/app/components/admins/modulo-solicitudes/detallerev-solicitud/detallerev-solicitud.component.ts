@@ -5,6 +5,8 @@ import { Banco } from 'src/app/models/banco.model';
 import { LoginService } from 'src/app/services/login.service';
 import { SolicitudService } from 'src/app/services/solicitud.service';
 import Swal from 'sweetalert2';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FuncionesCompartidas } from 'src/app/models/shared/funcionesCompartidas';
 
 @Component({
   selector: 'app-detallerev-solicitud',
@@ -14,89 +16,97 @@ import Swal from 'sweetalert2';
 })
 export class DetallerevSolicitudComponent implements OnInit {
 
-  public bancosArr:Banco[];
-  public rol;
+ 
+  public solicitud;
+  public numeroSolicitud:number;
+  public bancos;
+  public idAdmin:number;
+  public rol:string;
 
   constructor(
-    public dialogRef: MatDialogRef<DetallerevSolicitudComponent>,
-    @Inject(MAT_DIALOG_DATA) public data,
-    private conSV:ConceptoService,
+    private route:ActivatedRoute,
+    private router:Router,
+    private SolSV:SolicitudService,
+    private generales:FuncionesCompartidas,
+    private conceptoSV:ConceptoService,
     private logSV:LoginService,
-    private solSV:SolicitudService
-  ) {
-    this.rol = this.logSV.getIdentity().rol;
-   }
+    private funciones:FuncionesCompartidas
+  ) { }
 
   ngOnInit(): void {
-    this.bancos()
+    this.rol = this.logSV.getIdentity().rol.toLowerCase()
+    this.idAdmin = this.logSV.getIdentity().id;
+    this.buscarBancos()
+    this.buscarInformacion();
   }
-  rechazar(id){
-
-    const usuario = { usuario: this.logSV.getIdentity().sub }
-
-    Swal.fire({
-      title: 'Estas seguro?',
-      text: `Desea rechazar la solicitud #${id}?`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Rechazar',
-      cancelButtonText:'Cancelar'
-    }).then((result) => {
-      if (result.value) {
-        this.solSV.RechazarSolicitud(usuario, id).subscribe(res => {
-          console.log(res)
-          Swal.fire({
-            toast:true,
-            timer:5000,
-            timerProgressBar:true,
-            title:`Solicitud #${id} Rechazada`,
-            icon:'warning',
-            position:'bottom-end'
-          })
-          this.dialogRef.close(true);
-        })
-      }
-    })    
-  }
-
-  autorizar(id){
-    const usuario = { usuario: this.logSV.getIdentity().sub }
-
-
-    Swal.fire({
-      title: 'Estas seguro?',
-      text: `Desea autorizar la solicitud #${id}?`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Autorizar',
-      cancelButtonText:'Cancelar'
-    }).then((result) => {
-      if (result.value) {
-        this.solSV.postSolicitudRevisada(usuario, id).subscribe(res => {
-          Swal.fire({
-            toast:true,
-            timer:5000,
-            timerProgressBar:true,
-            title:`Solicitud #${id} Autorizada`,
-            icon:'success',
-            position:'bottom-end'
-          })
-          this.dialogRef.close(true);
-        })
-      }
-    })    
-  }
-
-  bancos(){
-    this.conSV.getAllBanco().subscribe(res => {
-      this.bancosArr = res;
+ 
+  private buscarBancos(){
+    this.numeroSolicitud = +this.route.snapshot.paramMap.get('id');
+    
+    this.conceptoSV.getAllBanco().subscribe(res => {
       
+      this.bancos = res
+    }, err => {
+    if(err.status !== 0){
+      this.buscarBancos();
+    }
+    else{
+      FuncionesCompartidas.funcionesCompartidas(null,'error','No hay conexion con el servidor',false)
+    }
     })
   }
   
+  private buscarInformacion(){
+    
 
+    this.SolSV.getOneSolicitud(this.numeroSolicitud).subscribe(res => {
+      console.log(res)
+      this.solicitud = res;
+    },
+    err => {
+      this.generales.AlertConfirmPublic('error encontrado', err.error,'error',false,null,'Regresar')
+                    .then((result)=>{
+                      this.router.navigate(['panel-administrativo','modulo-solicitudes','revision-solicitud'])
+                    })    
+    })
+    }
+
+    
+  rechazar(id){
+    
+    const datos = {usuario: this.idAdmin}
+    this.funciones.AlertConfirmPublic('Estas seguro?', `Anular la solicitud #${id}`,'warning',true,'Cancelar','Anular').then((result) => {
+      if(result.value){
+        this.SolSV.anularSolicitud(datos,id).subscribe(res=>{
+          this.generales.AlertConfirmPublic(res,null,'success',false,null,'Regresar').then((result)=>{
+            this.router.navigate(['panel-administrativo','modulo-solicitudes','revision-solicitud'])  
+          })
+        }, err => {
+          console.log(err);
+          this.generales.AlertConfirmPublic('ha ocurrido un error inesperado',null,'error',false,null,'Regresar').then((result) => {
+            this.router.navigate(['panel-administrativo','modulo-solicitudes','revision-solicitud'])
+          })
+        })
+      }
+    })
+    
+  }
+
+  autorizar(id){
+    const datos = {usuario: this.idAdmin}
+    this.funciones.AlertConfirmPublic('Estas seguro?', `Autorizar la solicitud #${id}`,'warning',true,'Cancelar','Autorizar').then((result) => {
+      if(result.value){
+        this.SolSV.anularSolicitud(datos,id).subscribe(res=>{
+          this.generales.AlertConfirmPublic(res,null,'success',false,null,'Regresar').then((result)=>{
+            this.router.navigate(['panel-administrativo','modulo-solicitudes','revision-solicitud'])  
+          })
+        }, err => {
+          console.log(err);
+          this.generales.AlertConfirmPublic('ha ocurrido un error inesperado',null,'error',false,null,'Regresar').then((result) => {
+            this.router.navigate(['panel-administrativo','modulo-solicitudes','revision-solicitud'])
+          })
+        })
+      }
+    })
+  }
 }

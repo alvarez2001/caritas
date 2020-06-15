@@ -1,437 +1,88 @@
-<h2 mat-dialog-title class="text-center">Solicitud #{{data.id}}</h2>
-
-<mat-dialog-content>
-
-
-    <div class="row">
-        
-        <div class="col-12 col-md-6 col-lg-3 text-center mt-2">
-            <h4 class="col-12">Proyecto</h4>
-
-            <p class="mb-0 col-12">{{data.proyecto.nombre | titlecase}}</p>
-        </div>
-
-        
-        <div class="col-12 col-md-6 col-lg-3 text-center mt-2">
-            <h4 class="col-12">Responsable</h4>
-
-            <p class="mb-0 col-12">{{data.responsable  | titlecase}}</p>
-        </div>
-
-
-        <div class="col-12 col-md-6 col-lg-3 text-center mt-2">
-            <h4 class="col-12 m-0">Disponible</h4>
-            <small class="col-12 text-secondary m-0">Proyecto</small>
-
-            <p class="mb-0 col-12">{{data.proyecto.disponible | currency:'EUR':true:'1.2' }}</p>
-        </div>
-
-        
-        <div class="col-12 col-md-6 col-lg-3 text-center mt-2">
-            <h4 class="col-12 m-0">Total</h4>
-            <small class="col-12 text-secondary m-0">Solicitud</small>
-
-            <p class="mb-0 col-12">{{data.total | currency:' ':true:'1.2' }}</p>
-        </div>
-
-
-        <!--Operacións1-->
-        <div  class="col-12 col-md-8 mx-auto"  *ngIf="data.rubro.precio1 !== null">
-            <div class="scheduler-border my-3" >
-                <h4 class="scheduler-border">Operación 1</h4>
-                
-                <div class="row mt-3">
-                    
-                    <div class="col-12"> 
-                        <h4 class="text-center">Datos del producto:</h4>
-                        <div class="row">
-
-                            
-
-                            <div class="col-lg-3 text-center">
-                                <div class="col-12">
-                                    <h5 class="m-0">Cantidad:</h5>
-                                </div>
-                                <div class="col-12">
-                                    <p class="m-0 ">{{data.rubro.cantidad1 }}</p>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3 text-center">
-                                <div class="col-12">
-                                    <h5 class="m-0">Descripción:</h5>
-                                </div>
-                                <div class="col-12">
-                                    <p class="m-0">{{data.rubro.descripcion1}}</p>
-                                </div>
-                            </div>
-        
-                            <div class="col-lg-3 text-center">
-                                <div class="col-12">
-                                    <h5 class="m-0">Precio:</h5>
-                                </div>
-                                <div class="col-12">
-                                    <p class="m-0">{{data.rubro.precio1 | currency:' ':true:'1.2' }}</p>
-                                </div>
-                            </div>
-        
-                            <div class="col-lg-3 text-center">
-                                <div class="col-12">
-                                    <h5 class="m-0">Total:</h5>
-                                </div>
-                                <div class="col-12">
-                                    <p class="m-0">{{data.rubro.cantidad1 * data.rubro.precio1 | currency:' ':true:'1.2' }}</p>
-                                </div>
-                            </div>
-
-                            
-
-
-                        </div>
-                    </div>
-
-                    <div class="col-12 my-3">
-                        <h4 class="text-center">Datos para Transferencia:</h4>
-                        <div class="col-12  mt-1" *ngFor="let banco of bancosArr" >
-                            <div *ngIf="banco.id === data.rubro.banco1_id" class="text-center">
-                                 
-                                 <div class="row">
-                                     <div class="col-lg-6">
-                                         <h5 class="m-0 col-12">Titular</h5>
-                                         <p class="m-0"> {{banco.titular | titlecase}} </p>
-                                     </div>
-                                     <div class="col-lg-6">
-                                         <h5 class="m-0 col-12">Banco</h5>
-                                         <p class="m-0">{{banco.banco | titlecase}}</p>
-                                     </div>
-                                 </div>
-                            </div>
-                         </div>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-
-        
-        
-        <!--Operacións2-->
-        <div  class="col-12 col-md-8 mx-auto" *ngIf="data.rubro.precio2 !== null">
-                <div class="scheduler-border my-3" >
-                    <h4 class="scheduler-border">Operación 2</h4>
-                    
-                    <div class="row mt-3">
-                        
-                        <div class="col-12"> 
-                            <h4 class="text-center">Datos del producto:</h4>
-                            <div class="row">
-    
-                                
-    
-                                <div class="col-lg-3 text-center">
-                                    <div class="col-12">
-                                        <h5 class="m-0">Cantidad:</h5>
-                                    </div>
-                                    <div class="col-12">
-                                        <p class="m-0 ">{{data.rubro.cantidad2 }}</p>
-                                    </div>
-                                </div> 
-
-                                <div class="col-lg-3 text-center">
-                                    <div class="col-12">
-                                        <h5 class="m-0">Descripción:</h5>
-                                    </div>
-                                    <div class="col-12">
-                                        <p class="m-0">{{data.rubro.descripcion2}}</p>
-                                    </div>
-                                </div>
+<div class="text-center mb-2">
+    <h1 class="titulosPagina">Solicitud #{{numeroSolicitud}}</h1>
+  </div>
+<div class="col-12 col-md-10 mx-auto">
+    <form  *ngIf="solicitud" >
+        <div class="mb-0">
             
-                                <div class="col-lg-3 text-center">
-                                    <div class="col-12">
-                                        <h5 class="m-0">Precio:</h5>
-                                    </div>
-                                    <div class="col-12">
-                                        <p class="m-0">{{data.rubro.precio2 | currency:' ':true:'1.2' }}</p>
-                                    </div>
-                                </div>
+    
             
-                                <div class="col-lg-3 text-center">
-                                    <div class="col-12">
-                                        <h5 class="m-0">Total:</h5>
-                                    </div>
-                                    <div class="col-12">
-                                        <p class="m-0">{{data.rubro.cantidad2 * data.rubro.precio2 | currency:' ':true:'1.2' }}</p>
-                                    </div>
-                                </div>
+            <mat-form-field appearance="outline" class="col-12">
+                <mat-label>Nombre del proyecto</mat-label>
+                <input matInput type="text" autocomplete="off" required readonly name="nombreProyecto" [ngModel]="solicitud.proyecto.nombre">
+                <mat-icon matSuffix>event_note</mat-icon>
     
-                                
+            </mat-form-field>
     
+            <mat-form-field appearance="outline" class="col-12 col-sm-6">
+                <mat-label>Codigo del proyecto</mat-label>
+                <input matInput [type]="'text'" autocomplete="off" readonly required name="codigoProyecto" [ngModel]="solicitud.proyecto.codigo">
+                <mat-icon matSuffix>code</mat-icon>
     
-                            </div>
-                        </div>
+            </mat-form-field>
     
-                        <div class="col-12 my-3">
-                            <h4 class="text-center">Datos para Transferencia:</h4>
-                            <div class="col-12  mt-1" *ngFor="let banco of bancosArr" >
-                                <div *ngIf="banco.id === data.rubro.banco2_id" class="text-center">
-                                        
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <h5 class="m-0 col-12">Titular</h5>
-                                                <p class="m-0"> {{banco.titular | titlecase}} </p>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <h5 class="m-0 col-12">Banco</h5>
-                                                <p class="m-0">{{banco.banco | titlecase}}</p>
-                                            </div>
-                                        </div>
-                                </div>
-                                </div>
-                        </div>
-                    </div>
+            <mat-form-field appearance="outline" class="col-12 col-sm-6">
+                <mat-label>Monto disponible del proyecto</mat-label>
+                <input matInput type="text" min="0" step="0.01" readonly name="aprobadoProyecto" [ngModel]="solicitud.proyecto.disponible | currency:'Bs':true:'1.2'" autocomplete="off" required>
+        
+                <mat-icon matSuffix>attach_money</mat-icon>
+    
+                
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" class="col-12 col-sm-6">
+                <mat-label>Concepto del proyecto</mat-label> 
+                <input type="text" matInput readonly [ngModel]="solicitud.concepto.descripcion" name="conceptoSolicitud">
+                <mat-icon matSuffix>person</mat-icon>
+                
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="col-12 col-sm-6">
+                <mat-label>total de la solicitud</mat-label> 
+                <input type="text" matInput readonly [ngModel]="solicitud.total | currency:'Bs':true:'1.2'" name="totalSolicitud">
+                <mat-icon matSuffix>attach_money</mat-icon>
+                
+            </mat-form-field>
+
+
+            <div *ngFor="let producto of solicitud.productos; let index = index" class="interlineado">
+                <mat-form-field appearance="outline" class="col-12 col-sm-6 col-lg-2 ">
+                    <mat-label>Cantidad</mat-label>
+                    <input type="number" readonly matInput min="0" step="0.01" autocomplete="off" [ngModel]="producto.cantidad" name="cantidad{{index}}" > 
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="col-12 col-sm-6">
+                    <mat-label>Descripción</mat-label>
+                    <input type="text" matInput autocomplete="off" [ngModel]="producto.descripcion" name="descripcion{{index}}" readonly>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="col-12 col-sm-6 col-lg-4  ">
+                    <mat-label>Precio</mat-label>
+                    <input type="text" required  matInput min="0" readonly step="0.01" autocomplete="off" name="producto{{index}}" [ngModel]="producto.precio | currency:'Bs':true:'1.2'" > <!---->
                     
-                </div>
-        </div>
-        
-        <!--Operacións3-->
-        <div  class="col-12 col-md-8 mx-auto" *ngIf="data.rubro.precio3 !== null">
-                    <div class="scheduler-border my-3" >
-                        <h4 class="scheduler-border">Operación 3</h4>
-                        
-                        <div class="row mt-3">
-                            
-                            <div class="col-12"> 
-                                <h4 class="text-center">Datos del producto:</h4>
-                                <div class="row">
-        
-                                    
-        
-                                    <div class="col-lg-3 text-center">
-                                        <div class="col-12">
-                                            <h5 class="m-0">Cantidad:</h5>
-                                        </div>
-                                        <div class="col-12">
-                                            <p class="m-0 ">{{data.rubro.cantidad3 }}</p>
-                                        </div>
-                                    </div>
+                </mat-form-field>
 
-                                    <div class="col-lg-3 text-center">
-                                        <div class="col-12">
-                                            <h5 class="m-0">Descripción:</h5>
-                                        </div>
-                                        <div class="col-12">
-                                            <p class="m-0">{{data.rubro.descripcion3}}</p>
-                                        </div>
-                                    </div>
-                
-                                    <div class="col-lg-3 text-center">
-                                        <div class="col-12">
-                                            <h5 class="m-0">Precio:</h5>
-                                        </div>
-                                        <div class="col-12">
-                                            <p class="m-0">{{data.rubro.precio3 | currency:' ':true:'1.2' }}</p>
-                                        </div>
-                                    </div>
-                
-                                    <div class="col-lg-3 text-center">
-                                        <div class="col-12">
-                                            <h5 class="m-0">Total:</h5>
-                                        </div>
-                                        <div class="col-12">
-                                            <p class="m-0">{{data.rubro.cantidad3 * data.rubro.precio3 | currency:' ':true:'1.2' }}</p>
-                                        </div>
-                                    </div>
-        
-        
-        
-                                </div>
-                            </div>
-        
-                            <div class="col-12 my-3">
-                                <h4 class="text-center">Datos para Transferencia:</h4>
-                                <div class="col-12  mt-1" *ngFor="let banco of bancosArr" >
-                                    <div *ngIf="banco.id === data.rubro.banco3_id" class="text-center">
-                                            
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <h5 class="m-0 col-12">Titular</h5>
-                                                    <p class="m-0"> {{banco.titular | titlecase}} </p>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <h5 class="m-0 col-12">Banco</h5>
-                                                    <p class="m-0">{{banco.banco | titlecase}}</p>
-                                                </div>
-                                            </div>
-                                    </div>
-                                    </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-        </div>
-        
-        <!--Operacións4-->
-        <div  class="col-12 col-md-8 mx-auto" *ngIf="data.rubro.precio4 !== null">
-            <div class="scheduler-border my-3" >
-                <h4 class="scheduler-border">Operación 4</h4>
-                
-                <div class="row mt-3">
-                    
-                    <div class="col-12"> 
-                        <h4 class="text-center">Datos del producto:</h4>
-                        <div class="row">
-
-                            
-
-                            <div class="col-lg-3 text-center">
-                                <div class="col-12">
-                                    <h5 class="m-0">Cantidad:</h5>
-                                </div>
-                                <div class="col-12">
-                                    <p class="m-0 ">{{data.rubro.cantidad4 }}</p>
-                                </div>
-                            </div> 
-
-                            <div class="col-lg-3 text-center">
-                                <div class="col-12">
-                                    <h5 class="m-0">Descripción:</h5>
-                                </div>
-                                <div class="col-12">
-                                    <p class="m-0">{{data.rubro.descripcion4}}</p>
-                                </div>
-                            </div>
-        
-                            <div class="col-lg-3 text-center">
-                                <div class="col-12">
-                                    <h5 class="m-0">Precio:</h5>
-                                </div>
-                                <div class="col-12">
-                                    <p class="m-0">{{data.rubro.precio4 | currency:' ':true:'1.2' }}</p>
-                                </div>
-                            </div>
-        
-                            <div class="col-lg-3 text-center">
-                                <div class="col-12">
-                                    <h5 class="m-0">Total:</h5>
-                                </div>
-                                <div class="col-12">
-                                    <p class="m-0">{{data.rubro.cantidad4 * data.rubro.precio4 | currency:' ':true:'1.2' }}</p>
-                                </div>
-                            </div>
-
-                            
-
-
-                        </div>
-                    </div>
-
-                    <div class="col-12 my-3">
-                        <h4 class="text-center">Datos para Transferencia:</h4>
-                        <div class="col-12  mt-1" *ngFor="let banco of bancosArr" >
-                            <div *ngIf="banco.id === data.rubro.banco4_id" class="text-center">
-                                 
-                                 <div class="row">
-                                     <div class="col-lg-6">
-                                         <h5 class="m-0 col-12">Titular</h5>
-                                         <p class="m-0"> {{banco.titular | titlecase}} </p>
-                                     </div>
-                                     <div class="col-lg-6">
-                                         <h5 class="m-0 col-12">Banco</h5>
-                                         <p class="m-0">{{banco.banco | titlecase}}</p>
-                                     </div>
-                                 </div>
-                            </div>
-                         </div>
-                    </div>
-                </div>
-                
+                <mat-form-field appearance="outline" class="col-12 col-sm-6 col-lg-12">
+                    <mat-label>Banco</mat-label>
+                    <mat-select [ngModel]="producto.banco_id" disabled name="banco{{index}}" required>
+                        <mat-option *ngFor="let banco of bancos" [value]="banco.id">{{banco.titular}} | {{banco.banco}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
-        </div>
 
-        <!--Operacións5-->
-        <div  class="col-12 col-md-8 mx-auto" *ngIf="data.rubro.precio5 !== null">
-            <div class="scheduler-border my-3" >
-                <h4 class="scheduler-border">Operación 5</h4>
+
+            
+            <div class="text-center mx-auto" *ngIf="rol === 'master'">
+                <div class="my-3 col-12 col-md-6 col-lg-4 d-inline-block mx-auto ">
                 
-                <div class="row mt-3">
-                    
-                    <div class="col-12"> 
-                        <h4 class="text-center">Datos del producto:</h4>
-                        <div class="row">
-
-                            
-
-                            <div class="col-lg-3 text-center">
-                                <div class="col-12">
-                                    <h5 class="m-0">Cantidad:</h5>
-                                </div>
-                                <div class="col-12">
-                                    <p class="m-0 ">{{data.rubro.cantidad5 }}</p>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3 text-center">
-                                <div class="col-12">
-                                    <h5 class="m-0">Descripción:</h5>
-                                </div>
-                                <div class="col-12">
-                                    <p class="m-0">{{data.rubro.descripcion4}}</p>
-                                </div>
-                            </div>
-        
-                            <div class="col-lg-3 text-center">
-                                <div class="col-12">
-                                    <h5 class="m-0">Precio:</h5>
-                                </div>
-                                <div class="col-12">
-                                    <p class="m-0">{{data.rubro.precio5 | currency:' ':true:'1.2' }}</p>
-                                </div>
-                            </div>
-        
-                            <div class="col-lg-3 text-center">
-                                <div class="col-12">
-                                    <h5 class="m-0">Total:</h5>
-                                </div>
-                                <div class="col-12">
-                                    <p class="m-0">{{data.rubro.cantidad5 * data.rubro.precio5 | currency:' ':true:'1.2' }}</p>
-                                </div>
-                            </div>
-
-                           
-
-
-                        </div>
-                    </div>
-
-                    <div class="col-12 my-3">
-                        <h4 class="text-center">Datos para Transferencia:</h4>
-                        <div class="col-12  mt-1" *ngFor="let banco of bancosArr" >
-                            <div *ngIf="banco.id === data.rubro.banco5_id" class="text-center">
-                                 
-                                 <div class="row">
-                                     <div class="col-lg-6">
-                                         <h5 class="m-0 col-12">Titular</h5>
-                                         <p class="m-0"> {{banco.titular | titlecase}} </p>
-                                     </div>
-                                     <div class="col-lg-6">
-                                         <h5 class="m-0 col-12">Banco</h5>
-                                         <p class="m-0">{{banco.banco | titlecase}}</p>
-                                     </div>
-                                 </div>
-                            </div>
-                         </div>
-                    </div>
+                    <button class="btn btn-outline-colormain btn-outline-rojo col-12 " (click)="rechazar(solicitud.id)" type="submit">Rechazar</button>
                 </div>
-                
+                <div class="my-3 col-12 col-md-6 col-lg-4 d-inline-block mx-auto">
+                    <button class="btn btn-outline-colormain col-12 " (click)="autorizar(solicitud.id)" type="submit">Autorizar</button>
+                </div>
             </div>
+    
         </div>
-    </div>
-</mat-dialog-content>
-
-<mat-dialog-actions class="float-right botones-theme">
-    <button mat-raised-button mat-dialog-close color="accent">Cerrar</button>
-<div *ngIf="rol === 'MASTER'"> 
-    <button mat-raised-button (click)="rechazar(data.id)" color="warn">Rechazar</button>
-    <button mat-raised-button (click)="autorizar(data.id)" color="primary" class="text-white"> Autorizar </button>
+    </form>
 </div>
-</mat-dialog-actions>
+  
