@@ -40,7 +40,7 @@ export class ListarSolicitudesComponent  implements OnInit  {
 
   solicitudesPendientes(valor = false){
     if(!valor){
-      FuncionesCompartidas.funcionesCompartidas(null,'warning','Porfavor espere un momento')
+      FuncionesCompartidas.funcionesCompartidas(null,'warning','espere un momento')
     }
     this.SoliSV.getsoliPendientes().subscribe(res => {
       if(!valor){

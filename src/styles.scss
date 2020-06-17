@@ -62,6 +62,7 @@
 }
 
 .interlineado{
+    position: relative;
     padding-top: 10px;
     box-shadow: 0px -2px $mainColor ;
 }
@@ -190,6 +191,10 @@
 .vh-67{ 
     height: 67vh;
 }
+
+.fixed-top{
+    z-index: 1000!important;
+}
 /*Iconos Card*/
 
 .titulosPagina{
@@ -204,6 +209,12 @@
 }
 /*TITULOS*/
 
+.tamanoTextarea{
+    
+    min-height: 130px;
+    max-height: 130px;
+}
+
 .btn-outline-colormain{
     @include btn-outline();
     mat-icon{
@@ -214,6 +225,9 @@
 }
 .btn-outline-rojo{
     @include btn-outline(red,red,red,#fff)
+}
+.btn-outline-verde{
+    @include btn-outline(green,green,green,#fff)
 }
 
 .btn-outline-solicitud{
@@ -235,6 +249,45 @@
     &:hover{
         color: red!important;
     }
+}
+.eliminarOperacion{
+    @extend .btnPropio;
+    @media screen and (min-width:576px){
+        color: red!important;
+    }
+
+    @media screen  and (max-width:575px){
+        @include btn-outline(red,red,red,#fff);
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+.botonFlotante{
+    @media screen and (min-width:576px){
+        position: absolute;
+        top: 50px;
+        right: -35px;
+    }
+}
+
+.btnPropio{
+    display: inline-block;
+    font-weight: bold;
+    color: #222;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 /*Botones*/

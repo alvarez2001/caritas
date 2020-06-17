@@ -35,4 +35,10 @@ export class ProjectService {
       return this._http.put(`${this.url}proyectos/${project.id}`, params)
     }
 
+
+    proyectosAdmin(data, id):Observable<any>{
+      const json = JSON.stringify(data)
+      const params = 'json='+json;
+      return this._http.post(`${this.url}proyecto/admin/${id}`, params)
+    }
 }

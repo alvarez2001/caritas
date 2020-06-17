@@ -12,10 +12,14 @@ import { CamposDetalleComponent } from './campos-detalle/campos-detalle.componen
 import { SolicitudesDuoComponent } from './solicitudes-duo/solicitudes-duo.component';
 import { ListarAutorizadasComponent } from './listar-autorizadas/listar-autorizadas.component';
 import { VistaSolicitudesComponent } from '../vistasModulo/vista-solicitudes/vista-solicitudes.component';
+import { ListarRechaAutoriComponent } from './listar-recha-autori/listar-recha-autori.component';
+import { ListarSolAutorizadasComponent } from './listar-sol-autorizadas/listar-sol-autorizadas.component';
+import { OneSolicitudComponent } from './one-solicitud/one-solicitud.component';
+import { NuevaSolicitudComponent } from './nueva-solicitud/nueva-solicitud.component';
 
 
 @NgModule({
-  declarations: [AsignarMontoComponent, ListarSolicitudesComponent, RevisionSolicitudComponent, DetallerevSolicitudComponent, CamposDetalleComponent, SolicitudesDuoComponent, ListarAutorizadasComponent,VistaSolicitudesComponent],
+  declarations: [AsignarMontoComponent, ListarSolicitudesComponent, RevisionSolicitudComponent, DetallerevSolicitudComponent, CamposDetalleComponent, SolicitudesDuoComponent, ListarAutorizadasComponent,VistaSolicitudesComponent, ListarRechaAutoriComponent, ListarSolAutorizadasComponent, OneSolicitudComponent, NuevaSolicitudComponent],
   imports: [
     CommonModule,
     MaterialModule,

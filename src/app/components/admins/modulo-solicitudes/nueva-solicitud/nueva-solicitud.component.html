@@ -1,0 +1,147 @@
+<div class="text-center mb-2">
+    <h1 class="titulosPagina">Nueva Solicitud</h1>
+  </div>
+  <div *ngIf="!bancos && !proyectos && !conceptos">
+            
+    <p class="text-center">Cargando...</p>
+    <mat-spinner class="mx-auto"></mat-spinner>
+  </div>
+<div class="col-12 col-md-10 mx-auto" *ngIf="bancos && proyectos && conceptos">
+    <form  #formularioSolicitud="ngForm">
+        <div class="mb-0">
+            
+    
+            
+            <mat-form-field appearance="outline" class="col-12">
+                <mat-label>Nombre del proyecto</mat-label>
+                <mat-select name="proyecto" [(ngModel)]="solicitud.proyecto" required>
+                    <mat-option *ngFor="let proyecto of proyectos" [value]="proyecto.id">{{proyecto.codigo}} | {{proyecto.nombre}}</mat-option>
+                </mat-select>
+                <mat-icon matSuffix>event_note</mat-icon>
+    
+            </mat-form-field>
+    
+    
+            <mat-form-field appearance="outline" class="col-12 col-sm-6">
+                <mat-label>Monto disponible del proyecto</mat-label>
+                <mat-select required [ngModel]="solicitud.proyecto" name="disponible" disabled>
+                    <mat-option *ngFor="let proyecto of proyectos" [value]="proyecto.id">{{proyecto.disponible | currency:'Bs':true:'1.2'}}</mat-option>
+                </mat-select>
+        <!--[ngModel]="solicitud.proyecto.disponible | currency:'Bs':true:'1.2'"-->
+                <mat-icon matSuffix>attach_money</mat-icon>
+    
+                
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" class="col-12 col-sm-6">
+                <mat-label>Concepto de la solicitud</mat-label> 
+                <mat-select required [(ngModel)]="solicitud.concepto" name="concepto">
+                    <mat-option *ngFor="let concepto of conceptos" [value]="concepto.id">{{concepto.descripcion}}</mat-option>
+                </mat-select>
+                <mat-icon matSuffix>description</mat-icon>
+                
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="col-12">
+                <mat-label>Responsable</mat-label>
+                <input type="text" matInput required autocomplete="off" [(ngModel)]="solicitud.responsable" name="responsable">
+                <mat-icon matSuffix>person</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="col-12">
+                <mat-label>Descripción de la solicitud</mat-label> 
+                <textarea required name="descripcionSolicitud" autocomplete="off" matInput class="tamanoTextarea" [(ngModel)]="solicitud.descripcion" required></textarea>                
+            </mat-form-field>
+
+            
+
+
+            <div *ngFor="let producto of arrayProductos; let index = index" class="interlineado">
+                <mat-form-field appearance="outline" class="col-12 col-sm-6 col-lg-2 ">
+                    <mat-label>Cantidad</mat-label>
+                    <input type="number" readonly  matInput min="0"  step="0.01" autocomplete="off" [ngModel]="producto.cantidad" name="cantidad{{index}}" > 
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="col-12 col-sm-6">
+                    <mat-label>Descripción</mat-label>
+                    <input type="text" readonly matInput autocomplete="off" [ngModel]="producto.descripcion" name="descripcion{{index}}" >
+                    <mat-icon matSuffix>notes</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="col-12 col-sm-6 col-lg-4  ">
+                    <mat-label>Precio</mat-label>
+                    <input type="text" readonly  matInput min="0"  step="0.01" autocomplete="off" name="producto{{index}}" [ngModel]="producto.precio | currency:'Bs':true:'1.2'" > 
+                    <mat-icon matSuffix>attach_money</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="col-12 col-sm-6 col-lg-12">
+                    <mat-label>Banco</mat-label>
+                    <mat-select [ngModel]="producto.banco" disabled name="banco{{index}}" >
+                        <mat-option *ngFor="let banco of bancos" [value]="banco.id">{{banco.titular}} | {{banco.banco}}</mat-option>
+                    </mat-select>
+                    <mat-icon matSuffix>account_balance</mat-icon>
+                </mat-form-field>
+
+                <div class="text-center botonFlotante">
+                    <div class=" mb-3 col-12 col-md-6 col-lg-4 d-block mx-auto">
+                        <button class="eliminarOperacion col-12" (click)="borrarOperacion(index)" ><mat-icon>delete</mat-icon></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center" *ngIf="comprobar(formularioSolicitud)">
+                <div class=" mb-3 col-12 col-md-6 col-lg-4 d-block mx-auto">
+                    <button class="btn btn-outline-colormain col-12 " type="submit" (click)="guardarInformacion(formularioSolicitud)" >Guardar Solicitud</button>
+                </div>
+            </div>
+
+
+            <div class="interlineado">
+                <mat-form-field appearance="outline" class="col-12 col-sm-6 col-lg-2 ">
+                    <mat-label>Cantidad</mat-label>
+                    <input type="number" name="cantidadArray" max="1000" [(ngModel)]="cantidad" matInput min="0" step="0.01" autocomplete="off" > 
+                </mat-form-field>
+    
+                <mat-form-field appearance="outline" class="col-12 col-sm-6">
+                    <mat-label>Descripción</mat-label>
+                    <input name="descripcionArray" [(ngModel)]="descripcion" type="text" matInput autocomplete="off" >
+                    <mat-icon matSuffix>notes</mat-icon>
+                </mat-form-field>
+    
+                <mat-form-field appearance="outline" class="col-12 col-sm-6 col-lg-4  ">
+                    <mat-label>Precio</mat-label>
+                    <input type="number" name="precioArray" [(ngModel)]="precio" min="0" step="0.01" matInput  autocomplete="off"  > 
+                    <mat-icon matSuffix>attach_money</mat-icon>
+                </mat-form-field>
+    
+                <mat-form-field appearance="outline" class="col-12 col-sm-6 col-lg-12">
+                    <mat-label>Banco</mat-label>
+                    <mat-select [(ngModel)]="banco" name="bancoArray">
+                        <mat-option *ngFor="let banco of bancos" [value]="banco.id">{{banco.titular}} | {{banco.banco}}</mat-option>
+                    </mat-select>
+                    <mat-icon matSuffix>account_balance</mat-icon>
+                </mat-form-field>
+    
+            </div>
+            
+        
+
+            <div class="text-center">
+                <div class=" mb-3 col-12 col-md-6 col-lg-4 d-block mx-auto">
+                    <button class="btn btn-outline-colormain  btn-outline-verde col-12 " [disabled]="banco === null || precio === null || descripcion === null || cantidad === null || descripcion === '' " (click)="agregarOperacion()">Agregar Operacion</button>
+                </div>
+            </div>
+            
+
+                
+                
+            
+
+
+            
+            
+    
+        </div>
+    </form>
+</div>
+  

@@ -96,7 +96,7 @@ export class DetallerevSolicitudComponent implements OnInit {
     const datos = {usuario: this.idAdmin}
     this.funciones.AlertConfirmPublic('Estas seguro?', `Autorizar la solicitud #${id}`,'warning',true,'Cancelar','Autorizar').then((result) => {
       if(result.value){
-        this.SolSV.anularSolicitud(datos,id).subscribe(res=>{
+        this.SolSV.autorizarSolicitud(datos,id).subscribe(res=>{
           this.generales.AlertConfirmPublic(res,null,'success',false,null,'Regresar').then((result)=>{
             this.router.navigate(['panel-administrativo','modulo-solicitudes','revision-solicitud'])  
           })

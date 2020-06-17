@@ -46,6 +46,8 @@ export class SolicitudService {
 
   getSolicitudRechazadas():Observable<any>{return this._http.get(`${this.url}solicitud/anuladas`)}
 
+  getFinalizadas():Observable<any>{ return this._http.get(`${this.url}solicitud/ejecutadas`)}
+
   getOneSolicitud(id):Observable<any>{ return this._http.get(`${this.url}solicitudes/${id}`)}
 
   postSolicitudRevisada(user, idActivo):Observable<any>{
@@ -71,4 +73,11 @@ export class SolicitudService {
     const params = 'json='+json;
     return this._http.put(`${this.url}solicitud/rechazarsolicitud/${id}`,params);
   }
+
+  solicitudAdmin(data):Observable<any>{
+    const json =JSON.stringify(data);
+    const params = 'json='+json;
+    return this._http.post(`${this.url}solicitud/admin`,params)
+  }
 }
+

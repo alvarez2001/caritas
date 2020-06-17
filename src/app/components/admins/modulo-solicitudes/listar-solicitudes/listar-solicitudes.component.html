@@ -32,7 +32,7 @@
         <th mat-header-cell *matHeaderCellDef> Acciones </th>
         <td mat-cell *matCellDef="let element" class="botones-theme" > 
             <button mat-icon-button matTooltip="Anular Solicitud" color="warn" (click)="AnularSolicitud(element.id)">
-                <mat-icon>delete</mat-icon>
+                <mat-icon>highlight_off</mat-icon>
             </button>
             
             <a [routerLink]="[element.id]"  mat-icon-button matTooltip="asignar monto"  *ngIf="element.proyecto.admin_id === idAdmin">
@@ -49,7 +49,7 @@
 
     <div *ngIf="noHay">
       <div class="col-12 alert alert-info">
-        No hay información que mostrar
+        No hay solicitudes pendiente por asignar
       </div>
     </div>
   

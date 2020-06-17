@@ -11,7 +11,7 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <div class="navbar-nav mr-auto">
       <ul class="navbar-nav">
-        <li class="nav-item px-2" routerLinkActive="hoverCaritas" >
+        <li class="nav-item px-2" routerLinkActive="hoverCaritas" *ngIf="rol === 'MASTER'">
           <a class="nav-link" [routerLink]="['modulo-usuarios']"  >Usuarios</a>
         </li>
   

@@ -2,6 +2,11 @@
     <h1 class="titulosPagina">Solicitud #{{numeroSolicitud}}</h1>
   </div>
 <div class="col-12 col-md-10 mx-auto">
+    <div *ngIf="!solicitud">
+            
+        <p class="text-center">Cargando...</p>
+        <mat-spinner class="mx-auto"></mat-spinner>
+      </div>
     <form  *ngIf="solicitud" >
         <div class="mb-0">
             
@@ -78,7 +83,7 @@
                     <button class="btn btn-outline-colormain btn-outline-rojo col-12 " (click)="rechazar(solicitud.id)" type="submit">Rechazar</button>
                 </div>
                 <div class="my-3 col-12 col-md-6 col-lg-4 d-inline-block mx-auto">
-                    <button class="btn btn-outline-colormain col-12 " (click)="autorizar(solicitud.id)" type="submit">Autorizar</button>
+                    <button class="btn btn-outline-colormain btn-outline-verde col-12 " (click)="autorizar(solicitud.id)" type="submit">Autorizar</button>
                 </div>
             </div>
     

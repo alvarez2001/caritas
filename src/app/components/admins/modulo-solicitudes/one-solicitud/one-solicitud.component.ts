@@ -1,19 +1,17 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SolicitudService } from 'src/app/services/solicitud.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { FuncionesCompartidas } from 'src/app/models/shared/funcionesCompartidas';
 import { ConceptoService } from 'src/app/services/concepto.service';
 import { LoginService } from 'src/app/services/login.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FuncionesCompartidas } from 'src/app/models/shared/funcionesCompartidas';
 
 @Component({
-  selector: 'app-solicitudes-duo',
-  templateUrl: './solicitudes-duo.component.html',
-  styleUrls: ['./solicitudes-duo.component.css'],
-  providers:[ConceptoService,LoginService,SolicitudService]
+  selector: 'app-one-solicitud',
+  templateUrl: './one-solicitud.component.html',
+  styleUrls: ['./one-solicitud.component.css']
 })
-export class SolicitudesDuoComponent implements OnInit {
+export class OneSolicitudComponent implements OnInit {
+
   public solicitud;
   public numeroSolicitud:number;
   public bancos;
@@ -57,15 +55,14 @@ export class SolicitudesDuoComponent implements OnInit {
     
 
     this.SolSV.getOneSolicitud(this.numeroSolicitud).subscribe(res => {
-      console.log(res)
+      
       this.solicitud = res;
     },
     err => {
       this.generales.AlertConfirmPublic('error encontrado', err.error,'error',false,null,'Regresar')
                     .then((result)=>{
-                      this.router.navigate(['panel-administrativo','modulo-solicitudes','ejecucion'])
+                      this.router.navigate(['panel-administrativo','modulo-solicitudes','revision-solicitud'])
                     })    
     })
     }
-
 }

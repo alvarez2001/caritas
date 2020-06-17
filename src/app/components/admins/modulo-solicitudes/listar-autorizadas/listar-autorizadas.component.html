@@ -1,49 +1,53 @@
-<mat-card>
-    <mat-card-title class="text-center"> Solicitudes por Ejecutar </mat-card-title>
+<div class="text-center mb-2">
+  <h1 class="titulosPagina">Ejecución de solicitud</h1>
+</div>
+  <div class="table-responsive">
+    <table mat-table [dataSource]="dataSource"  class="w-100">
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="numero">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="proyecto">
+        <th mat-header-cell *matHeaderCellDef> Proyecto </th>
+        <td mat-cell *matCellDef="let element"> {{element.proyecto.nombre | titlecase}} </td>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="concepto">
+        <th mat-header-cell *matHeaderCellDef> Concepto </th>
+        <td mat-cell *matCellDef="let element"> {{element.concepto.descripcion | titlecase}} </td>
+      </ng-container>
+  
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="total">
+        <th mat-header-cell *matHeaderCellDef> Total Solicitud </th>
+        <td mat-cell *matCellDef="let element"> {{element.total | currency:'Bs':true:'1.2'}} </td>
+      </ng-container>
 
-    <mat-card-content class="table-responsive">
-        <div class="mat-elevation-z8 ">
-            <table mat-table [dataSource]="dataSource"  class="w-100">
-          
-              <!-- Position Column -->
-              <ng-container matColumnDef="numero">
-                <th mat-header-cell *matHeaderCellDef> No. </th>
-                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-              </ng-container>
-          
-              <!-- Name Column -->
-              <ng-container matColumnDef="proyecto">
-                <th mat-header-cell *matHeaderCellDef> Proyecto </th>
-                <td mat-cell *matCellDef="let element"> {{element.proyecto.nombre | titlecase}} </td>
-              </ng-container>
-          
-              <!-- Weight Column -->
-              <ng-container matColumnDef="concepto">
-                <th mat-header-cell *matHeaderCellDef> Concepto </th>
-                <td mat-cell *matCellDef="let element"> {{element.concepto.descripcion | titlecase}} </td>
-              </ng-container>
-          
-              <!-- Symbol Column -->
-              <ng-container matColumnDef="responsable">
-                <th mat-header-cell *matHeaderCellDef> Responsable </th>
-                <td mat-cell *matCellDef="let element"> {{element.responsable | titlecase}} </td>
-              </ng-container>
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let element" class="botones-theme" >             
+            <a [routerLink]="[element.id]"  mat-icon-button matTooltip="Ver Informacion" >
+              <mat-icon>event_note</mat-icon>
+          </a>
+        </td>
+      </ng-container>
+  
+      
 
-              <ng-container matColumnDef="acciones">
-                <th mat-header-cell *matHeaderCellDef> Acciones </th>
-                <td mat-cell *matCellDef="let element" > 
-                    <button mat-icon-button matTooltip="Ejecutar solicitud">
-                        <mat-icon>plagiarism</mat-icon>
-                    </button>    
-                </td>
-              </ng-container>
-          
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-          
-            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-          </div>
-          
-    </mat-card-content>
-</mat-card>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <div *ngIf="noHay">
+      <div class="col-12 alert alert-info">
+        No hay solicitudes pendiente por ejecutar
+      </div>
+    </div>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>

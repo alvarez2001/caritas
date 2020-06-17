@@ -3,7 +3,7 @@
 </div>
 
 <div class="row justify-content-center align-items-center vh-67">
-    <div class="col-12 col-sm-6 col-md-4 col-lg-4" >
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3" >
         <a  [routerLink]="['asignar-monto']">
             <div class="card cardParaIconos">
                 <div class="iconoCard">
@@ -16,7 +16,7 @@
         </a>
     </div>
 
-    <div class="col-12 col-sm-6 col-md-4 col-lg-4" >
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3" >
         <a [routerLink]="['revision-solicitud']">
             <div class="card cardParaIconos">
                 <div class="iconoCard">
@@ -29,7 +29,7 @@
         </a>
     </div>
 
-    <div class="col-12 col-sm-6 col-md-4 col-lg-4" >
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3" >
         <a [routerLink]="['ejecucion']">
             <div class="card cardParaIconos">
                 <div class="iconoCard">
@@ -42,27 +42,40 @@
         </a>
     </div>
 
-    <div class="col-12 col-sm-6 col-md-4 col-lg-4" >
-        <a [routerLink]="['listar-bancos']">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3" >
+        <a [routerLink]="['nueva-solicitud']">
             <div class="card cardParaIconos">
                 <div class="iconoCard">
-                    <mat-icon>check_circle_outline</mat-icon>
+                    <mat-icon>create_new_folder</mat-icon>
                 </div>
                 <div class="nombreCard">
-                    <h4>Finalizadas</h4>
+                    <h4>Nueva</h4>
                 </div>
             </div>
         </a>
     </div>
 
-    <div class="col-12 col-sm-6 col-md-4 col-lg-4" >
-        <a [routerLink]="['listar-bancos']">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3" >
+        <a [routerLink]="['solicitudes', 'rechazadas']">
             <div class="card cardParaIconos">
                 <div class="iconoCard">
                     <mat-icon>highlight_off</mat-icon>
                 </div>
                 <div class="nombreCard">
                     <h4>Rechazadas</h4>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3" >
+        <a [routerLink]="['solicitudes', 'finalizadas']">
+            <div class="card cardParaIconos">
+                <div class="iconoCard">
+                    <mat-icon>check_circle_outline</mat-icon>
+                </div>
+                <div class="nombreCard">
+                    <h4>Finalizadas</h4>
                 </div>
             </div>
         </a>

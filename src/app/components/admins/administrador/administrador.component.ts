@@ -12,6 +12,7 @@ export class AdministradorComponent implements OnInit {
 
   public nombreUsuario:string;
   public apellidoUsuario:string;
+  public rol:string;
 
 
   constructor(private logSV:LoginService) { }
@@ -23,6 +24,7 @@ export class AdministradorComponent implements OnInit {
   private nombresApellidosUsuario(){
     this.nombreUsuario = this.logSV.getIdentity().name;
     this.apellidoUsuario = this.logSV.getIdentity().surname;
+    this.rol = this.logSV.getIdentity().rol;
   }
 
 

@@ -1,49 +1,81 @@
-<mat-card>
-    <mat-card-title class="text-center"> {{titlePagina}} </mat-card-title>
+<div class="text-center mb-2">
+  <h1 class="titulosPagina">Solicitud #{{numeroSolicitud}}</h1>
+</div>
+<div class="col-12 col-md-10 mx-auto">
 
-    <mat-card-content class="table-responsive">
-        <div class="mat-elevation-z8 ">
-            <table mat-table [dataSource]="dataSource"  class="w-100">
+    <div *ngIf="!solicitud">
+            
+        <p class="text-center">Cargando...</p>
+        <mat-spinner class="mx-auto"></mat-spinner>
+      </div>
+  <form  *ngIf="solicitud" >
+      <div class="mb-0">
           
-              <!-- Position Column -->
-              <ng-container matColumnDef="numero">
-                <th mat-header-cell *matHeaderCellDef> No. </th>
-                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-              </ng-container>
+  
           
-              <!-- Name Column -->
-              <ng-container matColumnDef="proyecto">
-                <th mat-header-cell *matHeaderCellDef> Proyecto </th>
-                <td mat-cell *matCellDef="let element"> {{element.proyecto.nombre | titlecase}} </td>
-              </ng-container>
-          
-              <!-- Weight Column -->
-              <ng-container matColumnDef="concepto">
-                <th mat-header-cell *matHeaderCellDef> Concepto </th>
-                <td mat-cell *matCellDef="let element"> {{element.concepto.descripcion | titlecase}} </td>
-              </ng-container>
-          
-              <!-- Symbol Column -->
-              <ng-container matColumnDef="responsable">
-                <th mat-header-cell *matHeaderCellDef> Responsable </th>
-                <td mat-cell *matCellDef="let element"> {{element.responsable | titlecase}} </td>
-              </ng-container>
+          <mat-form-field appearance="outline" class="col-12">
+              <mat-label>Nombre del proyecto</mat-label>
+              <input matInput type="text" autocomplete="off" required readonly name="nombreProyecto" [ngModel]="solicitud.proyecto.nombre">
+              <mat-icon matSuffix>event_note</mat-icon>
+  
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="col-12 col-sm-6">
+              <mat-label>Codigo del proyecto</mat-label>
+              <input matInput [type]="'text'" autocomplete="off" readonly required name="codigoProyecto" [ngModel]="solicitud.proyecto.codigo">
+              <mat-icon matSuffix>code</mat-icon>
+  
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="col-12 col-sm-6">
+              <mat-label>Monto disponible del proyecto</mat-label>
+              <input matInput type="text" min="0" step="0.01" readonly name="aprobadoProyecto" [ngModel]="solicitud.proyecto.disponible | currency:'Bs':true:'1.2'" autocomplete="off" required>
+      
+              <mat-icon matSuffix>attach_money</mat-icon>
+  
+              
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="col-12 col-sm-6">
+              <mat-label>Concepto del proyecto</mat-label> 
+              <input type="text" matInput readonly [ngModel]="solicitud.concepto.descripcion" name="conceptoSolicitud">
+              <mat-icon matSuffix>person</mat-icon>
+              
+          </mat-form-field>
 
-              <ng-container matColumnDef="acciones">
-                <th mat-header-cell *matHeaderCellDef> Acciones </th>
-                <td mat-cell *matCellDef="let element" > 
-                    <button mat-icon-button matTooltip="Ver solicitud">
-                        <mat-icon>description</mat-icon>
-                    </button>    
-                </td>
-              </ng-container>
-          
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-          
-            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          <mat-form-field appearance="outline" class="col-12 col-sm-6">
+              <mat-label>total de la solicitud</mat-label> 
+              <input type="text" matInput readonly [ngModel]="solicitud.total | currency:'Bs':true:'1.2'" name="totalSolicitud">
+              <mat-icon matSuffix>attach_money</mat-icon>
+              
+          </mat-form-field>
+
+
+          <div *ngFor="let producto of solicitud.productos; let index = index" class="interlineado">
+              <mat-form-field appearance="outline" class="col-12 col-sm-6 col-lg-2 ">
+                  <mat-label>Cantidad</mat-label>
+                  <input type="number" readonly matInput min="0" step="0.01" autocomplete="off" [ngModel]="producto.cantidad" name="cantidad{{index}}" > 
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="col-12 col-sm-6">
+                  <mat-label>Descripción</mat-label>
+                  <input type="text" matInput autocomplete="off" [ngModel]="producto.descripcion" name="descripcion{{index}}" readonly>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="col-12 col-sm-6 col-lg-4  ">
+                  <mat-label>Precio</mat-label>
+                  <input type="text" required  matInput min="0" readonly step="0.01" autocomplete="off" name="producto{{index}}" [ngModel]="producto.precio | currency:'Bs':true:'1.2'" > <!---->
+                  
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="col-12 col-sm-6 col-lg-12">
+                  <mat-label>Banco</mat-label>
+                  <mat-select [ngModel]="producto.banco_id" disabled name="banco{{index}}" required>
+                      <mat-option *ngFor="let banco of bancos" [value]="banco.id">{{banco.titular}} | {{banco.banco}}</mat-option>
+                  </mat-select>
+              </mat-form-field>
           </div>
-          
-    </mat-card-content>
-</mat-card>
+  
+      </div>
+  </form>
+</div>

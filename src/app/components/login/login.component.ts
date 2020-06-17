@@ -62,24 +62,35 @@ export class LoginComponent implements OnInit {
   iniciarSesion(user, boton){
     this.carga = true;
     this.renderer.setAttribute(boton.nativeElement, "disabled", "true");
-    FuncionesCompartidas.funcionesCompartidas(null,'info','porfavor espere un momento',false)        
+    FuncionesCompartidas.funcionesCompartidas(null,'info','Espere un momento',false)        
 
     this._loginService.loginUser(this.user).subscribe(res=>{
-      FuncionesCompartidas.funcionesCompartidas(2500,'success','Bienvenido al sistema',false)
-      sessionStorage.setItem('token', JSON.stringify(res.token));
-      sessionStorage.setItem('identity', JSON.stringify(res.usuario));
-      this._route.navigate(['redireccion']);
+      if(res.usuario){
+        FuncionesCompartidas.funcionesCompartidas(2500,'success','Bienvenido al sistema',false)
+        sessionStorage.setItem('token', JSON.stringify(res.token));
+        sessionStorage.setItem('identity', JSON.stringify(res.usuario));
+        this._route.navigate(['redireccion']);
+      }else{
+        FuncionesCompartidas.funcionesCompartidas(4000,'error',res,false)
+        this.carga = false;
+        user.reset()  
+        this.renderer.setAttribute(boton.nativeElement, "disabled", "false");
+      }
+      
     },
     err=> {
-      this.statusApi ='error';
+      this.statusApi ='error';   
       if(err.status !== 0){
-        this.message = err;
-        FuncionesCompartidas.funcionesCompartidas(2500,'error',err,false)        
+        
+        FuncionesCompartidas.funcionesCompartidas(2500,'error',err,false)     
+      }else{
+        this.message = 'Fallo de conexion';
       }
       FuncionesCompartidas.funcionesCompartidas(2500,'error','ha ocurrido un error inesperado',false)      
-    }, () => {
       this.carga = false;
       user.reset()
+    }, () => {
+      
       this.renderer.setAttribute(boton.nativeElement, "disabled", "false");
     })
     

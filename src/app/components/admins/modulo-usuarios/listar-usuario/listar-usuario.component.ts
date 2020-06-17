@@ -62,7 +62,7 @@ export class ListarUsuarioComponent implements OnInit, AfterViewInit {
     this.cargaStatus = true;
     this._userService.mostrarUsuarios().subscribe(res=>{
       console.log(res)
-        this.dataSource.data = res.data;
+        this.dataSource.data = res;
         this.cargaStatus = false;
   
     },

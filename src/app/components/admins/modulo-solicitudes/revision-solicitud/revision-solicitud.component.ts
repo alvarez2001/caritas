@@ -37,7 +37,7 @@ export class RevisionSolicitudComponent implements OnInit {
 
   cargarInformacion(valor = false){
     if(!valor){
-      FuncionesCompartidas.funcionesCompartidas(null,'warning','Porfavor espere un momento')
+      FuncionesCompartidas.funcionesCompartidas(null,'warning','espere un momento')
     }
 
     this.solSV.getSolicitudRevision().subscribe(res => {
@@ -62,7 +62,7 @@ export class RevisionSolicitudComponent implements OnInit {
 
   AnularSolicitud(id){
     const datos = {usuario: this.idAdmin}
-    this.funciones.AlertConfirmPublic('Estas seguro?', `Borraras la solicitud #${id}`,'warning',true,'Cancelar','Eliminar').then((result) => {
+    this.funciones.AlertConfirmPublic('Estas seguro?', `Anularas la solicitud #${id}`,'warning',true,'Cancelar','Eliminar').then((result) => {
       if(result.value){
         this.solSV.anularSolicitud(datos,id).subscribe(res=>{
           FuncionesCompartidas.funcionesCompartidas(6000,'success',res)

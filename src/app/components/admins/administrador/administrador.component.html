@@ -2,7 +2,7 @@
     <h1 class="titulosPagina">Bienvenido(a) {{nombreUsuario | titlecase}} {{apellidoUsuario | titlecase}}</h1>
 </div>
 <div class="row justify-content-center align-items-center vh-67">
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3" >
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngIf="rol === 'MASTER'">
         <a [routerLink]="['modulo-usuarios', 'usuarios']">
             <div class="card cardParaIconos">
                 <div class="iconoCard">
